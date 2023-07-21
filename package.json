@@ -1,0 +1,9 @@
+{
+  "name": "aldea-web",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "components"
+  ],
+  "packageManager": "yarn@3.6.1"
+}
