@@ -3,7 +3,8 @@
   "private": true,
   "type": "module",
   "workspaces": [
-    "components"
+    "components",
+    "explorer"
   ],
   "packageManager": "yarn@3.6.1"
 }

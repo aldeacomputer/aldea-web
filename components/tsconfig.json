@@ -26,7 +26,7 @@
 
     /* Modules */
     "module": "ESNext",                                  /* Specify what module code is generated. */
-    "rootDir": "./",                                     /* Specify the root folder within your source files. */
+    "rootDir": "./src",                                  /* Specify the root folder within your source files. */
     "moduleResolution": "node",                          /* Specify how TypeScript looks up a file from a given module specifier. */
     // "baseUrl": "./",                                  /* Specify the base directory to resolve non-relative module names. */
     // "paths": {},                                      /* Specify a set of entries that re-map imports to additional lookup locations. */
@@ -113,41 +113,6 @@
   "exclude": [
     "dist",
     "test",
+    "src/**/*.stories.ts",
   ]
 }
-
-
-//{
-//  "compilerOptions": {
-//    "target": "es2019",
-//    "module": "es2020",
-//    "lib": ["es2020", "DOM", "DOM.Iterable"],
-//    "declaration": true,
-//    "declarationMap": true,
-//    "sourceMap": true,
-//    "inlineSources": true,
-//    "outDir": "./",
-//    "rootDir": "./src",
-//    "strict": true,
-//    "noUnusedLocals": true,
-//    "noUnusedParameters": true,
-//    "noImplicitReturns": true,
-//    "noFallthroughCasesInSwitch": true,
-//    "noImplicitAny": true,
-//    "noImplicitThis": true,
-//    "moduleResolution": "node",
-//    "allowSyntheticDefaultImports": true,
-//    "experimentalDecorators": true,
-//    "forceConsistentCasingInFileNames": true,
-//    "noImplicitOverride": true,
-//    "plugins": [
-//      {
-//        "name": "ts-lit-plugin",
-//        "strict": true
-//      }
-//    ],
-//    "types": ["mocha"]
-//  },
-//  "include": ["src/**/*.ts"],
-//  "exclude": []
-//}

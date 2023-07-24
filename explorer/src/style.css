@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.link {
+  @apply text-sky-300 hover:text-sky-200 transition-colors;
+}
