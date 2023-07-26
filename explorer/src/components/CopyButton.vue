@@ -1,7 +1,8 @@
 <template>
   <button
-    class="p-2 text-18 lg:text-20 link"
-    @click="handleClick">
+    class="link"
+    :class="size || 'p-2 text-18 lg:text-20'"
+    @click.prevent="handleClick">
     <CaCopy />
   </button>
 </template>
@@ -10,7 +11,8 @@
 import { CaCopy } from '@kalimahapps/vue-icons'
 
 const props = defineProps<{
-  value: string
+  size?: string;
+  value: string;
 }>()
 
 async function handleClick() {

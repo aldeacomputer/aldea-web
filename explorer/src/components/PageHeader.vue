@@ -1,6 +1,6 @@
 <template>
-  <header class="lg:grid grid-cols-12 gap-4">
-    <div class="space-y-2 lg:col-span-10 xl:col-span-9">
+  <header class="lg:flex gap-4">
+    <div class="flex-auto space-y-2">
       <div class="flex items-center gap-4">
         <h1 class="font-light text-32 lg:text-42">{{ title }}</h1>
         <div class="flex items-center gap-2 pt-1 lg:pt-2">
@@ -14,7 +14,7 @@
       <slot name="after-title"></slot>
       <GraphLinkTable class="pt-8" :links="links" v-if="!!links" />
     </div>
-    <div class="hidden lg:block lg:col-span-2 xl:col-span-3">
+    <div class="hidden w-56 xl:w-72 lg:block lg:flex-shrink-0">
       <slot name="right-column"></slot>
     </div>
   </header>

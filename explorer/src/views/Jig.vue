@@ -4,6 +4,9 @@
       title="Jig"
       id="d2537340d4b5ee7d806ad6b4f8c40b206893bb06a6de1a4d14fd0ac9e06d4803"
       :links="graphLinks">
+      <template #title-labels>
+        <Label class="font-mono" :no-border="true">ClassName</Label>
+      </template>
       <template #after-title>
         <div class="flex flex-col sm:flex-row gap-2">
           <div class="flex items-center justify-between p-2 gap-2 bg-neutral-800">
@@ -42,6 +45,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import PageHeader from '../components/PageHeader.vue'
+import Label from '../components/Label.vue'
 
 const graphLinks = computed(() => {
   return [

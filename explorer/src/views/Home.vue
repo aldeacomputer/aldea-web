@@ -11,9 +11,9 @@
 
 <script setup lang="ts">
 const links = [
-  { path: "/tx", label: "Transaction" },
-  { path: "/pkg", label: "Package" },
-  { path: "/jig", label: "Jig" },
-  { path: "/addr", label: "Address" },
+  { path: "/tx/1", label: "Transaction" },
+  { path: "/pkg/1", label: "Package" },
+  { path: "/jig/1", label: "Jig" },
+  { path: "/address/1", label: "Address" },
 ]
 </script>

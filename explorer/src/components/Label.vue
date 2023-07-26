@@ -1,8 +1,9 @@
 <template>
   <span
-    class="inline-flex items-center h-7 px-3 gap-2 text-14 bg-neutral-800 border-l-4 rounded-sm"
+    class="inline-flex items-center h-7 px-3 gap-2 text-14 bg-neutral-800 rounded-sm"
     :class="{
       'border-l-4': !noBorder,
+      'border-l-neutral-700': !type,
       'text-blue-400 border-l-blue-400': type === 'info',
       'text-green-400 border-l-green-400': type === 'success',
       'text-yellow-200 border-l-yellow-200': type === 'warning',
