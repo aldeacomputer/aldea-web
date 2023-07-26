@@ -4,9 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "dev": "run-p vite:dev mocknet seed",
+    "mocknet": "mocknet",
+    "seed": "node scripts/seed",
+    "vite:dev": "vite --clearScreen=false",
+    "vite:build": "vue-tsc && vite build",
+    "vite:preview": "vite preview"
   },
   "packageManager": "yarn@3.6.1",
   "dependencies": {
@@ -16,8 +19,10 @@
     "vue-router": "^4.2.4"
   },
   "devDependencies": {
+    "@aldea/mocknet": "^0.4.0",
     "@vitejs/plugin-vue": "^4.2.3",
     "autoprefixer": "^10.4.14",
+    "npm-run-all": "^4.1.5",
     "postcss": "^8.4.27",
     "tailwindcss": "^3.3.3",
     "typescript": "^5.0.2",
