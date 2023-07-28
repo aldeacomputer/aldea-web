@@ -1,8 +1,8 @@
 <template>
-  <article v-if="$tx.currentTx">
+  <article v-if="extTx">
     <PageHeader
       title="Transaction"
-      :id="$tx.currentTx.id"
+      :id="extTx.id"
       class="mb-10"
       :links="graphLinks">
       <template #title-labels>
@@ -37,25 +37,35 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeMount } from 'vue'
+import { computed, onBeforeMount, provide, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { CommitTxResponse, Tx } from '@aldea/sdk'
 import { CaAdd, CaArrowsHorizontal, CaBox, CaCalendar, CaInformation, CaListDropdown, CaMoney } from '@kalimahapps/vue-icons'
-import { useTxStore } from '../stores/tx.ts'
+import { useAppStore } from '../stores/app'
+import * as keys from '../injection-keys'
 import PageHeader from '../components/PageHeader.vue'
 import Label from '../components/Label.vue'
 import Button from '../components/Button.vue'
 import TabRouterView from '../components/TabRouterView.vue'
 import TabLink from '../components/TabLink.vue'
 
+const store = useAppStore()
+const route = useRoute()
+
+const extTx = ref<CommitTxResponse>()
+const tx = computed(() => Tx.fromHex(extTx.value?.rawtx!))
+
+provide(keys.extendedTx, extTx)
+provide(keys.tx, tx)
+
 const graphLinks = computed(() => {
   return [
-    { title: 'Block ID', value: 'd14fd0ac9e06d4803d2537340d4b5ee7d806ad6b4f8c40b206893bb06a6de1a4', url: '/block' },
-    { title: 'Address', value: 'addr18kglj7mw2ypwz5rmlwytmry2sm7qa6v39lxq0t', url: '/addr' },
+    { title: 'Block ID', value: 'd14fd0ac9e06d4803d2537340d4b5ee7d806ad6b4f8c40b206893bb06a6de1a4', url: '/block/1' },
+    { title: 'Address', value: 'addr18kglj7mw2ypwz5rmlwytmry2sm7qa6v39lxq0t', url: '/addr/1' },
   ]
 })
 
-const $tx = useTxStore()
-
 onBeforeMount(async () => {
-  await $tx.fetchTx()
+  extTx.value = await store.adapter.getTx(route.params.id as string)
 })
 </script>

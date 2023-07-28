@@ -68,7 +68,5 @@ async function seedUser(pkgId) {
     txb.sign(user.privKey)
   })
 
-  return aldea.commitTx(tx).catch(async e => {
-    console.log(await e.response.json())
-  })
+  return aldea.commitTx(tx)
 }

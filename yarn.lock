@@ -91,11 +91,13 @@ __metadata:
   dependencies:
     "@aldea/components": "workspace:^"
     "@aldea/mocknet": ^0.4.0
+    "@cocalc/local-storage-lru": ^2.3.0
     "@kalimahapps/vue-icons": ^1.4.0
     "@vitejs/plugin-vue": ^4.2.3
     autoprefixer: ^10.4.14
     npm-run-all: ^4.1.5
     postcss: ^8.4.27
+    shiki: ^0.14.3
     tailwindcss: ^3.3.3
     typescript: ^5.0.2
     vite: ^4.4.5
@@ -1724,6 +1726,13 @@ __metadata:
   dependencies:
     "@chainsafe/is-ip": ^2.0.1
   checksum: 90d27154c11ff878130150766ebfc490c829cd5249a61f7018fa4cefe3a18d92394285bb435c38bd0dbe45261006a82572e95ac201e9b28157de80127a6a3d06
+  languageName: node
+  linkType: hard
+
+"@cocalc/local-storage-lru@npm:^2.3.0":
+  version: 2.3.0
+  resolution: "@cocalc/local-storage-lru@npm:2.3.0"
+  checksum: 9278dea2a128a278bcdae7564c123121cfc4176a252b0abd0a61b9f2a0834123ff8237290a9dfbee2a70f7c90d5cca6119ac0c834a6370bdbb094f932987cbe1
   languageName: node
   linkType: hard
 
@@ -4547,6 +4556,13 @@ __metadata:
   version: 6.0.1
   resolution: "ansi-regex@npm:6.0.1"
   checksum: 1ff8b7667cded1de4fa2c9ae283e979fc87036864317da86a2e546725f96406746411d0d85e87a2d12fa5abd715d90006de7fa4fa0477c92321ad3b4c7d4e169
+  languageName: node
+  linkType: hard
+
+"ansi-sequence-parser@npm:^1.1.0":
+  version: 1.1.1
+  resolution: "ansi-sequence-parser@npm:1.1.1"
+  checksum: ead5b15c596e8e85ca02951a844366c6776769dcc9fd1bd3a0db11bb21364554822c6a439877fb599e7e1ffa0b5f039f1e5501423950457f3dcb2f480c30b188
   languageName: node
   linkType: hard
 
@@ -7945,6 +7961,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jsonc-parser@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "jsonc-parser@npm:3.2.0"
+  checksum: 946dd9a5f326b745aa326d48a7257e3f4a4b62c5e98ec8e49fa2bdd8d96cef7e6febf1399f5c7016114fd1f68a1c62c6138826d5d90bc650448e3cf0951c53c7
+  languageName: node
+  linkType: hard
+
 "jsonfile@npm:^6.0.1":
   version: 6.1.0
   resolution: "jsonfile@npm:6.1.0"
@@ -10537,6 +10560,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"shiki@npm:^0.14.3":
+  version: 0.14.3
+  resolution: "shiki@npm:0.14.3"
+  dependencies:
+    ansi-sequence-parser: ^1.1.0
+    jsonc-parser: ^3.2.0
+    vscode-oniguruma: ^1.7.0
+    vscode-textmate: ^8.0.0
+  checksum: a4dd98e3b2a5dd8be207448f111ffb9ad2ed6c530f215714d8b61cbf91ec3edbabb09109b8ec58a26678aacd24e8161d5a9bc0c1fa1b4f64b27ceb180cbd0c89
+  languageName: node
+  linkType: hard
+
 "side-channel@npm:^1.0.4":
   version: 1.0.4
   resolution: "side-channel@npm:1.0.4"
@@ -11634,6 +11669,20 @@ __metadata:
   bin:
     vite: bin/vite.js
   checksum: 5a821897f1e03f9786f827acb89e3117a79b8901d184bbc3a2e48d6404b37975a5cdeb6b6969ec24ed1e81d96f1959ed6f9426cbb64501d1e4770bdb20f9c02f
+  languageName: node
+  linkType: hard
+
+"vscode-oniguruma@npm:^1.7.0":
+  version: 1.7.0
+  resolution: "vscode-oniguruma@npm:1.7.0"
+  checksum: 53519d91d90593e6fb080260892e87d447e9b200c4964d766772b5053f5699066539d92100f77f1302c91e8fc5d9c772fbe40fe4c90f3d411a96d5a9b1e63f42
+  languageName: node
+  linkType: hard
+
+"vscode-textmate@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "vscode-textmate@npm:8.0.0"
+  checksum: 127780dfea89559d70b8326df6ec344cfd701312dd7f3f591a718693812b7852c30b6715e3cfc8b3200a4e2515b4c96f0843c0eacc0a3020969b5de262c2a4bb
   languageName: node
   linkType: hard
 

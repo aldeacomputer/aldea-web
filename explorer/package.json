@@ -14,7 +14,9 @@
   "packageManager": "yarn@3.6.1",
   "dependencies": {
     "@aldea/components": "workspace:^",
+    "@cocalc/local-storage-lru": "^2.3.0",
     "@kalimahapps/vue-icons": "^1.4.0",
+    "shiki": "^0.14.3",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4"
   },

@@ -1,21 +1,18 @@
 <template>
-  <div class="flex items-center gap-2" :class="{'@container': responsive}">
-      <component
-        :is="component"
-        :to="to"
-        :class="{
-          'link underline': isLink,
-          'text-14': size === 'sm',
-          'text-16': size === 'md',
-          'text-20': size === 'lg',
-        }">
-        <span class="@lg:hidden whitespace-nowrap" v-if="responsive">{{ shortValue }}</span>
-        <span class="whitespace-nowrap" :class="{'hidden @lg:inline': responsive}">{{ value }}</span>
-      </component>
-
-    <CopyButton
-      :value="value"
-      size="xx" />
+  <div class="flex items-center gap-1" :class="{'@container': responsive}">
+    <component
+      :is="component"
+      :to="to"
+      :class="{
+        'link underline': isLink,
+        'text-14': size === 'sm',
+        'text-16': size === 'md',
+        'text-18 lg:text-20': size === 'lg',
+      }">
+      <span class="@lg:hidden whitespace-nowrap" v-if="responsive">{{ shortValue }}</span>
+      <span class="break-all" :class="{'hidden @lg:inline': responsive}">{{ value }}</span>
+    </component>
+    <CopyButton :size="size" :value="value" />
   </div>
 </template>
 

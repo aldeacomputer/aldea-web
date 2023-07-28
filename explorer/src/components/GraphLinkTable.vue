@@ -5,22 +5,16 @@
       v-for="link of links">
       <div class="md:table-cell pr-4">{{ link.title }}</div>
       <div class="md:table-cell pr-4">
-        <div class="flex items-center gap-1">
-          <RouterLink
-            :to="link.url"
-            class="link underline break-all">
-            {{ link.value }}
-          </RouterLink>
-          <CopyButton :value="link.value" />
-        </div>
-        
+        <Copyable
+          :to="link.url"
+          :value="link.value" />        
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import CopyButton from './CopyButton.vue'
+import Copyable from './Copyable.vue'
 
 defineProps<{
   links: GraphLink[]

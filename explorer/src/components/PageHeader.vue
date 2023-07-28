@@ -7,10 +7,7 @@
           <slot name="title-labels" class="mt-16"></slot>
         </div>
       </div>
-      <div class="flex items-center gap-1">
-        <div class="lg:text-20 break-all">{{ id }}</div>
-        <CopyButton :value="id" />
-      </div>
+      <Copyable size="lg" :value="id" />
       <slot name="after-title"></slot>
       <GraphLinkTable class="pt-8" :links="links" v-if="!!links" />
     </div>
@@ -21,8 +18,8 @@
 </template>
 
 <script setup lang="ts">
-import CopyButton from '../components/CopyButton.vue'
-import GraphLinkTable from '../components/GraphLinkTable.vue'
+import Copyable from './Copyable.vue'
+import GraphLinkTable from './GraphLinkTable.vue'
 
 defineProps<{
   title: string;
