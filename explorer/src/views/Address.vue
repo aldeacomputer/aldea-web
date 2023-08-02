@@ -6,10 +6,9 @@
       id="addr18kglj7mw2ypwz5rmlwytmry2sm7qa6v39lxq0t">
       <template #after-title>
         <div class="flex flex-col sm:flex-row gap-2">
-          <div class="flex items-center justify-between p-2 gap-2 bg-neutral-800">
-            <span class="text-white">₳</span>
+          <Label :icon="XacIcon" border="success">
             <div class="font-mono text-14">{{ balance }}</div>
-          </div>
+          </Label>
         </div>
       </template>
     </PageHeader>
@@ -24,14 +23,16 @@
 <script setup lang="ts">
 import { computed, onBeforeMount, provide, ref, toRaw, unref } from 'vue'
 import { useRoute } from 'vue-router'
+import { Abi } from '@aldea/core/abi'
+import { BCS, OutputResponse, base16 } from '@aldea/sdk'
 import { CaShoppingBag, CaArrowsVertical } from '@kalimahapps/vue-icons'
 import * as keys from '../injection-keys'
 import { useAppStore } from '../stores/app'
 import PageHeader from '../components/PageHeader.vue'
 import TabRouterView from '../components/TabRouterView.vue'
 import TabLink from '../components/TabLink.vue'
-import { Abi } from '@aldea/core/abi'
-import { BCS, OutputResponse, base16 } from '@aldea/sdk'
+import Label from '../components/Label.vue'
+import XacIcon from '../components/XacIcon.vue'
 
 const COIN_PKG_ID = '0000000000000000000000000000000000000000000000000000000000000000'
 

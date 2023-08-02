@@ -1,16 +1,26 @@
 <template>
-  <div class="flex items-center gap-1" :class="{'@container': responsive}">
+  <div class="flex items-center gap-1" :class="{'@container': responsive && !short}">
     <component
       :is="component"
       :to="to"
+      class="font-mono"
       :class="{
         'link underline': isLink,
         'text-14': size === 'sm',
         'text-16': size === 'md',
         'text-18 lg:text-20': size === 'lg',
       }">
-      <span class="@lg:hidden whitespace-nowrap" v-if="responsive">{{ shortValue }}</span>
-      <span class="break-all" :class="{'hidden @lg:inline': responsive}">{{ value }}</span>
+      <span
+        class="@lg:hidden whitespace-nowrap"
+        v-if="responsive || short">
+        {{ shortValue }}
+      </span>
+      <span
+        class="break-all"
+        :class="{'hidden @lg:inline': responsive}"
+        v-if="!short">
+        {{ value }}
+      </span>
     </component>
     <CopyButton :size="size" :value="value" />
   </div>
@@ -24,10 +34,12 @@ import CopyButton from './CopyButton.vue'
 const props = withDefaults(defineProps<{
   to?: RouteLocationRaw;
   responsive?: boolean;
+  short?: boolean;
   size?: 'sm' | 'md' | 'lg';
   value: string;
 }>(), {
   responsive: false,
+  short: false,
   size: 'md'
 })
 
@@ -40,7 +52,9 @@ const isLink = computed(() => {
 })
 
 const shortValue = computed(() => {
-  if (/^addr/.test(props.value)) {
+  if (props.value.length > 100) {
+    return `${props.value.slice(0, 7)}…${props.value.slice(-7)}`
+  } else if (/^addr/.test(props.value)) {
     return `${props.value.slice(0, 10)}…${props.value.slice(-7)}`
   } else {
     return `${props.value.slice(0, 7)}…${props.value.slice(64-7)}`

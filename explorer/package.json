@@ -16,6 +16,7 @@
     "@aldea/components": "workspace:^",
     "@cocalc/local-storage-lru": "^2.3.0",
     "@kalimahapps/vue-icons": "^1.4.0",
+    "dayjs": "^1.11.9",
     "shiki": "^0.14.3",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4"

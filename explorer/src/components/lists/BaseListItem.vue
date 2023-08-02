@@ -1,7 +1,7 @@
 <template>
   <div
-    class="bg-neutral-800 overflow-hidden"
-    :class="{'group hover:bg-neutral-700 transition-colors cursor-pointer': hasDropDown}"
+    class="bg-layer-01 overflow-hidden"
+    :class="{'group hover:bg-layer-02 transition-colors cursor-pointer': hasDropDown}"
     @click="toggleOpen">
 
     <div class="flex items-center justify-between h-12">
@@ -19,8 +19,13 @@
     <div
       class="transition-all duration-500 overflow-hidden"
       :class="isOpen ? 'max-h-64 visible' : 'max-h-0 invisible'">
-      <slot name="drop-down"></slot>
+      <div class="px-4 pb-4">
+        <div class="p-4 bg-gray-100 rounded-sm">
+          <slot name="drop-down"></slot>  
+        </div>
+      </div>
     </div>
+
   </div>
 </template>
 

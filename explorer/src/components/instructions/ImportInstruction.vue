@@ -1,6 +1,12 @@
 <template>
   <BaseInstruction :idx="idx" :instruction="instruction">
-    <ShortLink type="pkg" :value="pkgId" />
+    <ShortLink :icon="CaBox">
+      <Copyable
+        :to="{ name: 'pkg', params: { id: pkgId } }"
+        :value="pkgId"
+        size="sm"
+        short />
+    </ShortLink>
   </BaseInstruction>
 </template>
 
@@ -8,7 +14,9 @@
 import { computed } from 'vue'
 import { ImportInstruction } from '@aldea/core/instructions'
 import { base16 } from '@aldea/sdk'
+import { CaBox } from '@kalimahapps/vue-icons'
 import BaseInstruction from './BaseInstruction.vue'
+import Copyable from '../Copyable.vue'
 import ShortLink from '../ShortLink.vue'
 
 const props = defineProps<{

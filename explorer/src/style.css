@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .link {
-  @apply text-sky-300 hover:text-sky-200 transition-colors;
+  @apply text-blue-40 hover:text-blue-30 transition-colors;
 }

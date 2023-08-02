@@ -45,6 +45,6 @@ const codeHtml = computed(() => {
 .numbered .line::before {
   content: counter(step);
   counter-increment: step;
-  @apply inline-block w-11 mr-4 pr-4 text-neutral-400/40 text-right border-r border-neutral-700;
+  @apply inline-block w-11 mr-4 pr-4 text-helper/60 text-right border-r border-gray-70;
 }
 </style>

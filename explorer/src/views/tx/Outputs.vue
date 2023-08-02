@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="md:grid grid-cols-2 gap-8">
+    <div class="md:grid grid-cols-2 gap-8 space-y-8 md:space-y-0">
       <div>
         <h3 class="flex items-center mb-6 gap-2">
           <CaArrowDownRight class="text-emeral-200" />

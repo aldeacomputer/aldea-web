@@ -1,44 +1,48 @@
 <template>
   <div
-    class="flex items-center bg-neutral-800 overflow-hidden"
-    :class="{'group hover:bg-neutral-700 transition-colors cursor-pointer': hasDropDown}"
+    class="flex items-center bg-layer-01 overflow-hidden"
+    :class="{'group hover:bg-layer-02 transition-colors cursor-pointer': hasDropDown}"
     @click="toggleOpen">
-    <div class="flex flex-shrink-0 items-center justify-center self-stretch w-12 sm:w-14 bg-neutral-700 group-hover:bg-neutral-600 transition-colors">
-      <span class="font-mono text-14 text-neutral-400 group-hover:text-neutral-300 transition-colors">
+
+    <div class="flex flex-shrink-0 items-center justify-center self-stretch w-12 sm:w-14 bg-layer-02 group-hover:bg-layer-03 transition-colors">
+      <span class="font-mono text-14 text-secondary group-hover:text-primary transition-colors">
         <span class="opacity-60">#</span>
         <span>{{ idx }}</span>
       </span>
     </div>
+
     <div class="flex-auto font-mono text-14">
       <div class="flex items-center justify-between h-14 pl-6 gap-10">
-        <div class="flex flex-auto items-center justify-between gap-2 md:flex-grow-0 md:w-36">
-          <span>{{ opName }}</span>
-          <span class="flex items-center text-neutral-400 gap-1" v-if="hasRef">
-            <CaArrowUpLeft class="text-neutral-500" />
+        <div class="flex flex-auto items-center justify-between gap-2 md:flex-grow-0 md:w-32">
+          <span class="text-primary">{{ opName }}</span>
+          <span class="flex items-center text-secondary gap-1" v-if="hasRef">
+            <CaArrowUpLeft class="text-helper" />
             <span>
               <span class="opacity-60">#</span>
               <span>{{ instruction.idx }}</span>
             </span>
           </span>
         </div>
-        <div class="hidden md:block flex-auto">
+        <div class="hidden md:block flex-auto text-secondary">
           <slot></slot>
         </div>
         <div class="flex flex-shrink-0 items-center justify-center self-stretch w-12 sm:w-14">
           <component :is="chevronIcon" v-if="hasDropDown" />
         </div>
       </div>
+
       <div
         class="transition-all duration-500 overflow-hidden"
         :class="isOpen ? 'max-h-64 visible' : 'max-h-0 invisible'"
         v-if="hasDropDown">
         <div class="px-4 pb-4">
-          <div class="p-4 bg-neutral-900 rounded-sm">
+          <div class="p-4 bg-gray-100 rounded-sm">
             <slot name="drop-down"></slot>  
           </div>
         </div>
       </div>
     </div>
+
   </div>
 </template>
 

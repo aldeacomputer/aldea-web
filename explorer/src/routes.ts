@@ -10,6 +10,8 @@ import PkgDocsTab from './views/pkg/Docs.vue'
 import PkgSourceTab from './views/pkg/Source.vue'
 import PkgAbiTab from './views/pkg/Abi.vue'
 import JigView from './views/Jig.vue'
+import JigStateTab from './views/jig/State.vue'
+import JigHistoryTab from './views/jig/History.vue'
 import AddrView from './views/Address.vue'
 import AddrJigsTab from './views/addr/Jigs.vue'
 import AddrTxnsTab from './views/addr/Txns.vue'
@@ -44,6 +46,10 @@ export const routes: RouteRecordRaw[] = [
     name: 'jig',
     path: '/jig/:id',
     component: JigView,
+    children: [
+      { name: 'jig_state', path: '', component: JigStateTab },
+      { name: 'jig_history', path: '', component: JigHistoryTab },
+    ]
   },
   {
     name: 'addr',

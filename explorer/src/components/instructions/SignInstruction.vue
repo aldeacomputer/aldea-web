@@ -1,8 +1,16 @@
 <template>
   <BaseInstruction :idx="idx" :instruction="instruction">
     <div class="flex items-center gap-4">
-      <ShortLabel :icon="CaFingerprintRecognition" :value="signature" />
-      <ShortLink type="addr" :value="address" />
+      <ShortLink :icon="CaFingerprintRecognition">
+        <Copyable :value="signature" size="sm" short />
+      </ShortLink>
+      <ShortLink :icon="CaPassword">
+        <Copyable
+          :to="{ name: 'addr', params: { addr: address } }"
+          :value="address"
+          size="sm"
+          short />
+      </ShortLink>
     </div>
   </BaseInstruction>
 </template>
@@ -11,9 +19,9 @@
 import { computed } from 'vue'
 import { SignInstruction, SignToInstruction } from '@aldea/core/instructions'
 import { PubKey, base16 } from '@aldea/sdk'
-import { CaFingerprintRecognition } from '@kalimahapps/vue-icons'
+import { CaFingerprintRecognition, CaPassword } from '@kalimahapps/vue-icons'
 import BaseInstruction from './BaseInstruction.vue'
-import ShortLabel from '../ShortLabel.vue'
+import Copyable from '../Copyable.vue'
 import ShortLink from '../ShortLink.vue'
 
 const props = defineProps<{

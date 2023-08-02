@@ -1,7 +1,7 @@
 <template>
   <RouterLink
     :to="to"
-    class="inline-flex flex-grow items-center px-6 py-4 gap-3 text-neutral-500 border-b border-neutral-700 transition-colors">
+    class="inline-flex flex-grow items-center px-6 py-4 gap-3 text-helper border-b-2 border-gray-70 hover:text-primary transition-colors">
     <component :is="icon" />
     <span><slot></slot></span>
   </RouterLink>
@@ -18,6 +18,6 @@ defineProps<{
 
 <style scoped>
 .router-link-exact-active {
-  @apply text-neutral-300 border-sky-300;
+  @apply text-primary border-blue-40;
 }
 </style>

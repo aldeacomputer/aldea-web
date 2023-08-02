@@ -95,6 +95,7 @@ __metadata:
     "@kalimahapps/vue-icons": ^1.4.0
     "@vitejs/plugin-vue": ^4.2.3
     autoprefixer: ^10.4.14
+    dayjs: ^1.11.9
     npm-run-all: ^4.1.5
     postcss: ^8.4.27
     shiki: ^0.14.3
@@ -5532,6 +5533,13 @@ __metadata:
   version: 4.6.3
   resolution: "dateformat@npm:4.6.3"
   checksum: c3aa0617c0a5b30595122bc8d1bee6276a9221e4d392087b41cbbdf175d9662ae0e50d0d6dcdf45caeac5153c4b5b0844265f8cd2b2245451e3da19e39e3b65d
+  languageName: node
+  linkType: hard
+
+"dayjs@npm:^1.11.9":
+  version: 1.11.9
+  resolution: "dayjs@npm:1.11.9"
+  checksum: a4844d83dc87f921348bb9b1b93af851c51e6f71fa259604809cfe1b49d1230e6b0212dab44d1cb01994c096ad3a77ea1cf18fa55154da6efcc9d3610526ac38
   languageName: node
   linkType: hard
 

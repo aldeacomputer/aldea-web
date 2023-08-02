@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div class="bg-neutral-800">
+    <div class="bg-layer-01">
       <nav class="flex items-center gap-0.5 h-10 overflow-x-scroll source-nav">
         <div
           v-for="file, i in pkg?.files"
-          class="inline-flex items-center self-stretch px-6 border-b cursor-pointer"
+          class="inline-flex items-center self-stretch px-6 border-b-2 cursor-pointer transition-colors"
           :class="{
-            'text-neutral-500 bg-neutral-700 border-neutral-700 hover:text-neutral-300': index !== i,
-            'text-neutral-300 bg-neutral-800 border-sky-300': index === i,
+            'text-secondary bg-layer-02 border-gray-70 hover:text-primary': index !== i,
+            'text-primary bg-layer-01 border-blue-40': index === i,
           }"
           @click="index = i">
           {{ file.name }}
@@ -37,6 +37,6 @@ const source = computed(() => {
 <style>
 .source-nav::after {
   content: ' ';
-  @apply flex-auto self-stretch border-b border-neutral-700;
+  @apply flex-auto self-stretch border-b border-gray-70;
 }
 </style>

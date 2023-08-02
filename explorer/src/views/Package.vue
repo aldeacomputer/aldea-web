@@ -3,8 +3,7 @@
     <PageHeader
       class="mb-10"
       title="Package"
-      :id="pkg.id"
-      :links="graphLinks">
+      :id="pkg.id">
     </PageHeader>
 
     <TabRouterView>
@@ -16,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeMount, provide, ref } from 'vue'
+import { onBeforeMount, provide, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import type { Abi } from '@aldea/core/abi'
 import { PackageResponse } from '@aldea/sdk'
@@ -36,12 +35,13 @@ const pkg = ref<PackageResponse>()
 provide(keys.abi, abi)
 provide(keys.pkg, pkg)
 
-const graphLinks = computed(() => {
-  return [
-    { title: 'Tx ID', value: 'd14fd0ac9e06d4803d2537340d4b5ee7d806ad6b4f8c40b206893bb06a6de1a4', url: '/tx/1' },
-    { title: 'Publisher', value: 'addr18kglj7mw2ypwz5rmlwytmry2sm7qa6v39lxq0t', url: '/addr/1' },
-  ]
-})
+//const graphLinks = computed(() => {
+//  // TODO - can we show the TX id from a package?
+//  return [
+//    { title: 'Tx ID', value: 'd14fd0ac9e06d4803d2537340d4b5ee7d806ad6b4f8c40b206893bb06a6de1a4', url: '/tx/1' },
+//    { title: 'Publisher', value: 'addr18kglj7mw2ypwz5rmlwytmry2sm7qa6v39lxq0t', url: '/addr/1' },
+//  ]
+//})
 
 onBeforeMount(async () => {
   abi.value = await store.adapter.getPkgAbi(route.params.id as string)

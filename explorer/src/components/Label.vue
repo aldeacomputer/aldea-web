@@ -1,25 +1,38 @@
 <template>
   <span
-    class="inline-flex items-center h-7 px-3 gap-2 text-14 bg-neutral-800 rounded-sm"
+    class="inline-flex items-center  px-3 gap-2 bg-layer-01 rounded-sm"
     :class="{
-      'border-l-4': !noBorder,
-      'border-l-neutral-700': !type,
-      'text-blue-400 border-l-blue-400': type === 'info',
-      'text-green-400 border-l-green-400': type === 'success',
-      'text-yellow-200 border-l-yellow-200': type === 'warning',
-      'text-red-400 border-l-red-400': type === 'error',
+      'h-7': size === 'sm',
+      'h-10': size === 'md',
+      'text-secondary': !type,
+      'flex-row-reverse': !!type,
+      'border-l-4': !!type || !!border,
+      'border-l-info': type === 'info' || border === 'info',
+      'border-l-success': type === 'success' || border === 'success',
+      'border-l-warning': type === 'warning' || border === 'warning',
+      'border-l-error': type === 'error' || border === 'error',
+      'text-info': type === 'info',
+      'text-success': type === 'success',
+      'text-warning': type === 'warning',
+      'text-error': type === 'error',
     }">
-    <span><slot></slot></span>
     <component :is="icon" v-if="icon" />
+    <span class="text-14">
+      <slot></slot>
+    </span>
   </span>
 </template>
 
 <script setup lang="ts">
 type LabelType = 'info' | 'success' | 'warning' | 'error'
+type LabelSize = 'sm' | 'md' | 'lg'
 
-defineProps<{
-  type?: LabelType,
-  icon?: any,
-  noBorder?: boolean
-}>()
+withDefaults(defineProps<{
+  type?: LabelType;
+  icon?: any;
+  border?: LabelType;
+  size?: LabelSize;
+}>(), {
+  size: 'md'
+})
 </script>

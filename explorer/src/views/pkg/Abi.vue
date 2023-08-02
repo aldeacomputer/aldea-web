@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-neutral-800">
+  <div class="bg-layer-01">
     <CodeBlock :code="source" copyable numbered />
   </div>
 </template>
