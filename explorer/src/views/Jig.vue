@@ -1,18 +1,16 @@
 <template>
-  <article>
+  <article v-if="jig">
     <PageHeader
       title="Jig"
-      id="d2537340d4b5ee7d806ad6b4f8c40b206893bb06a6de1a4d14fd0ac9e06d4803"
+      :id="jig.id"
       class="mb-10"
       :links="graphLinks">
       <template #title-labels>
-        <Label class="font-mono" size="sm">ClassName</Label>
+        <Label class="font-mono" size="sm">{{ $helpers.jigClassName(jig) }}</Label>
       </template>
       <template #after-title>
         <div class="flex flex-col sm:flex-row gap-2">
-          <Label :icon="XacIcon" border="success">
-            <div class="font-mono text-14">0.00267719</div>
-          </Label>
+          <LockLabel :lock="jig.lock" />
         </div>
       </template>
       <!--
@@ -50,19 +48,37 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, provide, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import { CaExpandAll, CaChangeCatalog } from '@kalimahapps/vue-icons'
+import * as keys from '../injection-keys'
+import { useAppStore } from '../stores/app'
 import PageHeader from '../components/PageHeader.vue'
 import Label from '../components/Label.vue'
+import LockLabel from '../components/LockLabel.vue'
 import TabRouterView from '../components/TabRouterView.vue'
 import TabLink from '../components/TabLink.vue'
-import XacIcon from '../components/XacIcon.vue'
+
+const route = useRoute()
+const store = useAppStore()
+
+const jig = ref<Jig>(await loadJig(route.params.id as string))
+provide(keys.jig, jig)
 
 const graphLinks = computed(() => {
   return [
-    { title: 'Origin', value: '4b5ee7d806ad6b4f8c40b206893bb06a6de1a4d14fd0ac9e06d480d2537340d3_2', url: '/jig' },
-    { title: 'Location', value: '4b5ee7d806ad6b4f8c40b206893bb06a6de1a4d14fd0ac9e06d480d2537340d3_2', url: '/jig' },
-    { title: 'Class', value: 'd2537340d4b5ee7d806ad6b4f8c40b206893bb06a6de1a4d14fd0ac9e06d4803_0', url: '/pkg' },
+    { title: 'Origin', value: jig.value.origin, url: `/jig/${jig.value.id}` },
+    { title: 'Location', value: jig.value.location, url: `/jig/${jig.value.id}` },
+    { title: 'Class', value: jig.value.class, url: `/pkg/${jig.value.class.replace(/_\d+/, '')}` },
   ]
 })
+
+watch(route, async () => {
+  jig.value = await loadJig(route.params.id as string)
+  window.scrollTo({ top: 0 })
+})
+
+async function loadJig(id: string): Promise<Jig> {
+  return store.adapter.getJig(id)
+}
 </script>

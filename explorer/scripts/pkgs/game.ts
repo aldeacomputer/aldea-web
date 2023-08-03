@@ -55,7 +55,6 @@ export class House extends Jig {
 export class Game extends Jig {
   ctrl: ControlToken;
   dice: StaticArray<u8> = new StaticArray(2);
-  foo: string = 'aaaaaaaaaa';
   signature: Uint8Array = new Uint8Array(64);
 
   constructor(

@@ -4,6 +4,7 @@
     :class="{
       'h-7': size === 'sm',
       'h-10': size === 'md',
+      'h-12': size === 'lg',
       'text-secondary': !type,
       'flex-row-reverse': !!type,
       'border-l-4': !!type || !!border,

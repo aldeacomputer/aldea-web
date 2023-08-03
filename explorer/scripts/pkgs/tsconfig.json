@@ -1,0 +1,13 @@
+{
+  "extends": "@aldea/compiler/assembly.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "pkg://*": [".packages/*"]
+    }
+  },
+  "include": [
+    "**/*",
+    ".packages/**/*"
+  ]
+}

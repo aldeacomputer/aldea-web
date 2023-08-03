@@ -13,35 +13,46 @@ const keys = KeyPair.fromRandom()
 const user = KeyPair.fromRandom()
 
 setTimeout(async () => {
-  const tx1 = await deployPkg()
+  const tx1 = await deployPkgs()
   const tx2 = await seedUser(tx1.packages[0].id)
+  const tx3 = await kitchenSink(tx1.packages[1].id)
 
   console.log('🌱', 'address', keys.pubKey.toAddress().toString())
   console.log('🌱', 'address', user.pubKey.toAddress().toString())
   for (let jig of tx2.outputs) {
     console.log('🌱', 'jig', jig.id)  
   }
+  for (let jig of tx3.outputs) {
+    console.log('🌱', 'jig', jig.id)  
+  }
   console.log('🌱', 'package', tx1.packages[0].id)
+  console.log('🌱', 'package', tx1.packages[1].id)
   console.log('🌱', 'transaction', tx1.id)
   console.log('🌱', 'transaction', tx2.id)
+  console.log('🌱', 'transaction', tx3.id)
 }, WAIT_TIME)
 
-async function deployPkg() {
+async function deployPkgs() {
   const params = { address: keys.pubKey.toAddress().toString(), amount: 100 }
   const coin = await aldea.api.post('mint', { json: params }).json()
 
-  const pkg = new Map([
+  const pkg1 = new Map([
     ['main.ts', readFileSync(join(__dirname, 'pkgs', 'game.ts'), 'utf8')]
+  ])
+
+  const pkg2 = new Map([
+    ['main.ts', readFileSync(join(__dirname, 'pkgs', 'kitchen-sink.ts'), 'utf8')]
   ])
 
   const tx = await aldea.createTx(txb => {
     const feeRef = txb.load(coin.id)
-    txb.deploy(pkg)
+    txb.deploy(pkg1)
+    txb.deploy(pkg2)
     txb.fund(feeRef)
     txb.sign(keys.privKey)
   })
 
-  return aldea.commitTx(tx)
+  return aldea.commitTx(tx).catch(catcher)
 }
 
 async function seedUser(pkgId) {
@@ -69,4 +80,26 @@ async function seedUser(pkgId) {
   })
 
   return aldea.commitTx(tx)
+}
+
+async function kitchenSink(pkgId) {
+  console.log({ pkgId })
+  const params = { address: keys.pubKey.toAddress().toString(), amount: 100 }
+  const coin = await aldea.api.post('mint', { json: params }).json()
+
+  const tx = await aldea.createTx(txb => {
+    const pkgRef = txb.import(pkgId)
+    const feeRef = txb.load(coin.id)
+    const jigRef = txb.new(pkgRef, 'KitchenSink', [feeRef])
+    txb.lock(jigRef, user.pubKey.toAddress())
+    txb.fund(feeRef)
+    txb.sign(keys.privKey)
+  })
+
+  return aldea.commitTx(tx).catch(catcher)
+}
+
+const catcher = async (e) => {
+  console.log(await e.response.json())
+  throw 'X'
 }

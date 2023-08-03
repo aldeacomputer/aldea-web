@@ -4,6 +4,8 @@ import type { CommitTxResponse, OutputResponse, PackageResponse, Tx } from '@ald
 
 export const extendedTx = Symbol() as InjectionKey<Ref<CommitTxResponse | undefined>>
 export const tx = Symbol() as InjectionKey<Ref<Tx | undefined>>
+export const jig = Symbol() as InjectionKey<Ref<Jig>>
+export const jigProps = Symbol() as InjectionKey<Record<string, any>>
 
 export const abi = Symbol() as InjectionKey<Ref<Abi | undefined>>
 export const pkg = Symbol() as InjectionKey<Ref<PackageResponse | undefined>>

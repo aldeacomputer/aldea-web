@@ -31,6 +31,7 @@ export const routes: RouteRecordRaw[] = [
       { name: 'tx_outputs', path: 'outputs', component: TxOutputsTab },
       { name: 'tx_packages', path: 'packages', component: TxPackagesTab },
     ],
+    redirect: { name: 'tx_instructions' },
   },
   {
     name: 'pkg',
@@ -40,7 +41,8 @@ export const routes: RouteRecordRaw[] = [
       { name: 'pkg_docs', path: '', component: PkgDocsTab },
       { name: 'pkg_src', path: 'source', component: PkgSourceTab },
       { name: 'pkg_abi', path: 'abi', component: PkgAbiTab },
-    ]
+    ],
+    redirect: { name: 'pkg_docs' },
   },
   {
     name: 'jig',
@@ -49,7 +51,8 @@ export const routes: RouteRecordRaw[] = [
     children: [
       { name: 'jig_state', path: '', component: JigStateTab },
       { name: 'jig_history', path: '', component: JigHistoryTab },
-    ]
+    ],
+    redirect: { name: 'jig_state' },
   },
   {
     name: 'addr',
@@ -58,6 +61,7 @@ export const routes: RouteRecordRaw[] = [
     children: [
       { name: 'addr_jigs', path: '', component: AddrJigsTab },
       { name: 'addr_txns', path: 'txs', component: AddrTxnsTab },
-    ]
+    ],
+    redirect: { name: 'addr_jigs' },
   },
 ]
