@@ -58,6 +58,7 @@ export default {
       success: colors.green['40'],
       warning: colors.yellow['30'],
       error: colors.red['50'],
+      transparent: 'transparent',
     },
     fontSize: {
       '12': '0.75rem',
@@ -76,7 +77,7 @@ export default {
       fontFamily: {
         sans: ['IBM Plex Sans', 'Helvetica Neue', 'Arial', 'sans-serif'],
         mono: ['IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier', 'monospace'],
-      }
+      },
     },
   },
   plugins: [

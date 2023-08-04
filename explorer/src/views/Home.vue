@@ -1,19 +1,13 @@
 <template>
-  <div class="flex items-center gap-4">
-    <RouterLink
-      class="link"
-      v-for="link of links"
-      :to="link.path">
-      {{ link.label }}
-    </RouterLink>
+  <div class="w-full max-w-md space-y-2">
+    <div>
+      <img src="/aldea-ex-logo.svg" width="350" alt="Aldea Explorer" />
+    </div>
+    
+    <SearchTrigger on-home />
   </div>
 </template>
 
 <script setup lang="ts">
-const links = [
-  { path: "/tx/1", label: "Transaction" },
-  { path: "/pkg/1", label: "Package" },
-  { path: "/jig/1", label: "Jig" },
-  { path: "/address/1", label: "Address" },
-]
+import SearchTrigger from '../components/SearchTrigger.vue'
 </script>

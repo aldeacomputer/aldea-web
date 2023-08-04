@@ -6,9 +6,14 @@
         <slot></slot>
       </div>
     </main>
+    <SearchModal v-if="search.show" />
   </div>
 </template>
 
 <script setup lang="ts">
-import AppHeader from '../components/AppHeader.vue';
+import { useSearchStore } from '../stores/search'
+import AppHeader from '../components/AppHeader.vue'
+import SearchModal from '../components/SearchModal.vue'
+
+const search = useSearchStore()
 </script>
