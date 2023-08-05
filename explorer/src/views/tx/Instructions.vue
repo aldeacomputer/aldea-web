@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div v-if="tx">
     <p class="text-14 mb-2">An instruction is a unit of code that performs a specific task.</p>
     <ul class="space-y-2">
-      <li v-for="instruction, i of tx?.instructions">
+      <li v-for="instruction, i of tx.instructions">
         <component :is="componentFor(instruction)" :idx="i" :instruction="instruction" />
       </li>
     </ul>

@@ -58,7 +58,7 @@ const jigProps = computed(() => {
 })
 
 onBeforeMount(async () => {
-  const abi = await store.adapter.getPkgAbi(props.item.class.replace(/_\d+$/, ''))
+  const abi = await store.adapter.getAbi(props.item.class.replace(/_\d+$/, ''))
   output.value = Output.fromJson(props.item, abi)
 })
 </script>

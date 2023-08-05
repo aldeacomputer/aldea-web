@@ -21,10 +21,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeMount, provide, ref, toRaw, unref } from 'vue'
-import { useRoute } from 'vue-router'
+import { computed, provide, ref, toRaw, unref } from 'vue'
+import { onBeforeRouteUpdate, useRoute } from 'vue-router'
 import { Abi } from '@aldea/core/abi'
-import { BCS, OutputResponse, base16 } from '@aldea/sdk'
+import { BCS, base16 } from '@aldea/sdk'
 import { CaShoppingBag, CaArrowsVertical } from '@kalimahapps/vue-icons'
 import * as keys from '../injection-keys'
 import { useAppStore } from '../stores/app'
@@ -39,16 +39,17 @@ const COIN_PKG_ID = '00000000000000000000000000000000000000000000000000000000000
 const store = useAppStore()
 const route = useRoute()
 
-const coinAbi = ref<Abi>()
-const jigs = ref<OutputResponse[]>([])
+const coinAbi = ref<Abi>(await store.adapter.getAbi(COIN_PKG_ID))
+const jigs = ref<JigData[]>(await loadJigs(route.params.addr as string))
 
-provide(keys.addrJigs, jigs)
+provide(keys.jigs, jigs)
 
 const balance = computed(() => {
   const coins = jigs.value.filter(o => o.class === `${COIN_PKG_ID}_0`)
   const motos = coins.reduce((sum, o) => {
     if (coinAbi.value) {
-      const bcs = new BCS(toRaw(unref(coinAbi))!)
+      const abi = toRaw(unref(coinAbi))!
+      const bcs = new BCS(abi)
       const [motos] = bcs.decode('Coin', base16.decode(o.state))
       sum += motos
     }
@@ -58,8 +59,14 @@ const balance = computed(() => {
   return (Number(motos) / 100000000).toFixed(8)
 })
 
-onBeforeMount(async () => {
-  coinAbi.value = await store.adapter.getPkgAbi(COIN_PKG_ID)
-  jigs.value = await store.adapter.getAddrJigs(route.params.addr as string)
+async function loadJigs(addr: string): Promise<JigData[]> {
+  return store.adapter.getAddrJigs(addr)
+}
+
+onBeforeRouteUpdate(async (to, from) => {
+  if (to.name && /^addr/.test(to.name as string) && to.params.addr !== from.params.addr) {
+    jigs.value = await loadJigs(to.params.addr as string)
+    window.scrollTo({ top: 0 })
+  }
 })
 </script>

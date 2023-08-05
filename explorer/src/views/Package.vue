@@ -15,10 +15,8 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeMount, provide, ref } from 'vue'
-import { useRoute } from 'vue-router'
-import type { Abi } from '@aldea/core/abi'
-import { PackageResponse } from '@aldea/sdk'
+import { provide, ref } from 'vue'
+import { onBeforeRouteUpdate, useRoute } from 'vue-router'
 import { CaCode, CaDocumentMultiple01, CaRepoSourceCode } from '@kalimahapps/vue-icons'
 import * as keys from '../injection-keys'
 import { useAppStore } from '../stores/app'
@@ -29,10 +27,7 @@ import TabLink from '../components/TabLink.vue'
 const store = useAppStore()
 const route = useRoute()
 
-const abi = ref<Abi>()
-const pkg = ref<PackageResponse>()
-
-provide(keys.abi, abi)
+const pkg = ref<PkgData>(await loadPkg(route.params.id as string))
 provide(keys.pkg, pkg)
 
 //const graphLinks = computed(() => {
@@ -43,8 +38,14 @@ provide(keys.pkg, pkg)
 //  ]
 //})
 
-onBeforeMount(async () => {
-  abi.value = await store.adapter.getPkgAbi(route.params.id as string)
-  pkg.value = await store.adapter.getPkgSrc(route.params.id as string)
+async function loadPkg(id: string): Promise<PkgData> {
+  return store.adapter.getPkg(id)
+}
+
+onBeforeRouteUpdate(async (to, from) => {
+  if (to.name && /^pkg/.test(to.name as string) && to.params.id !== from.params.id) {
+    pkg.value = await loadPkg(to.params.id as string)
+    window.scrollTo({ top: 0 })
+  }
 })
 </script>

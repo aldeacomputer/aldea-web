@@ -11,7 +11,7 @@
     </div>
     <div class="flex-auto py-6 space-y-6">
       <h3 class="text-20">Fields</h3>
-      <div v-for="field of $helpers.jigFields(jig)" ref="fields">
+      <div v-for="field of $helpers.jigFields(jig)" ref="fields" :key="field.name">
         <div class="flex items-center gap-3 mb-4">
           <h4 class="text-16 font-semibold text-secondary">{{ field.name }}</h4>
           <span class="text-14 font-mono text-helper" size="sm">{{ $helpers.typeName(field.type) }}</span>
@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { inject, ref } from 'vue'
+import { inject, onBeforeUnmount, ref } from 'vue'
 import { FieldNode } from '@aldea/core/abi'
 import * as keys from '../../injection-keys'
 import Primitive from '../../components/fields/Primitive.vue'
@@ -77,4 +77,13 @@ function scrollToField(i: number) {
   const top = el.getBoundingClientRect().top + window.scrollY - 84
   window.scrollTo({ top, behavior: 'smooth' })
 }
+
+/**
+ * Hack alert. When navigating away to another route, Vue throws:
+ *    Unhandled error during execution of scheduler flush.
+ *    Cannot read properties of null (reading 'parentNode')
+ * 
+ * Resolved by clearing the refs before navigating away. 🤷‍♂️
+ */
+onBeforeUnmount(() => { fields.value = [] })
 </script>

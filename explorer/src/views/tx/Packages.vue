@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div v-if="txd">
     <ul class="space-y-2">
-      <li v-for="pkg of extTx?.packages">
+      <li v-for="pkg of txd.packages">
         <PackageListItem :item="pkg" />
       </li>
     </ul>
@@ -13,5 +13,5 @@ import { inject } from 'vue'
 import * as keys from '../../injection-keys'
 import PackageListItem from '../../components/lists/PackageListItem.vue'
 
-const extTx = inject(keys.extendedTx)
+const txd = inject(keys.txd)
 </script>

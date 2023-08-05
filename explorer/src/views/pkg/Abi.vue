@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-layer-01">
+  <div class="bg-layer-01" v-if="pkg">
     <CodeBlock :code="source" copyable numbered />
   </div>
 </template>
@@ -9,9 +9,9 @@ import { computed, inject } from 'vue'
 import * as keys from '../../injection-keys'
 import CodeBlock from '../../components/CodeBlock.vue'
 
-const abi = inject(keys.abi)
+const pkg = inject(keys.pkg)
 
 const source = computed(() => {
-  return JSON.stringify(abi!.value, null, 2)
+  return JSON.stringify(pkg!.value.abi, null, 2)
 })
 </script>

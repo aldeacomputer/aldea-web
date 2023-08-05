@@ -37,9 +37,13 @@ declare global {
     props: Record<string, any>;
   }
 
-  interface PkgData extends PackageResponse {}
+  interface PkgData extends PackageResponse {
+    abi: Abi;
+  }
 
-  interface TxData extends CommitTxResponse {}
+  interface TxData extends CommitTxResponse {
+    timestamp: number;
+  }
 
   interface SearchResult {
     type: 'addr' | 'jig' | 'pkg' | 'tx';

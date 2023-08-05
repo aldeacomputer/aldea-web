@@ -13,5 +13,5 @@ import { inject } from 'vue'
 import * as keys from '../../injection-keys'
 import OutputListItem from '../../components/lists/OutputListItem.vue'
 
-const jigs = inject(keys.addrJigs)
+const jigs = inject(keys.jigs)
 </script>

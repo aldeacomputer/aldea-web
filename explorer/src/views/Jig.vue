@@ -48,8 +48,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, provide, ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { computed, provide, ref } from 'vue'
+import { onBeforeRouteUpdate, useRoute } from 'vue-router'
 import { CaExpandAll, CaChangeCatalog } from '@kalimahapps/vue-icons'
 import * as keys from '../injection-keys'
 import { useAppStore } from '../stores/app'
@@ -62,7 +62,7 @@ import TabLink from '../components/TabLink.vue'
 const route = useRoute()
 const store = useAppStore()
 
-const jig = ref<Jig>(await loadJig(route.params.id as string))
+const jig = ref<JigData>(await loadJig(route.params.id as string))
 provide(keys.jig, jig)
 
 const graphLinks = computed(() => {
@@ -73,12 +73,14 @@ const graphLinks = computed(() => {
   ]
 })
 
-watch(route, async () => {
-  jig.value = await loadJig(route.params.id as string)
-  window.scrollTo({ top: 0 })
-})
-
-async function loadJig(id: string): Promise<Jig> {
+async function loadJig(id: string): Promise<JigData> {
   return store.adapter.getJig(id)
 }
+
+onBeforeRouteUpdate(async (to, from) => {
+  if (to.name && /^jig/.test(to.name as string) && to.params.id !== from.params.id) {
+    jig.value = await loadJig(to.params.id as string)
+    window.scrollTo({ top: 0 })
+  }
+})
 </script>

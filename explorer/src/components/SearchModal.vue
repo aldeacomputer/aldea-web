@@ -37,10 +37,9 @@ function onKeyDown(e: KeyboardEvent) {
       results.value?.down()
       break
     case 'ArrowUp':
-      if (!isFieldInFocus()) {
-        e.preventDefault()
-        results.value?.up()
-      }
+    if (isFieldInFocus()) { field.value?.blur() }
+      e.preventDefault()
+      results.value?.up()
       break
     case 'Enter':
       if (!isFieldInFocus()) {

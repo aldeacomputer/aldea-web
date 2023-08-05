@@ -1,13 +1,8 @@
-import type { InjectionKey, Ref } from 'vue'
-import type { Abi } from '@aldea/core/abi'
-import type { CommitTxResponse, OutputResponse, PackageResponse, Tx } from '@aldea/sdk'
+import { InjectionKey, Ref } from 'vue'
+import { Tx } from '@aldea/sdk'
 
-export const extendedTx = Symbol() as InjectionKey<Ref<CommitTxResponse | undefined>>
-export const tx = Symbol() as InjectionKey<Ref<Tx | undefined>>
-export const jig = Symbol() as InjectionKey<Ref<Jig>>
-export const jigProps = Symbol() as InjectionKey<Record<string, any>>
-
-export const abi = Symbol() as InjectionKey<Ref<Abi | undefined>>
-export const pkg = Symbol() as InjectionKey<Ref<PackageResponse | undefined>>
-
-export const addrJigs = Symbol() as InjectionKey<Ref<OutputResponse[]>>
+export const jig = Symbol() as InjectionKey<Ref<JigData>>
+export const jigs = Symbol() as InjectionKey<Ref<JigData[]>>
+export const pkg = Symbol() as InjectionKey<Ref<PkgData>>
+export const txd = Symbol() as InjectionKey<Ref<TxData>>
+export const tx = Symbol() as InjectionKey<Ref<Tx>>

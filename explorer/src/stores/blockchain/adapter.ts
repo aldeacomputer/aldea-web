@@ -8,8 +8,8 @@ export type LookupResult =
 export interface ChainAdapter {
   getAddrJigs(addr: string): Promise<JigData[]>;
   getJig(jigId: string): Promise<JigData>;
-  getPkgAbi(pkgId: string): Promise<Abi>;
-  getPkgSrc(pkgId: string): Promise<PkgData>;
+  getAbi(pkgId: string): Promise<Abi>;
+  getPkg(pkgId: string): Promise<PkgData>;
   getTx(txid: string): Promise<TxData>;
 
   lookupById(id: string): Promise<LookupResult>;

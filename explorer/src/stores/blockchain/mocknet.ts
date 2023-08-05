@@ -1,5 +1,5 @@
 import { Abi } from '@aldea/core/abi'
-import { Aldea, FileResponse, OutputResponse, Output } from '@aldea/sdk'
+import { Aldea, FileResponse, OutputResponse, Output, CommitTxResponse } from '@aldea/sdk'
 import { ChainAdapter, LookupResult } from './adapter';
 import { cached } from './cache';
 
@@ -16,41 +16,48 @@ export class Mocknet implements ChainAdapter {
     if (/_\d+$/.test(jigId)) {
       output = await this.aldea.getOutputByOrigin(jigId)
     } else {
-      output = await cached<OutputResponse>(['jig', jigId], () => this.aldea.getOutput(jigId))
+      output = await cached<OutputResponse>(jigId, () => this.aldea.getOutput(jigId))
     }
 
     return this.outputToJig(output)
   }
 
-  getPkgAbi(pkgId: string): Promise<Abi> {
-    return cached<Abi>(['abi', pkgId], () => this.aldea.getPackageAbi(pkgId))
+  async getAbi(pkgId: string): Promise<Abi> {
+    return cached<Abi>([pkgId, 'abi'], () => this.aldea.getPackageAbi(pkgId))
   }
 
-  getPkgSrc(pkgId: string): Promise<PkgData> {
-    return cached<PkgData>(['pkg', pkgId], async () => {
-      const res = await this.aldea.getPackageSrc(pkgId)
-      if (res.files instanceof Map) {
-        res.files = [...(res.files as Map<string, string>)].reduce((list, [name, content]) => {
+  async getPkg(pkgId: string): Promise<PkgData> {
+    return cached<PkgData>(pkgId, async () => {
+      const [abi, pkg] = await Promise.all([
+        this.getAbi(pkgId),
+        this.aldea.getPackageSrc(pkgId),
+      ])
+
+      if (pkg.files instanceof Map) {
+        pkg.files = [...(pkg.files as Map<string, string>)].reduce((list, [name, content]) => {
           list.push({ name, content })
           return list
         }, [] as FileResponse[])
       }
-      return res
+
+      return { ...pkg, abi }
     })
   }
 
   async getTx(txid: string): Promise<TxData> {
-    return cached<TxData>(['tx', txid], () => this.aldea.getTx(txid))
+    return cached<TxData>(txid, async () => {
+      const data = await this.aldea.getTx(txid) as CommitTxResponse & { executed_at: number }
+      const timestamp = data.executed_at
+      return { ...data, timestamp, executed_at: undefined }
+    })
   }
 
   async lookupById(id: string): Promise<LookupResult> {
-    const lookups = [
+    const data = await Promise.any([
       this.getJig(id),
-      this.getPkgSrc(id),
-      this.getTx(id)
-    ]
-
-    const data = await Promise.any(lookups)
+      this.getPkg(id),
+      this.getTx(id),
+    ])
 
     if (isJigData(data))      return { type: 'jig', data }
     else if (isPkgData(data)) return { type: 'pkg', data }
@@ -60,7 +67,8 @@ export class Mocknet implements ChainAdapter {
   }
 
   private async outputToJig(o: OutputResponse): Promise<JigData> {
-    const abi = await this.getPkgAbi(o.class.replace(/_\d+$/, ''))
+    const pkgId = o.class.replace(/_\d+$/, '')
+    const abi = await this.getAbi(pkgId)
     const props = Output.fromJson(o, abi).props!
     return { ...o, abi, props }
   }

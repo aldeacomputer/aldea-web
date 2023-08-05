@@ -53,7 +53,10 @@ function resultType(result: SearchResult) {
 
 function up() {
   idx.value = idx.value - 1
-  if (idx.value < 0) { emit('blur') }
+  if (idx.value < 0) {
+    idx.value = -1
+    emit('blur')
+  }
 }
 
 function down() {
