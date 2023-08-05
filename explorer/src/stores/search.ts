@@ -1,17 +1,16 @@
-import { computed, ref } from 'vue'
+import { computed, ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { defineStore } from 'pinia'
 import { useAppStore } from './app'
 
-const STORAGE_KEY = 'recent_search_results'
+const STORAGE_KEY = '__recent_search'
 const MAX_STORED_RESULTS = 10
 const VALID_ADDR_REGEX = /^addr(_\w+)?1[a-z0-9]{38}$/
 const VALID_ID_REGEX = /^[a-fA-F0-9]{64}(_\d+)?$/
 
-const persitedResults = localStorage.getItem(STORAGE_KEY)
-const defaultResults: SearchResult[] = typeof persitedResults === 'string' ?
-  JSON.parse(persitedResults) :
-  []
+const persitedResultsStr = localStorage.getItem(STORAGE_KEY)
+const persitedResults: Record<string, SearchResult[]> =
+  typeof persitedResultsStr === 'string' ? JSON.parse(persitedResultsStr) : {}
 
 export const useSearchStore = defineStore('search', () => {
   const router = useRouter()
@@ -22,7 +21,8 @@ export const useSearchStore = defineStore('search', () => {
   const term = ref('')
   const errorTerm = ref('')
 
-  const recentResults = ref<SearchResult[]>(defaultResults)
+  const keyedResults = reactive<Record<string, SearchResult[]>>(persitedResults)
+  const recentResults = computed(() => keyedResults[store.network] || [])
 
   const isLoading = ref(false)
   const isBlank = computed(() => !term.value.length)
@@ -63,7 +63,7 @@ export const useSearchStore = defineStore('search', () => {
   }
 
   function goto(res: SearchResult) {
-    persist(res)
+    push(res)
     if (res.type === 'addr') {
       router.push({ name: 'addr', params: { addr: res.value }})
     } else {
@@ -73,26 +73,30 @@ export const useSearchStore = defineStore('search', () => {
     term.value = ''
   }
 
-  function persist(res: SearchResult) {
+  function push(res: SearchResult) {
+    // Set default
+    keyedResults[store.network] ||= []
+
     // Filter dupes
-    recentResults.value
+    keyedResults[store.network]
       .filter(r => r.type === res.type && r.value === res.value)
-      .map(d => recentResults.value.indexOf(d))
-      .forEach(i => recentResults.value.splice(i, 1))
+      .map(d => keyedResults[store.network].indexOf(d))
+      .forEach(i => keyedResults[store.network].splice(i, 1))
     
     // Prepend && slice
-    recentResults.value.unshift(res)
-    if (recentResults.value.length >= MAX_STORED_RESULTS) {
-      recentResults.value.length = MAX_STORED_RESULTS
+    keyedResults[store.network].unshift(res)
+    if (keyedResults[store.network].length >= MAX_STORED_RESULTS) {
+      keyedResults[store.network].length = MAX_STORED_RESULTS
     }
 
     // Persist
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(recentResults.value))
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(keyedResults))
   }
 
   function clear() {
-    recentResults.value = []
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(recentResults.value))
+    keyedResults[store.network] ||= []
+    keyedResults[store.network] = []
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(keyedResults))
   }
 
   return { isMac, show, term, errorTerm, recentResults, isBlank, isError, isValid, isLoading, lookup, goto, clear }

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fixed top-0 bottom-0 left-0 right-0 px-4 py-6 flex flex-col items-center justify-center bg-black/70"
+    class="fixed top-0 bottom-0 left-0 right-0 z-50 px-4 py-6 flex flex-col items-center justify-center bg-black/70"
     @click.self="hideSearch">
 
     <div class="w-full max-w-3xl bg-layer-01 rounded-sm overflow-hidden">

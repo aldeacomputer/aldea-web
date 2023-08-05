@@ -74,6 +74,11 @@ export class Mocknet implements ChainAdapter {
   }
 }
 
+export function createMocknetAdapter(url: string): Mocknet {
+  const aldea = new Aldea(url)
+  return new Mocknet(aldea)
+}
+
 function isJigData(data: JigData | PkgData | TxData): data is JigData {
   return 'origin' in data && 'location' in data
 }
