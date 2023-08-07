@@ -10,8 +10,8 @@
 
 <script setup lang="ts">
 import { inject } from 'vue'
-import * as keys from '../../injection-keys'
+import { KEYS } from '../../constants'
 import PackageListItem from '../../components/lists/PackageListItem.vue'
 
-const txd = inject(keys.txd)
+const txd = inject(KEYS.txd)
 </script>

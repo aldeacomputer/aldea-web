@@ -51,7 +51,7 @@
 import { computed, provide, ref } from 'vue'
 import { onBeforeRouteUpdate, useRoute } from 'vue-router'
 import { CaExpandAll, CaChangeCatalog } from '@kalimahapps/vue-icons'
-import * as keys from '../injection-keys'
+import { KEYS } from '../constants'
 import { useAppStore } from '../stores/app'
 import PageHeader from '../components/PageHeader.vue'
 import Label from '../components/Label.vue'
@@ -63,7 +63,7 @@ const route = useRoute()
 const store = useAppStore()
 
 const jig = ref<JigData>(await loadJig(route.params.id as string))
-provide(keys.jig, jig)
+provide(KEYS.jig, jig)
 
 const graphLinks = computed(() => {
   return [

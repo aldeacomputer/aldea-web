@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { computed, inject } from 'vue'
 import { TypeNode } from '@aldea/core/abi'
-import * as keys from '../../injection-keys'
+import { KEYS } from '../../constants'
 import Primitive from './Primitive.vue'
 
 const props = defineProps<{
@@ -21,7 +21,7 @@ const props = defineProps<{
   value: Map<any, any> | Record<string, any>;
 }>()
 
-const jig = inject(keys.jig)
+const jig = inject(KEYS.jig)
 
 const entries = computed(() => {
   return props.type.name === 'Map' ?

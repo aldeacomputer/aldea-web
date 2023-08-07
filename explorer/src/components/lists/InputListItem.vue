@@ -4,7 +4,7 @@
       :to="{ name: 'jig', params: { id: value }}"
       responsive
       size="sm"
-        :value="value" />
+      :value="value" />
   </BaseListItem>
 </template>
 

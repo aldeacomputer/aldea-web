@@ -28,14 +28,14 @@
 <script setup lang="ts">
 import { inject, onBeforeUnmount, ref } from 'vue'
 import { FieldNode } from '@aldea/core/abi'
-import * as keys from '../../injection-keys'
+import { KEYS } from '../../constants'
 import Primitive from '../../components/fields/Primitive.vue'
 import ArrayLike from '../../components/fields/ArrayLike.vue'
 import KeyValue from '../../components/fields/KeyValue.vue'
 import Nested from '../../components/fields/Nested.vue'
 import PointerType from '../../components/fields/PointerType.vue'
 
-const jig = inject(keys.jig)
+const jig = inject(KEYS.jig)
 const fields = ref<HTMLElement[]>([])
 
 function componentFor(f: FieldNode) {

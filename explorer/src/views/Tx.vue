@@ -1,11 +1,11 @@
 <template>
-  <article v-if="tx">
+  <article v-if="txd">
     <PageHeader
       title="Transaction"
-      :id="tx.id"
+      :id="txd.id"
       class="mb-10">
       <template #title-labels>
-        <Label type="warning" :icon="CaInformation" size="sm">Pending</Label>
+        <Label type="success" :icon="CaCheckmarkOutline" size="sm">Finalized</Label>
       </template>
       <template #after-title>
         <div class="flex flex-col sm:flex-row gap-2">
@@ -14,7 +14,7 @@
           </Label>
           <Label :icon="CaMoney">
             <div class="font-mono space-x-1.5">
-              <span class="text-14">100</span>
+              <span class="text-14">{{ fee }}</span>
               <span class="text-12">motos</span>
             </div>
           </Label>
@@ -34,10 +34,10 @@
 import { computed, provide, ref } from 'vue'
 import { onBeforeRouteUpdate, useRoute } from 'vue-router'
 import * as dayjs from 'dayjs'
-import { Tx } from '@aldea/sdk'
-import { CaArrowsHorizontal, CaBox, CaCalendar, CaInformation, CaListDropdown, CaMoney } from '@kalimahapps/vue-icons'
+import { OpCode, Output, Pointer, Tx, base16, instructions } from '@aldea/sdk'
+import { CaArrowsHorizontal, CaBox, CaCalendar, CaCheckmarkOutline, CaListDropdown, CaMoney } from '@kalimahapps/vue-icons'
 import { useAppStore } from '../stores/app'
-import * as keys from '../injection-keys'
+import { KEYS } from '../constants'
 import PageHeader from '../components/PageHeader.vue'
 import Label from '../components/Label.vue'
 import TabRouterView from '../components/TabRouterView.vue'
@@ -47,9 +47,17 @@ const store = useAppStore()
 const route = useRoute()
 
 const txd = ref<TxData>(await loadTx(route.params.id as string))
+const inputs  = ref<JigData[]>([])
+const outputs = ref<JigData[]>([])
+
 const tx = computed(() => Tx.fromHex(txd.value.rawtx!))
-provide(keys.txd, txd)
-provide(keys.tx, tx)
+
+loadInputs()
+loadOutputs()
+
+provide(KEYS.txd, txd)
+provide(KEYS.txInputs, inputs)
+provide(KEYS.txOutputs, outputs)
 
 const timestamp = computed(() => {
   return dayjs
@@ -57,13 +65,39 @@ const timestamp = computed(() => {
     .format('YYYY-MM-DD HH:mm')
 })
 
+const fee = computed(() => {
+  return Number(999)
+})
+
 async function loadTx(id: string): Promise<TxData> {
   return store.adapter.getTx(id)
+}
+
+async function loadInputs() {
+  const instructions = tx.value.instructions
+    .filter(i => i.opcode === OpCode.LOAD || i.opcode === OpCode.LOADBYORIGIN)
+
+  for (let i of instructions) {
+    const id = i.opcode === OpCode.LOAD ?
+      base16.encode((<instructions.LoadInstruction>i).outputId) :
+      Pointer.fromBytes((<instructions.LoadByOriginInstruction>i).origin).toString()
+    inputs.value.push(await store.adapter.getJig(id))
+  }
+}
+
+async function loadOutputs() {
+  for (let o of txd.value.outputs) {
+    const abi = await store.adapter.getAbi(o.class.replace(/_\d+$/, ''))
+    const props = Output.fromJson(o, abi).props!
+    outputs.value.push({ ...o, abi, props })
+  }
 }
 
 onBeforeRouteUpdate(async (to, from) => {
   if (to.name && /^tx/.test(to.name as string) && to.params.id !== from.params.id) {
     txd.value = await loadTx(to.params.id as string)
+    loadInputs()
+    loadOutputs()
     window.scrollTo({ top: 0 })
   }
 })

@@ -26,7 +26,7 @@ import { onBeforeRouteUpdate, useRoute } from 'vue-router'
 import { Abi } from '@aldea/core/abi'
 import { BCS, base16 } from '@aldea/sdk'
 import { CaShoppingBag, CaArrowsVertical } from '@kalimahapps/vue-icons'
-import * as keys from '../injection-keys'
+import { KEYS, COIN_PKG_ID, COIN_CLASS } from '../constants'
 import { useAppStore } from '../stores/app'
 import PageHeader from '../components/PageHeader.vue'
 import TabRouterView from '../components/TabRouterView.vue'
@@ -34,18 +34,16 @@ import TabLink from '../components/TabLink.vue'
 import Label from '../components/Label.vue'
 import XacIcon from '../components/XacIcon.vue'
 
-const COIN_PKG_ID = '0000000000000000000000000000000000000000000000000000000000000000'
-
 const store = useAppStore()
 const route = useRoute()
 
 const coinAbi = ref<Abi>(await store.adapter.getAbi(COIN_PKG_ID))
 const jigs = ref<JigData[]>(await loadJigs(route.params.addr as string))
 
-provide(keys.jigs, jigs)
+provide(KEYS.jigs, jigs)
 
 const balance = computed(() => {
-  const coins = jigs.value.filter(o => o.class === `${COIN_PKG_ID}_0`)
+  const coins = jigs.value.filter(o => o.class === COIN_CLASS)
   const motos = coins.reduce((sum, o) => {
     if (coinAbi.value) {
       const abi = toRaw(unref(coinAbi))!

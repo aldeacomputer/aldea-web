@@ -29,6 +29,7 @@ import { computed, onBeforeMount, ref, toRaw, unref } from 'vue'
 import { Output, OutputResponse } from '@aldea/sdk'
 import { CaSettings } from '@kalimahapps/vue-icons'
 import { useAppStore } from '../../stores/app'
+import { COIN_CLASS } from '../../constants'
 import BaseListItem from './BaseListItem.vue'
 import Copyable from '../Copyable.vue'
 import XacIcon from '../XacIcon.vue'
@@ -47,7 +48,7 @@ const className = computed(() => {
 })
 
 const balance = computed(() => {
-  if (props.item.class === '0000000000000000000000000000000000000000000000000000000000000000_0') {
+  if (props.item.class === COIN_CLASS) {
     return (Number(jigProps.value?.motos) / 100000000).toFixed(8)
   }
 })

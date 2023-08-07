@@ -1,8 +1,8 @@
 <template>
-  <div v-if="tx">
+  <div v-if="txd">
     <p class="text-14 mb-2">An instruction is a unit of code that performs a specific task.</p>
     <ul class="space-y-2">
-      <li v-for="instruction, i of tx.instructions">
+      <li v-for="instruction, i of instructions">
         <component :is="componentFor(instruction)" :idx="i" :instruction="instruction" />
       </li>
     </ul>
@@ -10,9 +10,9 @@
 </template>
 
 <script setup lang="ts">
-import { inject } from 'vue'
-import { Instruction, OpCode } from '@aldea/sdk'
-import * as keys from '../../injection-keys'
+import { computed, inject } from 'vue'
+import { Instruction, OpCode, Tx } from '@aldea/sdk'
+import { KEYS } from '../../constants'
 import ImportInstruction from '../../components/instructions/ImportInstruction.vue'
 import LoadInstruction from '../../components/instructions/LoadInstruction.vue'
 import CallInstruction from '../../components/instructions/CallInstruction.vue'
@@ -21,7 +21,11 @@ import DeployInstruction from '../../components/instructions/DeployInstruction.v
 import SignInstruction from '../../components/instructions/SignInstruction.vue'
 import BlankInstruction from '../../components/instructions/BlankInstruction.vue'
 
-const tx = inject(keys.tx)
+const txd = inject(KEYS.txd)
+
+const instructions = computed(() => {
+  return Tx.fromHex(txd?.value.rawtx!).instructions
+})
 
 function componentFor(instruction: Instruction) {
   switch (instruction.opcode) {

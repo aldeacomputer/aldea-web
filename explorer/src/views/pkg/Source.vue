@@ -19,10 +19,10 @@
 
 <script setup lang="ts">
 import { computed, inject, ref } from 'vue'
-import * as keys from '../../injection-keys'
+import { KEYS } from '../../constants'
 import CodeBlock from '../../components/CodeBlock.vue'
 
-const pkg = inject(keys.pkg)
+const pkg = inject(KEYS.pkg)
 
 const index = ref(0)
 

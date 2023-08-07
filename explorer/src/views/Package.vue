@@ -18,7 +18,7 @@
 import { provide, ref } from 'vue'
 import { onBeforeRouteUpdate, useRoute } from 'vue-router'
 import { CaCode, CaDocumentMultiple01, CaRepoSourceCode } from '@kalimahapps/vue-icons'
-import * as keys from '../injection-keys'
+import { KEYS } from '../constants'
 import { useAppStore } from '../stores/app'
 import PageHeader from '../components/PageHeader.vue'
 import TabRouterView from '../components/TabRouterView.vue'
@@ -28,15 +28,7 @@ const store = useAppStore()
 const route = useRoute()
 
 const pkg = ref<PkgData>(await loadPkg(route.params.id as string))
-provide(keys.pkg, pkg)
-
-//const graphLinks = computed(() => {
-//  // TODO - can we show the TX id from a package?
-//  return [
-//    { title: 'Tx ID', value: 'd14fd0ac9e06d4803d2537340d4b5ee7d806ad6b4f8c40b206893bb06a6de1a4', url: '/tx/1' },
-//    { title: 'Publisher', value: 'addr18kglj7mw2ypwz5rmlwytmry2sm7qa6v39lxq0t', url: '/addr/1' },
-//  ]
-//})
+provide(KEYS.pkg, pkg)
 
 async function loadPkg(id: string): Promise<PkgData> {
   return store.adapter.getPkg(id)
