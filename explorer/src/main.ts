@@ -1,8 +1,7 @@
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { createPinia } from 'pinia'
-import { Abi } from '@aldea/core/abi'
-import { CommitTxResponse, OutputResponse, PackageResponse } from '@aldea/sdk'
+import { CommitTxResponse, OutputResponse, PackageResponse, abi } from '@aldea/sdk'
 import { routes } from './routes'
 import * as helpers from './helpers'
 import './style.css'
@@ -33,12 +32,12 @@ declare global {
   }
 
   interface JigData extends OutputResponse {
-    abi: Abi;
+    abi: abi.Abi;
     props: Record<string, any>;
   }
 
   interface PkgData extends PackageResponse {
-    abi: Abi;
+    abi: abi.Abi;
   }
 
   interface TxData extends CommitTxResponse {

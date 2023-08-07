@@ -1,5 +1,4 @@
-import { Abi } from '@aldea/core/abi'
-import { Aldea, FileResponse, OutputResponse, Output, CommitTxResponse } from '@aldea/sdk'
+import { Aldea, FileResponse, OutputResponse, Output, CommitTxResponse, abi } from '@aldea/sdk'
 import { ChainAdapter, LookupResult } from './adapter';
 import { cached } from './cache';
 
@@ -22,8 +21,8 @@ export class Mocknet implements ChainAdapter {
     return this.outputToJig(output)
   }
 
-  async getAbi(pkgId: string): Promise<Abi> {
-    return cached<Abi>([pkgId, 'abi'], () => this.aldea.getPackageAbi(pkgId))
+  async getAbi(pkgId: string): Promise<abi.Abi> {
+    return cached<abi.Abi>([pkgId, 'abi'], () => this.aldea.getPackageAbi(pkgId))
   }
 
   async getPkg(pkgId: string): Promise<PkgData> {

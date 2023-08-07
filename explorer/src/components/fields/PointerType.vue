@@ -12,13 +12,12 @@
 </template>
 
 <script setup lang="ts">
-import { TypeNode } from '@aldea/core/abi'
-import { Pointer } from '@aldea/sdk'
+import { Pointer, abi } from '@aldea/sdk'
 import { CaSettings } from '@kalimahapps/vue-icons'
 import Copyable from '../Copyable.vue'
 
 defineProps<{
-  type: TypeNode;
+  type: abi.TypeNode;
   value: Pointer;
 }>()
 </script>

@@ -14,18 +14,17 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { OpCode } from '@aldea/sdk'
-//import { Abi } from '@aldea/core/abi'
-import { NewInstruction, CallInstruction, ExecInstruction, ExecFuncInstruction } from '@aldea/core/instructions'
+import { OpCode, instructions } from '@aldea/sdk'
 import { CaCode } from '@kalimahapps/vue-icons'
-//import * as keys from '../../injection-keys'
-//import { useAppStore } from '../../stores/app'
 import BaseInstruction from './BaseInstruction.vue'
 import ShortLink from '../ShortLink.vue'
 
 const props = defineProps<{
   idx: number;
-  instruction: NewInstruction | CallInstruction | ExecInstruction | ExecFuncInstruction;
+  instruction: instructions.NewInstruction |
+    instructions.CallInstruction |
+    instructions.ExecInstruction |
+    instructions.ExecFuncInstruction;
 }>()
 
 //const store = useAppStore()

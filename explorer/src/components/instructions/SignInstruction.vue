@@ -17,8 +17,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { SignInstruction, SignToInstruction } from '@aldea/core/instructions'
-import { PubKey, base16 } from '@aldea/sdk'
+import { PubKey, base16, instructions } from '@aldea/sdk'
 import { CaFingerprintRecognition, CaPassword } from '@kalimahapps/vue-icons'
 import BaseInstruction from './BaseInstruction.vue'
 import Copyable from '../Copyable.vue'
@@ -26,7 +25,7 @@ import ShortLink from '../ShortLink.vue'
 
 const props = defineProps<{
   idx: number;
-  instruction: SignInstruction | SignToInstruction;
+  instruction: instructions.SignInstruction | instructions.SignToInstruction;
 }>()
 
 const address = computed(() => {

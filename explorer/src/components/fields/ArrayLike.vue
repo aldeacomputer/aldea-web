@@ -10,13 +10,13 @@
 </template>
 
 <script setup lang="ts">
-import { TypeNode } from '@aldea/core/abi'
+import { abi } from '@aldea/sdk'
 import Primitive from './Primitive.vue'
 
 type Iterable = Array<any> | Set<any>
 
 defineProps<{
-  type: TypeNode;
+  type: abi.TypeNode;
   value: Iterable;
 }>()
 </script>

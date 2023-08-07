@@ -12,12 +12,12 @@
 
 <script setup lang="ts">
 import { computed, inject } from 'vue'
-import { TypeNode } from '@aldea/core/abi'
+import { abi } from '@aldea/sdk'
 import { KEYS } from '../../constants'
 import Primitive from './Primitive.vue'
 
 const props = defineProps<{
-  type: TypeNode;
+  type: abi.TypeNode;
   value: Map<any, any> | Record<string, any>;
 }>()
 

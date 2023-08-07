@@ -12,8 +12,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { LockInstruction } from '@aldea/core/instructions'
-import { Address } from '@aldea/sdk'
+import { Address, instructions } from '@aldea/sdk'
 import { CaPassword } from '@kalimahapps/vue-icons'
 import BaseInstruction from './BaseInstruction.vue'
 import ShortLink from '../ShortLink.vue'
@@ -21,7 +20,7 @@ import Copyable from '../Copyable.vue'
 
 const props = defineProps<{
   idx: number;
-  instruction: LockInstruction;
+  instruction: instructions.LockInstruction;
 }>()
 
 const address = computed(() => {

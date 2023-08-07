@@ -12,8 +12,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { LoadInstruction, LoadByOriginInstruction } from '@aldea/core/instructions'
-import { OpCode, Pointer, base16 } from '@aldea/sdk'
+import { OpCode, Pointer, base16, instructions } from '@aldea/sdk'
 import { CaSettings } from '@kalimahapps/vue-icons'
 import BaseInstruction from './BaseInstruction.vue'
 import ShortLink from '../ShortLink.vue'
@@ -21,7 +20,7 @@ import Copyable from '../Copyable.vue'
 
 const props = defineProps<{
   idx: number;
-  instruction: LoadInstruction | LoadByOriginInstruction;
+  instruction: instructions.LoadInstruction | instructions.LoadByOriginInstruction;
 }>()
 
 const jigId = computed(() => {
@@ -33,8 +32,8 @@ const jigId = computed(() => {
 })
 
 function isLoadByOrigin(
-  instruction: LoadInstruction | LoadByOriginInstruction
-): instruction is LoadByOriginInstruction {
+  instruction: instructions.LoadInstruction | instructions.LoadByOriginInstruction
+): instruction is instructions.LoadByOriginInstruction {
   return instruction.opcode === OpCode.LOADBYORIGIN
 }
 </script>

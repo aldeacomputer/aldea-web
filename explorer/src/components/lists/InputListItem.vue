@@ -10,14 +10,13 @@
 
 <script setup lang="ts">
 import { CaSettings } from '@kalimahapps/vue-icons'
-import { LoadInstruction, LoadByOriginInstruction } from '@aldea/core/instructions'
-import { OpCode, Pointer, base16 } from '@aldea/sdk'
+import { OpCode, Pointer, base16, instructions } from '@aldea/sdk'
 import BaseListItem from './BaseListItem.vue'
 import Copyable from '../Copyable.vue'
 import { computed } from 'vue';
 
 const props = defineProps<{
-  item: LoadInstruction | LoadByOriginInstruction
+  item: instructions.LoadInstruction | instructions.LoadByOriginInstruction
 }>()
 
 const value = computed(() => {
@@ -29,8 +28,8 @@ const value = computed(() => {
 })
 
 function isLoadByOrigin(
-  instruction: LoadInstruction | LoadByOriginInstruction
-): instruction is LoadByOriginInstruction {
+  instruction: instructions.LoadInstruction | instructions.LoadByOriginInstruction
+): instruction is instructions.LoadByOriginInstruction {
   return instruction.opcode === OpCode.LOADBYORIGIN
 }
 </script>

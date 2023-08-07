@@ -6,11 +6,10 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { TypeNode } from '@aldea/core/abi'
-import { base16 } from '@aldea/sdk'
+import { abi, base16 } from '@aldea/sdk'
 
 const props = defineProps<{
-  type: TypeNode;
+  type: abi.TypeNode;
   value: any;
 }>()
 

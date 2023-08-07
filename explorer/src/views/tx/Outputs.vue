@@ -31,8 +31,7 @@
 
 <script setup lang="ts">
 import { computed, inject } from 'vue'
-import { LoadInstruction, LoadByOriginInstruction } from '@aldea/core/instructions'
-import { Instruction, OpCode, Tx } from '@aldea/sdk'
+import { Instruction, OpCode, Tx, instructions } from '@aldea/sdk'
 import { CaArrowDownRight, CaArrowUpRight } from '@kalimahapps/vue-icons'
 import { KEYS } from '../../constants'
 import InputListItem from '../../components/lists/InputListItem.vue'
@@ -44,7 +43,7 @@ const outputs = inject(KEYS.txOutputs)
 
 const inputs = computed(() => {
   const tx = Tx.fromHex(txd?.value.rawtx!)
-  return tx.instructions.filter(filterInput) as Array<LoadInstruction | LoadByOriginInstruction>
+  return tx.instructions.filter(filterInput) as Array<instructions.LoadInstruction | instructions.LoadByOriginInstruction>
 })
 
 function filterInput(i: Instruction): boolean {

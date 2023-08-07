@@ -12,8 +12,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { DeployInstruction } from '@aldea/core/instructions'
-import { base16, blake3 } from '@aldea/sdk'
+import { base16, blake3, instructions } from '@aldea/sdk'
 import { CaBox } from '@kalimahapps/vue-icons'
 import BaseInstruction from './BaseInstruction.vue'
 import Copyable from '../Copyable.vue'
@@ -21,7 +20,7 @@ import ShortLink from '../ShortLink.vue'
 
 const props = defineProps<{
   idx: number;
-  instruction: DeployInstruction;
+  instruction: instructions.DeployInstruction;
 }>()
 
 const pkgId = computed(() => {

@@ -6,11 +6,11 @@
 </template>
 
 <script setup lang="ts">
-import { TypeNode } from '@aldea/core/abi'
+import { abi } from '@aldea/sdk'
 import { CaWarning } from '@kalimahapps/vue-icons'
 
 defineProps<{
-  type: TypeNode;
+  type: abi.TypeNode;
   value: any;
 }>()
 </script>

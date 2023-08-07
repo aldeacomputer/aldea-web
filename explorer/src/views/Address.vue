@@ -23,8 +23,7 @@
 <script setup lang="ts">
 import { computed, provide, ref, toRaw, unref } from 'vue'
 import { onBeforeRouteUpdate, useRoute } from 'vue-router'
-import { Abi } from '@aldea/core/abi'
-import { BCS, base16 } from '@aldea/sdk'
+import { BCS, abi, base16 } from '@aldea/sdk'
 import { CaShoppingBag, CaArrowsVertical } from '@kalimahapps/vue-icons'
 import { KEYS, COIN_PKG_ID, COIN_CLASS } from '../constants'
 import { useAppStore } from '../stores/app'
@@ -37,7 +36,7 @@ import XacIcon from '../components/XacIcon.vue'
 const store = useAppStore()
 const route = useRoute()
 
-const coinAbi = ref<Abi>(await store.adapter.getAbi(COIN_PKG_ID))
+const coinAbi = ref<abi.Abi>(await store.adapter.getAbi(COIN_PKG_ID))
 const jigs = ref<JigData[]>(await loadJigs(route.params.addr as string))
 
 provide(KEYS.jigs, jigs)

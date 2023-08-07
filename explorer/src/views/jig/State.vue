@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import { inject, onBeforeUnmount, ref } from 'vue'
-import { FieldNode } from '@aldea/core/abi'
+import { abi } from '@aldea/sdk'
 import { KEYS } from '../../constants'
 import Primitive from '../../components/fields/Primitive.vue'
 import ArrayLike from '../../components/fields/ArrayLike.vue'
@@ -38,7 +38,7 @@ import PointerType from '../../components/fields/PointerType.vue'
 const jig = inject(KEYS.jig)
 const fields = ref<HTMLElement[]>([])
 
-function componentFor(f: FieldNode) {
+function componentFor(f: abi.FieldNode) {
   if (f.type.args.some(t => t.args.length)) {
     return Nested
   } else if (isPrimitive(f.type.name)) {
