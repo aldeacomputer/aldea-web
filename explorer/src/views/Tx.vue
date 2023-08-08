@@ -56,6 +56,7 @@ loadInputs()
 loadOutputs()
 
 provide(KEYS.txd, txd)
+provide(KEYS.tx, tx)
 provide(KEYS.txInputs, inputs)
 provide(KEYS.txOutputs, outputs)
 
@@ -74,6 +75,7 @@ async function loadTx(id: string): Promise<TxData> {
 }
 
 async function loadInputs() {
+  inputs.value = []
   const instructions = tx.value.instructions
     .filter(i => i.opcode === OpCode.LOAD || i.opcode === OpCode.LOADBYORIGIN)
 
@@ -86,6 +88,7 @@ async function loadInputs() {
 }
 
 async function loadOutputs() {
+  outputs.value = []
   for (let o of txd.value.outputs) {
     const abi = await store.adapter.getAbi(o.class.replace(/_\d+$/, ''))
     const props = Output.fromJson(o, abi).props!

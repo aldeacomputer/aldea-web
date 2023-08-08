@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="tx">
     <div class="md:grid grid-cols-2 gap-8 space-y-8 md:space-y-0">
       <div>
         <h3 class="flex items-center mb-6 gap-2">
@@ -31,19 +31,18 @@
 
 <script setup lang="ts">
 import { computed, inject } from 'vue'
-import { Instruction, OpCode, Tx, instructions } from '@aldea/sdk'
+import { Instruction, OpCode, instructions } from '@aldea/sdk'
 import { CaArrowDownRight, CaArrowUpRight } from '@kalimahapps/vue-icons'
 import { KEYS } from '../../constants'
 import InputListItem from '../../components/lists/InputListItem.vue'
 import OutputListItem from '../../components/lists/OutputListItem.vue'
 
-const txd = inject(KEYS.txd)
+const tx = inject(KEYS.tx)
 //const inputs = inject(KEYS.txInputs)
 const outputs = inject(KEYS.txOutputs)
 
 const inputs = computed(() => {
-  const tx = Tx.fromHex(txd?.value.rawtx!)
-  return tx.instructions.filter(filterInput) as Array<instructions.LoadInstruction | instructions.LoadByOriginInstruction>
+  return tx?.value.instructions.filter(filterInput) as Array<instructions.LoadInstruction | instructions.LoadByOriginInstruction>
 })
 
 function filterInput(i: Instruction): boolean {
