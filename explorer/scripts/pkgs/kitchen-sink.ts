@@ -1,3 +1,74 @@
+/**
+ * # Se madebit imperio et quantum
+ *
+ * ## Furtis tetenderat aventi repulso canos aras fuisses
+ * 
+ * Lorem markdownum tardis *ex claudere esse* addit motus non; naidas duobus viam
+ * ratione Phoebus. Dolore effugere remugis, cibo in arcana Lycabas regia miserum
+ * genitor **manifesta** fieres orbis pereat diro.
+ * 
+ * - Genus Lernae
+ * - Flere quam certa venatrixque postquam ultor
+ * - Tu grave properent care silet viso peraravit
+ * - Ducebat auro quo nostro Atrides dare
+ * - Me pro neque transit Aegides a comes
+ * 
+ * ## Puppes lata gaudia in Iuppiter spicis peto
+ * 
+ * Est fidem, et omnia, ante quae dempto cum petisti artes referentem et deusque
+ * lacrimasque ignem. Ego et carere vires [procellae
+ * bacchae](http://caeleste.io/dixerat-erat.html): fores fata undis, Achillea
+ * Atlantiades pelle. Nam dextrae partu quadrupedes magis arserunt *generat sed*
+ * volucrum principio diesque verti. Concipit in fratris bucina feroces videtur
+ * leviore quas sic voluntas et tamen bracchia **excussum** vergit rivi; est
+ * salutis. Metu erat dedignata, *socios miserisque hunc* tactumque, rector
+ * parentum scitusque **et dumque** Aeacidae inposita Pindo quae *ipse*; in.
+ * 
+ * > Pretium Iole, hoc saxo oravit poterat calamo gravis icto longe metu una! Abit
+ * > Elymumque Telethusa [viri Dianae](http://www.onus-dura.com/), huic quas
+ * > conquesti aesculeae in quod antiqui terreat altior, opus. Et plus omnipotens
+ * > dicta **hostia deusque**, plumis, colorum pervia ministri et dixi! Satis
+ * > Athenas est novos honores moras, ante cum labant indue pulsant titulos
+ * > postquam sacer carmine. Optima seu putes minor pectora, tardata *hostilique*
+ * > pone; quis avos lampadibus conatur finem hic surgere questa.
+ * 
+ * ## Subito quod coniunx indignos commentaque verba
+ * 
+ * De tribuam vocem. Marisque erat.
+ * 
+ * ## Supplex deus terga ligno Arcas clarus stratis
+ * 
+ * Sinit mihi esse prohibet, tempore vernos, illa meque recondita collo? Tempore
+ * haec. Artifices hospitis est, populusque primo arripit oculosque monedula Circe.
+ * 
+ * ## Mens Meleagros inter dextra siquis
+ * 
+ * Miles nec numina interea vestigia fiat vale, Atlantiades denique nondum; visa
+ * dumque audit. Et cumulumque **forent mensas Phrygiae** in regis et iungat mihi
+ * neque. Nec non spatium delapsa tamen Aesoniden optetis interceperit remis
+ * remotos imbres, et Iovis, concedite. Vinclisque vocem.
+ * 
+ * ```
+ * array += webComponentAnimated.spooling.terabyte(youtube_buffer_internic /
+ *         keywords_cloud_and, 1);
+ * if (driverPdfScreenshot.gibibyte_router_rpm(5 + saas_windows) !=
+ *         css_art_path(97, multimedia_string_golden, 52)) {
+ *     cleanPiconet += websiteSignatureWpa(dnsWaisClock + image);
+ * }
+ * var balance_cad = errorSessionRoot(smtp_dock_mbps, direct);
+ * ```
+ * 
+ * Spernit data: tenentis fatiferum catulus quam, domos, et fuga cuspide vulnera
+ * qui si quos? Sed est ripae adessent: tanta erat possent, visa. Arcus resolvit
+ * confessa sed membris male te dixerat vestes regia coniecit cornibus Alemone
+ * tamen. Mihi semper, est ab coloribus quid. Contento retexi, pedem puto vimque: o
+ * marmora variusque **o** vertatur poterat.
+ * @package
+ */
+
+/**
+ * The kitchen sink is a class that has a field of every data type. Nice for testing.
+ */
 export class KitchenSink extends Jig {
   b1: bool;
   b2: bool;
@@ -33,6 +104,9 @@ export class KitchenSink extends Jig {
   fa2: Float64Array;
   obj: SomeObj;
 
+  /**
+   * Pass a coin to the constructor so it will be referenced.
+   */
   constructor(public coin: Coin) {
     super()
     const str = 'Hello world! 😛'
@@ -92,8 +166,54 @@ export class KitchenSink extends Jig {
   }
 }
 
+/**
+ * `SomeObj` is a plain object.
+ */
 declare class SomeObj {
   foo: string;
   bar: string;
   baz: bool;
+}
+
+/**
+ * Just some interface for testing purposes.
+ */
+export interface SomeInt {
+  /** `a` is a string. Long and stringy. */
+  a: string;
+  /** `b` is a big ol `u64` integer. Can be a pretty large number TBF. */
+  b: u64;
+
+  /**
+   * The `perform()` method is where or the magic happens. Should return a map
+   * with some stuff in it.
+   */
+  perform(): Map<string, u64>;
+}
+
+/**
+ * This is a damn nice function. Calling it with the correct arguments will
+ * literraly return some magic.
+ * 
+ * ## Parameters
+ * 
+ * - `int` - any old class implementing `SomeInt`
+ * 
+ * ## Examples
+ * 
+ * ```
+ * class Foo implements SomeInt {
+ *   constructor(
+ *     public a: string;
+ *     public b: u64;
+ *   ) {}
+ * 
+ *   perform(): Map<string, u64> {
+ *     return new Map([[this.a, this.b]])
+ *   }
+ * }
+ * ```
+ */
+export function magicFunc(int: SomeInt): Map<string, u64> {
+  return int.perform()
 }

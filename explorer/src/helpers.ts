@@ -14,3 +14,7 @@ export function jigFields(jig: JigData): abi.FieldNode[] {
 export function typeName(type: abi.TypeNode): string {
   return abi.normalizeTypeName(type)
 }
+
+export function docsFor({ docs }: PkgDocs, name: string) {
+  return docs[name]
+}

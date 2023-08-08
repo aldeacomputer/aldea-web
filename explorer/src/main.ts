@@ -40,6 +40,18 @@ declare global {
     abi: abi.Abi;
   }
 
+  interface PkgDocs {
+    package?: {
+      description: string;
+      tags: Array<{
+        tag: string;
+        name: string;
+        description: string;
+      }>;
+    };
+    docs: Record<string, string>;
+  }
+
   interface TxData extends CommitTxResponse {
     timestamp: number;
   }

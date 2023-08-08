@@ -1,7 +1,31 @@
+/**
+ * # Under Over Seven
+ * 
+ * Under Over Seven is a very simple dice game. The player tries to guess
+ * whether the value of two rolled dice will be lower, higher or equal to seven.
+ * 
+ * if the player guesses correctly that the dice will be lower or higher than
+ * seven, they are paid back at 1/1 (doubling their money). If the guess
+ * correctly that the dice will be equal to seven they are paid back at 4/1.
+ * Otherwise, the player loses their bet.
+ * 
+ * This code implements Under Over Seven on the Aldea Computer, with the `House`
+ * and each `Game` implemented as public Jigs (smart contracts). Randomness of
+ * the dice roll is implemented in a provably fair way by the player creating a
+ * game instance, requiring the house to sign the origin with a known key, and
+ * using the signature as a source of entropy.
+ * @package
+ */
+
 import { canLock } from 'aldea/auth'
 
 /**
- * TODO
+ * House is a public Jig this is used to create new Game jigs.
+ * 
+ * When a house is instantiated, a party deposits a coin as the House balance
+ * and declares it's public key. The instantiating party retains control of the
+ * House jig through a ControlToken. This allows the balance to be withdrawn or
+ * added to in the future.
  */
 export class House extends Jig {
   ctrl: ControlToken;
@@ -18,12 +42,24 @@ export class House extends Jig {
     this.$lock.changeToPublicLock()
   }
 
+  /**
+   * A public method that is called by a player to instantiate a new Game.
+   * 
+   * The player must add a coin as their bet and the House adds 4 times the bet
+   * (representing the maximum possible winnings) to the Game as it's own stake.
+   */
   createGame(guess: i8, bet: Coin): Game {
-    const stake = this.balance.send(bet.motos * 5)
+    const stake = this.balance.send(bet.motos * 4)
     stake.$lock.unlock()
     return new Game(this, guess, bet, stake)
   }
 
+  /**
+   * Deposit additional coins to the House, which are merged into the House
+   * balance.
+   * 
+   * Only the House controller can call this method.
+   */
   deposit(coins: Coin[]): void {
     if (!canLock(this.ctrl)) {
       throw new Error('unauthorized to control House jig')
@@ -31,6 +67,11 @@ export class House extends Jig {
     this.balance = this.balance.combine(coins)
   }
 
+  /**
+   * Withdraws the given number of motos from the House balance.
+   * 
+   * Only the House controller can call this method.
+   */
   withdraw(motos: u64): Coin {
     if (!canLock(this.ctrl)) {
       throw new Error('unauthorized to control House jig')
@@ -39,6 +80,11 @@ export class House extends Jig {
     return coin
   }
 
+  /**
+   * Withdraws the entire balance from the House.
+   * 
+   * Only the House controller can call this method.
+   */
   close(): Coin {
     if (!canLock(this.ctrl)) {
       throw new Error('unauthorized to control House jig')
@@ -50,7 +96,14 @@ export class House extends Jig {
 }
 
 /**
- * TODO
+ * Game is a public jig that represents a single play of Under Over Seven.
+ * 
+ * The player must create the instance of Game through calling `House.createGame()`.
+ * The player's bet and the House's stake are set on the Jig.
+ * 
+ * At this point the player would usually pass serialized of the Game Jig to
+ * the House entity, where they would sign the origin and call the `rollDice()`
+ * method and pass in the signature.
  */
 export class Game extends Jig {
   ctrl: ControlToken;
@@ -75,13 +128,19 @@ export class Game extends Jig {
     this.$lock.changeToPublicLock()
   }
 
+  /**
+   * Provides entropy for the PRNG which is used to calculate the dice roll.
+   * 
+   * The given entropy must be a valid signature of the output origin against
+   * the house pubkey. Implicitly therefore, only House can call this method.
+   */
   rollDice(sig: Uint8Array): void {
-    // todo - would be nice if we could verify the sig against the house pubkey
-    // eg: ed25519.verify(this.$output.id, sig, this.house.pubkey)
-    // instead we'll check the tx is signed by house
-    //if (!canLock(this.house.ctrl)) {
-    //  throw new Error('unauthorized to control Game jig')
-    //}
+    // todo - ideally we should be able to verify the sig against the house pubkey
+    // eg: ed25519.verify(this.$output.origin, sig, this.house.pubkey)
+    // todo - instead we'll check the tx is signed by house
+    // if (!canLock(this.house.ctrl)) {
+    //   throw new Error('unauthorized to control Game jig')
+    // }
     this.signature = sig
     const prng = new PRNG(sig)
     this.dice[0] = Math.floor(prng.rand() * 6 + 1) as u8
@@ -89,6 +148,10 @@ export class Game extends Jig {
     this.handleResult()
   }
 
+  // handles the result of the game
+  // if player wins having guessed under or over, they recieve 1/1 of their bet.
+  // if player wins having guess seven, they receive 4/1 of their bet.
+  // otherwise, the bet and stake go back to house.
   private handleResult(): void {
     const score = this.dice[0] + this.dice[1]
     const userPKH = this.ctrl.$lock.getAddressOrFail()
@@ -114,6 +177,11 @@ export class Game extends Jig {
   }
 }
 
+/**
+ * ControlToken is a very simple Jig that is used to control access to methods
+ * on public Jigs. If a transaction contains a signature from the key the token
+ * is locked to, then access is implied.
+ */
 export class ControlToken extends Jig {}
 
 enum Guess {
@@ -123,7 +191,8 @@ enum Guess {
 }
 
 /**
- * TODO
+ * Implementation of SFC-32 (Small Fast Counter) PRNG.
+ * Passes the PractRand PRNG test suite.
  */
 class PRNG {
   a: u32;
@@ -132,7 +201,9 @@ class PRNG {
   d: u32;
 
   constructor(seed: Uint8Array) {
-    if (seed.byteLength < 16) { throw new Error('PRNG seed must be at least 128 bits') }
+    if (seed.byteLength < 16) {
+      throw new Error('PRNG seed must be at least 128 bits')
+    }
     const view = new DataView(seed.buffer, seed.byteOffset, seed.byteLength)
     this.a = view.getUint32(0, true)
     this.b = view.getUint32(4, true)

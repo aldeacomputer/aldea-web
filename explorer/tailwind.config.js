@@ -77,6 +77,7 @@ export default {
       fontFamily: {
         sans: ['IBM Plex Sans', 'Helvetica Neue', 'Arial', 'sans-serif'],
         mono: ['IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier', 'monospace'],
+        serif: ['IBM Plex Serif', 'Georgia', 'Times', 'serif'],
       },
     },
   },

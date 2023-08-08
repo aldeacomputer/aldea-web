@@ -1,6 +1,7 @@
 <template>
   <div class="flex" v-if="jig">
     <div class="hiddenx w-64 self-stretch mr-8 pr-4 py-6 border-r border-gray-70/50">
+      <h4 class="mb-2 text-16 font-semibold">Fields</h4>
       <ul class="text-14 space-y-2">
         <li v-for="field, i of $helpers.jigFields(jig)">
           <a
@@ -11,7 +12,7 @@
     </div>
     <div class="flex-auto py-6 space-y-6">
       <h3 class="text-20">Fields</h3>
-      <div v-for="field of $helpers.jigFields(jig)" ref="fields" :key="field.name">
+      <div v-for="field of $helpers.jigFields(jig)" ref="fields">
         <div class="flex items-center gap-3 mb-4">
           <h4 class="text-16 font-semibold text-secondary">{{ field.name }}</h4>
           <span class="text-14 font-mono text-helper" size="sm">{{ $helpers.typeName(field.type) }}</span>

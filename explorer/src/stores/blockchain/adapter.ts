@@ -9,6 +9,7 @@ export interface ChainAdapter {
   getAddrJigs(addr: string): Promise<JigData[]>;
   getJig(jigId: string): Promise<JigData>;
   getAbi(pkgId: string): Promise<abi.Abi>;
+  getDocs(pkgId: string): Promise<PkgDocs>;
   getPkg(pkgId: string): Promise<PkgData>;
   getTx(txid: string): Promise<TxData>;
 
