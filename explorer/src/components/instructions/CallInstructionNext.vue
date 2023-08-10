@@ -1,8 +1,8 @@
 <template>
   <BaseInstruction :idx="idx" :instruction="instruction">
-    <ShortLink :icon="CaCode">
+    <Enclosed :icon="CaCode">
       <span class="pr-2 text-secondary text-sm">{{ callName }}</span>
-    </ShortLink>
+    </Enclosed>
     
     <template #drop-down>
       <div class="space-y-4">
@@ -39,7 +39,7 @@ import { CaCode } from '@kalimahapps/vue-icons'
 import { useAppStore } from '../../stores/app'
 import { KEYS } from '../../constants'
 import BaseInstruction from './BaseInstruction.vue'
-import ShortLink from '../ShortLink.vue'
+import Enclosed from '../Enclosed.vue'
 import Primitive from '..//fields/Primitive.vue'
 import ArrayLike from '..//fields/ArrayLike.vue'
 import KeyValue from '..//fields/KeyValue.vue'

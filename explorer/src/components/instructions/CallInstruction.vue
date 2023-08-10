@@ -1,9 +1,9 @@
 <template>
   <BaseInstruction :idx="idx" :instruction="instruction">
     <div class="flex items-center gap-4">
-      <ShortLink :icon="CaCode">
+      <Enclosed :icon="CaCode">
         <span class="pr-2 text-secondary text-sm">{{ callName }}</span>
-      </ShortLink>
+      </Enclosed>
     </div>
   </BaseInstruction>
 </template>
@@ -15,7 +15,7 @@ import { CaCode } from '@kalimahapps/vue-icons'
 import { useAppStore } from '../../stores/app'
 import { KEYS } from '../../constants'
 import BaseInstruction from './BaseInstruction.vue'
-import ShortLink from '../ShortLink.vue'
+import Enclosed from '../Enclosed.vue'
 
 type StaticCallInstruction = instructions.NewInstruction | instructions.ExecInstruction | instructions.ExecFuncInstruction
 

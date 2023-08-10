@@ -1,12 +1,12 @@
 <template>
   <BaseInstruction :idx="idx" :instruction="instruction">
-    <ShortLink :icon="CaSettings">
+    <Enclosed :icon="CaSettings">
       <Copyable
         :to="{ name: 'jig', params: { id: jigId } }"
         :value="jigId"
         size="sm"
         short />
-    </ShortLink>
+    </Enclosed>
   </BaseInstruction>
 </template>
 
@@ -15,7 +15,7 @@ import { computed } from 'vue'
 import { OpCode, Pointer, base16, instructions } from '@aldea/sdk'
 import { CaSettings } from '@kalimahapps/vue-icons'
 import BaseInstruction from './BaseInstruction.vue'
-import ShortLink from '../ShortLink.vue'
+import Enclosed from '../Enclosed.vue'
 import Copyable from '../Copyable.vue'
 
 const props = defineProps<{

@@ -2,9 +2,9 @@
   <Label :icon="icon" border="info" size="lg">
     <div class="flex items-center gap-4">
       <span>{{ label }}</span>
-      <ShortLink :icon="linkIcon" v-if="showLink">
+      <Enclosed :icon="linkIcon" v-if="showLink">
         <Copyable :to="linkParams" :value="linkValue" short size="sm" />
-      </ShortLink>
+      </Enclosed>
     </div>
   </Label>
 </template>
@@ -14,7 +14,7 @@ import { computed } from 'vue'
 import { Address, LockResponse, LockType, base16 } from '@aldea/sdk'
 import { CaLocked, CaPassword, CaSettings, CaSnowflake } from '@kalimahapps/vue-icons'
 import Label from './Label.vue'
-import ShortLink from './ShortLink.vue'
+import Enclosed from './Enclosed.vue'
 import Copyable from './Copyable.vue'
 
 const props = defineProps<{

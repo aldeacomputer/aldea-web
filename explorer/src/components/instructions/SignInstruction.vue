@@ -1,16 +1,16 @@
 <template>
   <BaseInstruction :idx="idx" :instruction="instruction">
     <div class="flex items-center gap-4">
-      <ShortLink :icon="CaFingerprintRecognition">
+      <Enclosed :icon="CaFingerprintRecognition">
         <Copyable :value="signature" size="sm" short />
-      </ShortLink>
-      <ShortLink :icon="CaPassword">
+      </Enclosed>
+      <Enclosed :icon="CaPassword">
         <Copyable
           :to="{ name: 'addr', params: { addr: address } }"
           :value="address"
           size="sm"
           short />
-      </ShortLink>
+      </Enclosed>
     </div>
   </BaseInstruction>
 </template>
@@ -21,7 +21,7 @@ import { PubKey, base16, instructions } from '@aldea/sdk'
 import { CaFingerprintRecognition, CaPassword } from '@kalimahapps/vue-icons'
 import BaseInstruction from './BaseInstruction.vue'
 import Copyable from '../Copyable.vue'
-import ShortLink from '../ShortLink.vue'
+import Enclosed from '../Enclosed.vue'
 
 const props = defineProps<{
   idx: number;
