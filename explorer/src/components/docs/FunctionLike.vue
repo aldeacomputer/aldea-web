@@ -30,7 +30,7 @@
         {{ kind }}
       </div>
     </div>
-    <Markdown class="pl-4" :content="content" />
+    <Markdown class="pl-4" :content="docs[docKey]" />
   </div>
 </template>
 
@@ -45,7 +45,7 @@ defineExpose({ root })
 const props = defineProps<{
   className?: string;
   code: abi.MethodNode | abi.FunctionNode;
-  docs: PkgDocs;
+  docs: Record<string, string>;
 }>()
 
 const kind = computed(() => {
@@ -54,14 +54,13 @@ const kind = computed(() => {
     'function'
 })
 
-const content = computed(() => {
+const docKey = computed(() => {
   if (isMethod(props.code)) {
     const sep = props.code.kind ?
       (props.code.kind === abi.MethodKind.INSTANCE ? '$' : '_') : '$'
-      const name = `${props.className}${sep}${props.code.name}`
-      return props.docs.docs[name]
+      return `${props.className}${sep}${props.code.name}`
   } else {
-    return props.docs.docs[props.code.name]
+    return props.code.name
   }
 })
 

@@ -34,13 +34,14 @@
     <div class="flex-auto h-full pl-8 py-6 space-y-10">
       <Markdown :content="docs.package?.description" />
 
+      
       <DocSection title="Classes" v-if="classes.length">
         <ClassLike
           v-for="ex of classes"
           ref="sections"
           :kind="ex.kind"
           :code="ex.code as abi.ClassNode"
-          :docs="docs" />
+          :docs="docs.docs" />
       </DocSection>
 
       <DocSection title="Interfaces" v-if="interfaces.length">
@@ -49,7 +50,7 @@
           ref="sections"
           :kind="ex.kind"
           :code="ex.code as abi.InterfaceNode"
-          :docs="docs" />
+          :docs="docs.docs" />
       </DocSection>
 
       <DocSection title="Functions" v-if="functions.length">
@@ -58,7 +59,7 @@
           ref="sections"
           :kind="ex.kind"
           :code="ex.code as abi.FunctionNode"
-          :docs="docs" />
+          :docs="docs.docs" />
       </DocSection>
 
       <DocSection title="Objects" v-if="objects.length">
@@ -66,7 +67,7 @@
           v-for="obj of objects"
           ref="sections"
           :code="obj"
-          :docs="docs" />
+          :docs="docs.docs" />
       </DocSection>
     </div>
   </div>

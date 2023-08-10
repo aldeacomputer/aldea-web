@@ -1,7 +1,7 @@
 <template>
   <article class="space-y-6" ref="root">
     <h1 class="text-20">{{ code.name }}</h1>
-    <Markdown :content="content" />
+    <Markdown :content="docs[code.name]" />
 
     <template v-if="fields.length">
       <h2 class="text-16 font-semibold">Fields</h2>
@@ -29,14 +29,13 @@ import Markdown from '../../components/Markdown.vue'
 const root = ref<HTMLElement>()
 defineExpose({ root })
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   kind?: abi.CodeKind;
   code: abi.ClassNode | abi.InterfaceNode | abi.ObjectNode;
-  docs: PkgDocs;
-}>()
-
-const content = computed(() => {
-  return props.docs.docs[props.code.name]
+  docs?: Record<string, string>;
+}>(), {
+  // @ts-ignore
+  docs: {}
 })
 
 const fields = computed(() => {

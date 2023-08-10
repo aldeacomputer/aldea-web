@@ -10,7 +10,7 @@
         field
       </div>
     </div>
-    <Markdown class="pl-4" :content="content" />
+    <Markdown class="pl-4" :content="docs[docKey]" />
   </div>
 </template>
 
@@ -22,11 +22,10 @@ import Markdown from '../Markdown.vue'
 const props = defineProps<{
   className: string;
   code: abi.FieldNode;
-  docs: PkgDocs;
+  docs: Record<string, string>;
 }>()
 
-const content = computed(() => {
-  const name = `${props.className}.${props.code.name}`
-  return props.docs.docs[name]
+const docKey = computed(() => {
+  return `${props.className}.${props.code.name}`
 })
 </script>
