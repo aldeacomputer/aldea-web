@@ -41,10 +41,10 @@ import { KEYS } from '../../constants'
 import BaseInstruction from './BaseInstruction.vue'
 import Enclosed from '../Enclosed.vue'
 import Primitive from '..//fields/Primitive.vue'
-import ArrayLike from '..//fields/ArrayLike.vue'
-import KeyValue from '..//fields/KeyValue.vue'
-import Nested from '..//fields/Nested.vue'
-import PointerType from '..//fields/PointerType.vue'
+//import ArrayLike from '..//fields/ArrayLike.vue'
+//import KeyValue from '..//fields/KeyValue.vue'
+//import Nested from '..//fields/Nested.vue'
+//import PointerType from '..//fields/PointerType.vue'
 
 type StaticCallInstruction = instructions.NewInstruction | instructions.ExecInstruction | instructions.ExecFuncInstruction
 

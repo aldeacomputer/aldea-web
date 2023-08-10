@@ -54,7 +54,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aldea/components@workspace:^, @aldea/components@workspace:components":
+"@aldea/components@workspace:components":
   version: 0.0.0-use.local
   resolution: "@aldea/components@workspace:components"
   dependencies:
@@ -89,7 +89,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@aldea/explorer@workspace:explorer"
   dependencies:
-    "@aldea/components": "workspace:^"
     "@aldea/mocknet": ^0.4.0
     "@aldea/sdk": ^0.4.0
     "@cocalc/local-storage-lru": ^2.3.0
