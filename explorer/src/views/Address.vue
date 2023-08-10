@@ -1,5 +1,5 @@
 <template>
-  <article>
+  <article v-if="jigs">
     <PageHeader
       class="mb-10"
       title="Address"
@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import { computed, provide, ref, toRaw, unref } from 'vue'
 import { onBeforeRouteUpdate, useRoute } from 'vue-router'
-import { BCS, abi, base16 } from '@aldea/sdk'
+import { Address, BCS, abi, base16 } from '@aldea/sdk'
 import { CaShoppingBag, CaArrowsVertical } from '@kalimahapps/vue-icons'
 import { KEYS, COIN_PKG_ID, COIN_CLASS } from '../constants'
 import { useAppStore } from '../stores/app'
@@ -35,6 +35,12 @@ import XacIcon from '../components/XacIcon.vue'
 
 const store = useAppStore()
 const route = useRoute()
+
+try {
+  Address.fromString(route.params.addr as string)
+} catch (e) {
+  throw new Error('invalid address')
+}
 
 const coinAbi = ref<abi.Abi>(await store.adapter.getAbi(COIN_PKG_ID))
 const jigs = ref<JigData[]>(await loadJigs(route.params.addr as string))

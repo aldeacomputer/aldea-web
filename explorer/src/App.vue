@@ -36,7 +36,10 @@ const layout = computed(() => {
 })
 
 onErrorCaptured<Error | HTTPError>((e) => {
-  if ('response' in e && e.response.status === 404) {
+  if (
+    ('response' in e && e.response.status === 404) ||
+    e.message === 'invalid address'
+  ) {
     router.push({
       name: '404',
       params: { slug: route.path.substring(1).split('/') },
