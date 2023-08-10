@@ -1,6 +1,6 @@
 <template>
-  <span
-    class="inline-flex items-center  px-3 gap-2 bg-layer-01 rounded-sm"
+  <div
+    class="inline-flex items-center px-3 gap-2 bg-layer-01 rounded-sm self-start"
     :class="{
       'h-7': size === 'sm',
       'h-10': size === 'md',
@@ -17,11 +17,11 @@
       'text-warning': type === 'warning',
       'text-error': type === 'error',
     }">
-    <component :is="icon" v-if="icon" />
+    <component class="shrink-0" :is="icon" v-if="icon" />
     <span class="text-14">
       <slot></slot>
     </span>
-  </span>
+  </div>
 </template>
 
 <script setup lang="ts">

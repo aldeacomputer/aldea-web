@@ -1,6 +1,6 @@
 <template>
   <Label :icon="icon" border="info" size="lg">
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-2 xs:gap-4">
       <span>{{ label }}</span>
       <Enclosed :icon="linkIcon" v-if="showLink">
         <Copyable :to="linkParams" :value="linkValue" short size="sm" />
@@ -27,9 +27,9 @@ const icon = computed(() => {
 
 const label = computed(() => {
   switch (props.lock.type) {
-    case LockType.ADDRESS: return 'Locked to Address'
-    case LockType.JIG: return 'Locked to Jig'
-    case LockType.PUBLIC: return 'Public Jig'
+    case LockType.ADDRESS: return 'Address'
+    case LockType.JIG: return 'Jig'
+    case LockType.PUBLIC: return 'Public'
     case LockType.FROZEN: return 'Frozen'
     default: return 'Unlocked'
   }

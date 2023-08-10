@@ -7,15 +7,16 @@
         'border-success': isFunction(code) || isConstructor(code),
         'border-info': isInstance(code),
       }">
-      <div class="font-mono text-16 text-secondary">
+      <div class="flex-auto font-mono text-14 md:text-16 text-secondary">
         <span>{{ code.name }}</span>
         <span class="text-helper">(</span>
-          <template v-for="arg, i in code.args">
+          <div class="block md:inline" v-for="arg, i in code.args">
+            <span class="md:hidden">&nbsp;&nbsp;</span>
             <span>{{ arg.name }}</span>
             <span>:&nbsp;</span>
             <span class="italic text-helper">{{ $helpers.typeName(arg.type) }}</span>
             <span class="text-helper" v-if="i < code.args.length-1">,&nbsp;</span>
-          </template>
+          </div>
         <span class="text-helper">)</span>
         <span v-if="code.rtype">:&nbsp;</span>
         <span class="italic text-helper" v-if="code.rtype">{{ $helpers.typeName(code.rtype) }}</span>

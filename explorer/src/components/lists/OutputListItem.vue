@@ -8,11 +8,11 @@
         :value="item.id" />
 
       <div class="font-mono text-14 text-secondary">{{ className }}</div>
-      <div
-        class="flex items-center gap-1.5 font-mono text-14 text-secondary"
-        v-if="balance">
-        <XacIcon class="text-16" />
-        <span class="hidden sm:block text-neutral-400">{{ balance }}</span>
+
+      <div class="hidden sm:block" v-if="balance">
+        <Enclosed :icon="XacIcon">
+          <span class="font-mono text-14 text-secondary">{{ balance }}</span>
+        </Enclosed>
       </div>
     </div>
 
@@ -37,6 +37,7 @@ import { COIN_CLASS } from '../../constants'
 import BaseListItem from './BaseListItem.vue'
 import GraphLink from '../GraphLink.vue'
 import Copyable from '../Copyable.vue'
+import Enclosed from '../Enclosed.vue'
 import LockLabel from '../LockLabel.vue'
 import XacIcon from '../XacIcon.vue'
 

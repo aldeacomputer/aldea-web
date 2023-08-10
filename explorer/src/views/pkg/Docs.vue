@@ -1,6 +1,6 @@
 <template>
   <div class="flex" v-if="pkg">
-    <div class="w-64 shrink-0 pr-4 py-6 space-y-6 border-r border-gray-70/50">
+    <div class="hidden lg:block w-48 xl:w-64 shrink-0 pr-4 py-6 space-y-6 border-r border-gray-70/50">
       <MenuSection title="Classes" v-if="classes.length">
         <MenuLink
           v-for="ex, i of classes"
@@ -31,9 +31,8 @@
       </MenuSection>
     </div>
     
-    <div class="flex-auto h-full pl-8 py-6 space-y-10">
+    <div class="flex-auto lg:pl-8 py-6 space-y-10">
       <Markdown :content="docs.package?.description" />
-
       
       <DocSection title="Classes" v-if="classes.length">
         <ClassLike

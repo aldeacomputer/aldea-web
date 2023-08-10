@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-4">
     <div class="flex items-center justify-between gap-4 px-4 py-2 bg-layer-01 border-l-4 border-warning">
-      <div class="font-mono text-16 text-secondary">
+      <div class="font-mono text-14 md:text-16 text-secondary">
         <span>{{ code.name }}</span>
         <span>:&nbsp;</span>
         <span class="italic text-helper">{{ $helpers.typeName(code.type) }}</span>

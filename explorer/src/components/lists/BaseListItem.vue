@@ -17,8 +17,8 @@
     </div>
 
     <div
-      class="transition-all duration-500 overflow-hidden"
-      :class="isOpen ? 'max-h-64 visible' : 'max-h-0 invisible'">
+      class="x-transition-all x-duration-500 overflow-hidden"
+      :class="isOpen ? 'max-h-max visible' : 'max-h-0 invisible'">
       <div class="px-4 pb-4">
         <div class="p-4 bg-gray-100 rounded-sm">
           <slot name="drop-down"></slot>  

@@ -13,7 +13,7 @@
 
     <div class="flex-auto font-mono text-14">
       <div class="flex items-center justify-between h-14 pl-6 gap-10">
-        <div class="flex flex-auto items-center justify-between gap-2 md:flex-grow-0 md:w-32">
+        <div class="flex flex-auto items-center justify-between gap-2 flex-grow-0 w-32">
           <span class="text-primary">{{ opName }}</span>
           <span class="flex items-center text-secondary gap-1" v-if="hasRef">
             <CaArrowUpLeft class="text-helper" />

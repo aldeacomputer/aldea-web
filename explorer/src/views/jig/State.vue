@@ -1,6 +1,6 @@
 <template>
   <div class="flex" v-if="jig">
-    <div class="hiddenx w-64 self-stretch mr-8 pr-4 py-6 border-r border-gray-70/50">
+    <div class="hidden lg:block w-48 xl:w-64 shrink-0 pr-4 py-6 border-r border-gray-70/50">
       <div class="space-y-6" v-if="fields.length">
         <h4 class="mb-2 text-16 font-semibold">Fields</h4>
         <ul class="text-14 space-y-2">
@@ -12,7 +12,8 @@
         </ul>
       </div>
     </div>
-    <div class="flex-auto py-6">
+
+    <div class="flex-auto lg:pl-8 py-6">
       <h3 class="mb-6 text-20">Fields</h3>
       <div class="space-y-6" v-if="fields.length">
         <div v-for="field of fields" ref="fieldRefs">
