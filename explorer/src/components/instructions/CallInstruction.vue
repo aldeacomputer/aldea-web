@@ -1,19 +1,15 @@
 <template>
   <BaseInstruction :idx="idx" :instruction="instruction">
-    <ShortLink :icon="CaCode">
-      <span class="pr-2 text-secondary text-sm">{{ callName }}</span>
-    </ShortLink>
-    
-    <template #drop-down>
-      <p>Decoded args will go here</p>
-      <p>Decoded args will go here</p>
-      <p>Decoded args will go here</p>
-    </template>
+    <div class="flex items-center gap-4">
+      <ShortLink :icon="CaCode">
+        <span class="pr-2 text-secondary text-sm">{{ callName }}</span>
+      </ShortLink>
+    </div>
   </BaseInstruction>
 </template>
 
 <script setup lang="ts">
-import { inject, ref } from 'vue'
+import { computed, inject, ref } from 'vue'
 import { OpCode, Pointer, abi, base16, instructions } from '@aldea/sdk'
 import { CaCode } from '@kalimahapps/vue-icons'
 import { useAppStore } from '../../stores/app'
@@ -31,64 +27,61 @@ const props = defineProps<{
 const store = useAppStore()
 const tx = inject(KEYS.tx)
 
-const callName = ref('<Loading...>')
+const ctxAbi = ref<abi.Abi>()
+const ctxJig = ref<JigData>()
+const ctxCode = ref<abi.ClassNode | abi.FunctionNode>()
 
-try {
-  const code = props.instruction.opcode === OpCode.CALL ?
-    await loadCode(props.instruction.idx) :
-    await loadCode(props.instruction.idx, (<StaticCallInstruction>props.instruction).exportIdx);
-
-  switch (props.instruction.opcode) {
-    case OpCode.NEW:
-      callName.value = `new ${code.name}()`
-      break
-    case OpCode.CALL:
-      const iMethod = (<abi.ClassNode>code).methods[(<instructions.CallInstruction>props.instruction).methodIdx]
-      callName.value = `${code.name}$${iMethod.name}()`
-      break
-    case OpCode.EXEC:
-      const sMethod = (<abi.ClassNode>code).methods[(<instructions.ExecInstruction>props.instruction).methodIdx]
-      callName.value = `${code.name}.${sMethod.name}()`
-      break
-    case OpCode.EXECFUNC:
-      callName.value = `${code.name}()`
-      break
+const callName = computed(() => {
+  if (ctxCode.value) {
+    switch (props.instruction.opcode) {
+      case OpCode.NEW:
+        return `new ${ctxCode.value.name}()`
+      case OpCode.CALL:
+        const iMethod = (<abi.ClassNode>ctxCode.value).methods[(<instructions.CallInstruction>props.instruction).methodIdx]
+        return `${ctxCode.value.name}$${iMethod.name}()`
+      case OpCode.EXEC:
+        const sMethod = (<abi.ClassNode>ctxCode.value).methods[(<instructions.ExecInstruction>props.instruction).methodIdx]
+        return `${ctxCode.value.name}.${sMethod.name}()`
+      case OpCode.EXECFUNC:
+        return `${ctxCode.value.name}()`
+    }
+  } else {
+    return '<Unknown>'
   }
-} catch(_e) {
-  callName.value = `<Error>`
-}
+})
 
-/**
- * Recursive look backwards through the TX and 
- */
-async function loadCode(idx: number, exportIdx?: number): Promise<abi.ClassNode | abi.FunctionNode> {
+async function traverseParents(idx: number, exportIdx?: number): Promise<void> {
   const parent = tx!.value.instructions[idx]
 
   switch(parent.opcode) {
     case OpCode.IMPORT:
       const pkgId = base16.encode((<instructions.ImportInstruction>parent).pkgId)
-      const pkgAbi = await store.adapter.getAbi(pkgId)
-      return pkgAbi.exports[exportIdx!].code as abi.ClassNode | abi.FunctionNode
+      ctxAbi.value = await store.adapter.getAbi(pkgId)
+      ctxCode.value = ctxAbi.value.exports[exportIdx!].code as abi.ClassNode | abi.FunctionNode
+      break
 
     case OpCode.LOAD:
     case OpCode.LOADBYORIGIN:
       const id = parent.opcode === OpCode.LOAD ?
         base16.encode((<instructions.LoadInstruction>parent).outputId) :
         Pointer.fromBytes((<instructions.LoadByOriginInstruction>parent).origin).toString()
-      const jig = await store.adapter.getJig(id)
-      const codeIdx = Number(jig.class.split('_')[1])
-      return jig.abi.exports[codeIdx].code as abi.ClassNode
+      ctxJig.value = await store.adapter.getJig(id)
+      ctxAbi.value = ctxJig.value.abi
+      const codeIdx = Number(ctxJig.value.class.split('_')[1])
+      ctxCode.value = ctxAbi.value.exports[codeIdx].code as abi.ClassNode
+      break
 
     case OpCode.NEW:
     case OpCode.EXEC:
     case OpCode.EXECFUNC:
-      return loadCode((<StaticCallInstruction>parent).idx, (<StaticCallInstruction>parent).exportIdx)
+      return traverseParents((<StaticCallInstruction>parent).idx, (<StaticCallInstruction>parent).exportIdx)
 
     case OpCode.CALL:
-      return loadCode((<instructions.CallInstruction>parent).idx)
-
-    default:
-      throw new Error('too confused to follow so lets just throw')
+      return traverseParents((<instructions.CallInstruction>parent).idx)
   }
 }
+
+props.instruction.opcode === OpCode.CALL ?
+  await traverseParents(props.instruction.idx) :
+  await traverseParents(props.instruction.idx, (<StaticCallInstruction>props.instruction).exportIdx);
 </script>

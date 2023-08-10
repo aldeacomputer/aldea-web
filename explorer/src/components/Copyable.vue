@@ -11,18 +11,18 @@
         'text-18 lg:text-20': size === 'lg',
       }">
       <span
-        class="@lg:hidden whitespace-nowrap"
+        class="@[582px]:hidden whitespace-nowrap"
         v-if="responsive || short">
         {{ shortValue }}
       </span>
       <span
         class="break-all"
-        :class="{'hidden @lg:inline': responsive}"
+        :class="{'hidden @[582px]:inline': responsive}"
         v-if="!short">
         {{ value }}
       </span>
     </component>
-    <CopyButton :size="size" :value="value" />
+    <CopyButton :size="size" :value="value" class="shrink-0" />
   </div>
 </template>
 
@@ -52,12 +52,15 @@ const isLink = computed(() => {
 })
 
 const shortValue = computed(() => {
-  if (props.value.length > 100) {
-    return `${props.value.slice(0, 7)}…${props.value.slice(-7)}`
-  } else if (/^addr/.test(props.value)) {
+  if (/^addr/.test(props.value)) {
     return `${props.value.slice(0, 10)}…${props.value.slice(-7)}`
+  } else if (/_\d+$/.test(props.value)) {
+    const n = Math.max(0, props.value.length - 64)
+    return `${props.value.slice(0, 7)}…${props.value.slice(-(7+n))}`
+  } else if (props.value.length >= 20) {
+    return `${props.value.slice(0, 7)}…${props.value.slice(-7)}`
   } else {
-    return `${props.value.slice(0, 7)}…${props.value.slice(64-7)}`
+    return props.value
   }
 })
 </script>

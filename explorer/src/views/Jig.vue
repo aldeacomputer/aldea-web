@@ -3,14 +3,18 @@
     <PageHeader
       title="Jig"
       :id="jig.id"
-      class="mb-10"
-      :links="graphLinks">
+      class="mb-10">
       <template #title-labels>
         <Label class="font-mono" size="sm">{{ $helpers.jigClassName(jig) }}</Label>
       </template>
       <template #after-title>
         <div class="flex flex-col sm:flex-row gap-2">
           <LockLabel :lock="jig.lock" />
+        </div>
+        <div class="pt-6 space-y-2 md:space-y-0.5">
+          <GraphLink :to="{ name: 'jig', params: { id: jig.id } }" label="Origin" :value="jig.origin" />
+          <GraphLink :to="{ name: 'jig', params: { id: jig.id } }" label="Location" :value="jig.location" />
+          <GraphLink :to="{ name: 'pkg', params: { id: jig.class.replace(/_\d+$/, '') } }" label="Class" :value="jig.class" />
         </div>
       </template>
       <!--
@@ -48,12 +52,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, provide, ref } from 'vue'
+import { provide, ref } from 'vue'
 import { onBeforeRouteUpdate, useRoute } from 'vue-router'
 import { CaExpandAll, CaChangeCatalog } from '@kalimahapps/vue-icons'
 import { KEYS } from '../constants'
 import { useAppStore } from '../stores/app'
 import PageHeader from '../components/PageHeader.vue'
+import GraphLink from '../components/GraphLink.vue'
 import Label from '../components/Label.vue'
 import LockLabel from '../components/LockLabel.vue'
 import TabRouterView from '../components/TabRouterView.vue'
@@ -64,14 +69,6 @@ const store = useAppStore()
 
 const jig = ref<JigData>(await loadJig(route.params.id as string))
 provide(KEYS.jig, jig)
-
-const graphLinks = computed(() => {
-  return [
-    { title: 'Origin', value: jig.value.origin, url: `/jig/${jig.value.id}` },
-    { title: 'Location', value: jig.value.location, url: `/jig/${jig.value.id}` },
-    { title: 'Class', value: jig.value.class, url: `/pkg/${jig.value.class.replace(/_\d+/, '')}` },
-  ]
-})
 
 async function loadJig(id: string): Promise<JigData> {
   return store.adapter.getJig(id)

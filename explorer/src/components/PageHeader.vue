@@ -9,7 +9,6 @@
       </div>
       <Copyable size="lg" :value="id" />
       <slot name="after-title"></slot>
-      <GraphLinkTable class="pt-8" :links="links" v-if="!!links" />
     </div>
     <div class="hidden w-56 xl:w-72 lg:block lg:flex-shrink-0">
       <slot name="right-column"></slot>
@@ -19,11 +18,9 @@
 
 <script setup lang="ts">
 import Copyable from './Copyable.vue'
-import GraphLinkTable from './GraphLinkTable.vue'
 
 defineProps<{
   title: string;
   id: string;
-  links?: GraphLink[];
 }>()
 </script>

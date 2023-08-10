@@ -17,9 +17,13 @@
     </div>
 
     <template #drop-down>
-      <p>Output links will go here</p>
-      <p>Output links will go here</p>
-      <p>Output links will go here</p>
+      <LockLabel :lock="item.lock" />
+      <div class="mt-4 space-y-2">
+        <GraphLink :to="{ name: 'jig', params: { id: item.id } }" label="ID" size="sm" :value="item.id" responsive />
+        <GraphLink :to="{ name: 'jig', params: { id: item.id } }" label="Origin" size="sm" :value="item.origin" responsive />
+        <GraphLink :to="{ name: 'jig', params: { id: item.id } }" label="Location" size="sm" :value="item.location" responsive />
+        <GraphLink :to="{ name: 'pkg', params: { id: item.class.replace(/_\d+$/, '') } }" label="Class" size="sm" :value="item.class" responsive />
+      </div>
     </template>
   </BaseListItem>
 </template>
@@ -31,7 +35,9 @@ import { CaSettings } from '@kalimahapps/vue-icons'
 import { useAppStore } from '../../stores/app'
 import { COIN_CLASS } from '../../constants'
 import BaseListItem from './BaseListItem.vue'
+import GraphLink from '../GraphLink.vue'
 import Copyable from '../Copyable.vue'
+import LockLabel from '../LockLabel.vue'
 import XacIcon from '../XacIcon.vue'
 
 const store = useAppStore()
