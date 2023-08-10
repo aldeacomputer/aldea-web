@@ -8,7 +8,7 @@
         class="flex items-center gap-2 text-helper hover:text-secondary transition-colors cursor-pointer"
         v-if="hasResults"
         @click="search.clear">
-        <span class="text-14">Clear history</span>
+        <span class="text-14">Clear<span class="hidden xs:inline"> history</span></span>
         <CaTrashCan />
       </span>
       <span class="text-14 text-helper" v-if="!hasResults">No recent searches.</span>
@@ -20,7 +20,7 @@
         :class="{'bg-layer-02': i === idx}"
         @mouseenter="idx = i"
         @click="search.goto(result)">
-        <div class="font-mono text-14 text-secondary">{{ result.value }}</div>
+        <div class="font-mono text-14 text-secondary overflow-hidden text-ellipsis">{{ result.value }}</div>
         <div class="text-12 text-helper">{{ resultType(result) }}</div>
       </li>
     </ul>

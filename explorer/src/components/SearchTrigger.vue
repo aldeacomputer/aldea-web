@@ -13,7 +13,7 @@
       <CaSearch class="text-secondary group-hover:text-primary transition-colors" />
     </div>
 
-    <div class="flex-auto font-mono text-12 md:text-14 text-placeholder group-hover:text-gray-50 transition-colors whitespace-nowrap overflow-hidden">
+    <div class="flex-auto font-mono text-14 text-placeholder group-hover:text-gray-50 transition-colors whitespace-nowrap overflow-hidden">
       <span class="inline sm:hidden">Search...</span>
       <span class="hidden sm:inline">Jig / Transaction / Package / Address</span>
     </div>

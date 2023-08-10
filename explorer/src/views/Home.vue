@@ -1,7 +1,7 @@
 <template>
   <div class="w-full max-w-md space-y-2">
     <div>
-      <img src="/aldea-ex-logo.svg" width="350" alt="Aldea Explorer" />
+      <img src="/aldea-ex-logo.svg" alt="Aldea Explorer" class="w-72 md:w-80" />
     </div>
     
     <SearchTrigger on-home />
