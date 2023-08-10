@@ -1,33 +1,39 @@
 <template>
   <div class="flex" v-if="jig">
     <div class="hiddenx w-64 self-stretch mr-8 pr-4 py-6 border-r border-gray-70/50">
-      <h4 class="mb-2 text-16 font-semibold">Fields</h4>
-      <ul class="text-14 space-y-2">
-        <li v-for="field, i of $helpers.jigFields(jig)">
-          <a
-            class="text-secondary underline decoration-secondary/0 hover:text-primary hover:decoration-primary transition-colors cursor-pointer"
-            @click="scrollToField(i)">{{ field.name }}</a>
-        </li>
-      </ul>
-    </div>
-    <div class="flex-auto py-6 space-y-6">
-      <h3 class="text-20">Fields</h3>
-      <div v-for="field of $helpers.jigFields(jig)" ref="fields">
-        <div class="flex items-center gap-3 mb-4">
-          <h4 class="text-16 font-semibold text-secondary">{{ field.name }}</h4>
-          <span class="text-14 font-mono text-helper" size="sm">{{ $helpers.typeName(field.type) }}</span>
-        </div>
-        <component
-          :is="componentFor(field)"
-          :type="field.type"
-          :value="jig.props[field.name]" />
+      <div class="space-y-6" v-if="fields.length">
+        <h4 class="mb-2 text-16 font-semibold">Fields</h4>
+        <ul class="text-14 space-y-2">
+          <li v-for="field, i of fields">
+            <a
+              class="text-secondary underline decoration-secondary/0 hover:text-primary hover:decoration-primary transition-colors cursor-pointer"
+              @click="scrollToField(i)">{{ field.name }}</a>
+          </li>
+        </ul>
       </div>
+    </div>
+    <div class="flex-auto py-6">
+      <h3 class="mb-6 text-20">Fields</h3>
+      <div class="space-y-6" v-if="fields.length">
+        <div v-for="field of fields" ref="fieldRefs">
+          <div class="flex items-center gap-3 mb-4">
+            <h4 class="text-16 font-semibold text-secondary">{{ field.name }}</h4>
+            <span class="text-14 font-mono text-helper" size="sm">{{ $helpers.typeName(field.type) }}</span>
+          </div>
+          <component
+            :is="componentFor(field)"
+            :type="field.type"
+            :value="jig.props[field.name]" />
+        </div>
+      </div>
+
+      <EmptyContent text="This jig has no fields." v-else />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { inject, onBeforeUnmount, ref } from 'vue'
+import { computed, inject, onBeforeUnmount, ref } from 'vue'
 import { abi } from '@aldea/sdk'
 import { KEYS } from '../../constants'
 import Primitive from '../../components/fields/Primitive.vue'
@@ -35,9 +41,15 @@ import ArrayLike from '../../components/fields/ArrayLike.vue'
 import KeyValue from '../../components/fields/KeyValue.vue'
 import Nested from '../../components/fields/Nested.vue'
 import PointerType from '../../components/fields/PointerType.vue'
+import EmptyContent from '../../components/EmptyContent.vue'
+import { jigFields } from '../../helpers'
 
 const jig = inject(KEYS.jig)
-const fields = ref<HTMLElement[]>([])
+const fieldRefs = ref<HTMLElement[]>([])
+
+const fields = computed(() => {
+  return jigFields(jig!.value)
+})
 
 function componentFor(f: abi.FieldNode) {
   if (f.type.args.some(t => t.args.length)) {
@@ -74,7 +86,7 @@ function isPointer(val: any): boolean {
 }
 
 function scrollToField(i: number) {
-  const el = fields.value[i]
+  const el = fieldRefs.value[i]
   const top = el.getBoundingClientRect().top + window.scrollY - 84
   window.scrollTo({ top, behavior: 'smooth' })
 }
@@ -86,5 +98,5 @@ function scrollToField(i: number) {
  * 
  * Resolved by clearing the refs before navigating away. 🤷‍♂️
  */
-onBeforeUnmount(() => { fields.value = [] })
+onBeforeUnmount(() => { fieldRefs.value = [] })
 </script>
