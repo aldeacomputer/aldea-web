@@ -10,3 +10,4 @@ RUN yarn vite:build
 
 FROM pierrezemb/gostatic as server
 COPY --from=build /build/dist /srv/http/
+ENTRYPOINT ["/goStatic", "-fallback", "/index.html"]

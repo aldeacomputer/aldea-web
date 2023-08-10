@@ -15,6 +15,7 @@ import JigHistoryTab from './views/jig/History.vue'
 import AddrView from './views/Address.vue'
 import AddrJigsTab from './views/addr/Jigs.vue'
 import AddrTxnsTab from './views/addr/Txns.vue'
+import Error404 from './views/404.vue'
 
 export const routes: RouteRecordRaw[] = [
   {
@@ -64,4 +65,9 @@ export const routes: RouteRecordRaw[] = [
     ],
     redirect: { name: 'addr_jigs' },
   },
+  {
+    name: '404',
+    path: '/:slug(.*)*',
+    component: Error404,
+  }
 ]
