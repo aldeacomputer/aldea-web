@@ -54,6 +54,7 @@
 <script setup lang="ts">
 import { provide, ref } from 'vue'
 import { onBeforeRouteUpdate, useRoute } from 'vue-router'
+import { useHead } from '@unhead/vue'
 import { CaExpandAll, CaChangeCatalog } from '@kalimahapps/vue-icons'
 import { KEYS } from '../constants'
 import { useAppStore } from '../stores/app'
@@ -66,6 +67,12 @@ import TabLink from '../components/TabLink.vue'
 
 const route = useRoute()
 const store = useAppStore()
+
+useHead({
+  title() {
+      return `Jig ${route.params.id}`
+  },
+})
 
 const jig = ref<JigData>(await loadJig(route.params.id as string))
 provide(KEYS.jig, jig)

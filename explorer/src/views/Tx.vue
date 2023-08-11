@@ -33,6 +33,7 @@
 <script setup lang="ts">
 import { computed, provide, ref } from 'vue'
 import { onBeforeRouteUpdate, useRoute } from 'vue-router'
+import { useHead } from '@unhead/vue'
 import * as dayjs from 'dayjs'
 import { OpCode, Output, Pointer, Tx, base16, instructions } from '@aldea/sdk'
 import { CaArrowsHorizontal, CaBox, CaCalendar, CaCheckmarkOutline, CaListDropdown, CaMoney } from '@kalimahapps/vue-icons'
@@ -45,6 +46,12 @@ import TabLink from '../components/TabLink.vue'
 
 const store = useAppStore()
 const route = useRoute()
+
+useHead({
+  title() {
+      return `Transaction ${route.params.id}`
+  },
+})
 
 const txd = ref<TxData>(await loadTx(route.params.id as string))
 const inputs  = ref<JigData[]>([])

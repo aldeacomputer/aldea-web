@@ -13,6 +13,11 @@
 </template>
 
 <script setup lang="ts">
+import { useHead } from '@unhead/vue'
 import SearchTrigger from '../components/SearchTrigger.vue'
 import NetworkSwitch from '../components/NetworkSwitch.vue'
+
+useHead({
+  title: 'Not found'
+})
 </script>

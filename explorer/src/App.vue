@@ -18,6 +18,7 @@
 <script setup lang="ts">
 import { computed, onErrorCaptured } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useHead } from '@unhead/vue'
 import { HTTPError } from 'ky'
 import HomeLayout from './layouts/Home.vue'
 import DefaultLayout from './layouts/Default.vue'
@@ -25,6 +26,11 @@ import LoadingIcon from './components/LoadingIcon.vue'
 
 const route = useRoute()
 const router = useRouter()
+
+useHead({
+  title: 'Explorer',
+  titleTemplate: '%s | Aldea Computer'
+})
 
 const layout = computed(() => {
   switch (route.name) {

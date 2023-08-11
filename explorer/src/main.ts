@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { createPinia } from 'pinia'
+import { createHead } from '@unhead/vue'
 import { CommitTxResponse, OutputResponse, PackageResponse, abi } from '@aldea/sdk'
 import { routes } from './routes'
 import * as helpers from './helpers'
@@ -13,10 +14,12 @@ const router = createRouter({
 })
 
 const store = createPinia()
+const head = createHead()
 
 const app =createApp(App)
   .use(router)
   .use(store)
+  .use(head)
 
 app.config.globalProperties.$helpers = {
   ...helpers

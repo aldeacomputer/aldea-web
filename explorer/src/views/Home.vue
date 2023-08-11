@@ -22,10 +22,15 @@
 </template>
 
 <script setup lang="ts">
+import { useHead } from '@unhead/vue'
 import { CaInformationFilled } from '@kalimahapps/vue-icons'
 import { useAppStore } from '../stores/app'
 import SearchTrigger from '../components/SearchTrigger.vue'
 import NetworkSwitch from '../components/NetworkSwitch.vue'
 
 const store = useAppStore()
+
+useHead({
+  title: 'Explorer'
+})
 </script>

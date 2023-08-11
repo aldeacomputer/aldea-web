@@ -17,6 +17,7 @@
 <script setup lang="ts">
 import { provide, ref } from 'vue'
 import { onBeforeRouteUpdate, useRoute } from 'vue-router'
+import { useHead } from '@unhead/vue'
 import { CaCode, CaDocumentMultiple01, CaRepoSourceCode } from '@kalimahapps/vue-icons'
 import { KEYS } from '../constants'
 import { useAppStore } from '../stores/app'
@@ -26,6 +27,12 @@ import TabLink from '../components/TabLink.vue'
 
 const store = useAppStore()
 const route = useRoute()
+
+useHead({
+  title() {
+      return `Package ${route.params.id}`
+  },
+})
 
 const pkg = ref<PkgData>(await loadPkg(route.params.id as string))
 provide(KEYS.pkg, pkg)

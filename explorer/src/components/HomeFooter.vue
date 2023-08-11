@@ -1,6 +1,8 @@
 <template>
   <footer class="flex items-center gap-3">
-    <img src="/aldea-iso.svg" width="39" alt="Aldea Explorer" />
+    <RouterLink to="/">
+      <img src="/aldea-iso.svg" width="39" alt="Aldea Explorer" />
+    </RouterLink>
     <div class="w-60">
       <p class="text-14">
         We are creating the best blockchain for app developers.
