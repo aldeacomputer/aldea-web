@@ -5,3 +5,12 @@
 .link {
   @apply text-blue-40 hover:text-blue-30 transition-colors;
 }
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

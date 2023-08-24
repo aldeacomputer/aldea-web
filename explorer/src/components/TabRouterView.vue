@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="flex items-center justify-stretch overflow-x-scroll">
+    <nav class="flex items-center justify-stretch overflow-x-scroll scrollbar-hide">
       <slot></slot>
     </nav>
     <div class="py-6">
