@@ -3,8 +3,9 @@
     <div class="flex-auto flex flex-col items-center justify-center">
       <slot></slot>
     </div>
-    <HomeFooter />
+    
     <SearchModal v-if="search.show" />
+    <HomeFooter />
   </div>
 </template>
 

@@ -20,6 +20,7 @@ import { computed, onErrorCaptured } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useHead } from '@unhead/vue'
 import { HTTPError } from 'ky'
+import BlankLayout from './layouts/Blank.vue'
 import HomeLayout from './layouts/Home.vue'
 import DefaultLayout from './layouts/Default.vue'
 import LoadingIcon from './components/LoadingIcon.vue'
@@ -34,8 +35,9 @@ useHead({
 
 const layout = computed(() => {
   switch (route.name) {
-    case 'home':
     case '404':
+      return BlankLayout
+    case 'home':
       return HomeLayout
     default: return DefaultLayout
   }
@@ -43,8 +45,10 @@ const layout = computed(() => {
 
 onErrorCaptured<Error | HTTPError>((e) => {
   if (
-    ('response' in e && e.response.status === 404) ||
-    e.message === 'invalid address'
+    e.message === 'invalid address' ||
+    ('response' in e && (
+      e.response.status === 404 || e.response.status === 400
+    ))
   ) {
     router.push({
       name: '404',

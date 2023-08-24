@@ -1,23 +1,36 @@
 <template>
-  <div class="w-full max-w-md space-y-6">
-    <div>
-      <h1 class="text-32 font-light">Ruh-oh... 404</h1>
-      <p class="text-secondary">The page you are looking for can't be found. Try again&hellip;</p>
+  <div class="w-full max-w-md space-y-7">
+    <img src="/404.png" width="360" alt="404 error" class="block mx-auto" />
+    <h1 class="text-42 font-light text-center">{{ resource }} not found</h1>
+    <p class="text-20 text-secondary text-center">The resource you are looking for is temporarily unavailable, or does not exist.</p>
+    <div class="mx-auto text-center">
+      <Button to="/">
+        Back to home
+      </Button>
     </div>
-
-    <div class="space-y-2">
-      <SearchTrigger on-home />
-      <NetworkSwitch on-home />
-    </div>
+    
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 import { useHead } from '@unhead/vue'
-import SearchTrigger from '../components/SearchTrigger.vue'
-import NetworkSwitch from '../components/NetworkSwitch.vue'
+import Button from '../components/Button.vue'
 
 useHead({
   title: 'Not found'
+})
+
+const route = useRoute()
+
+const resource = computed(() => {
+  switch (route.params.slug[0]) {
+    case 'tx': return 'Transaction'
+    case 'jig': return 'Jig'
+    case 'pkg': return 'Package'
+    case 'addr': return 'Address'
+    default : return 'Page'
+  }
 })
 </script>

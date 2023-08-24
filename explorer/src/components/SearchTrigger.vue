@@ -45,6 +45,7 @@ function showSearch() {
 
 function onKeyDown(e: KeyboardEvent) {
   if ((search.isMac ? e.metaKey : e.ctrlKey) && e.key === 'k') {
+    e.preventDefault()
     showSearch()
   }
 }
