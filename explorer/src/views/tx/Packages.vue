@@ -6,7 +6,9 @@
       </li>
     </ul>
 
-    <EmptyContent text="This transaction deploys no packages." v-else />
+    <p class="p-4 text-helper text-center" v-else>
+      This transaction deploys no packages.
+    </p>
   </div>
 </template>
 
@@ -14,7 +16,6 @@
 import { inject } from 'vue'
 import { KEYS } from '../../constants'
 import PackageListItem from '../../components/lists/PackageListItem.vue'
-import EmptyContent from '../../components/EmptyContent.vue'
 
 const txd = inject(KEYS.txd)
 </script>

@@ -1,11 +1,14 @@
 <template>
-  <EmptyContent :text="message" />
+  <div class="flex items-center justify-center gap-2 p-4">
+    <CaWarningSquare class="text-20 text-error" />
+    <span class="text-helper">{{ message }}</span>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { CaWarningSquare } from '@kalimahapps/vue-icons'
 import { useAppStore } from '../../stores/app'
-import EmptyContent from '../../components/EmptyContent.vue'
 
 const store = useAppStore()
 

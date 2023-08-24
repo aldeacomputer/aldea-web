@@ -6,7 +6,9 @@
       </li>
     </ul>
 
-    <EmptyContent text="This address has no jigs." v-else />
+    <p class="p-4 text-helper text-center" v-else>
+      This address has no jigs.
+    </p>
   </div>
 </template>
 
@@ -14,7 +16,6 @@
 import { inject } from 'vue'
 import { KEYS } from '../../constants'
 import OutputListItem from '../../components/lists/OutputListItem.vue'
-import EmptyContent from '../../components/EmptyContent.vue'
 
 const jigs = inject(KEYS.jigs)
 </script>

@@ -21,8 +21,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, provide, ref, toRaw, unref } from 'vue'
-import { onBeforeRouteUpdate, useRoute } from 'vue-router'
+import { computed, provide, ref, toRaw, unref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import { useHead } from '@unhead/vue'
 import { Address, BCS, abi, base16 } from '@aldea/sdk'
 import { CaShoppingBag, CaArrowsVertical } from '@kalimahapps/vue-icons'
@@ -73,9 +73,9 @@ async function loadJigs(addr: string): Promise<JigData[]> {
   return store.adapter.getAddrJigs(addr)
 }
 
-onBeforeRouteUpdate(async (to, from) => {
-  if (to.name && /^addr/.test(to.name as string) && to.params.addr !== from.params.addr) {
-    jigs.value = await loadJigs(to.params.addr as string)
+watch(() => route.params.id, async addr => {
+  if (typeof route.name === 'string' && /^addr/.test(route.name)) {
+    jigs.value = await loadJigs(addr as string)
     window.scrollTo({ top: 0 })
   }
 })

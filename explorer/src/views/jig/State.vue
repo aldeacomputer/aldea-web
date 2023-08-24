@@ -28,7 +28,9 @@
         </div>
       </div>
 
-      <EmptyContent text="This jig has no fields." v-else />
+      <p class="p-4 text-helper text-center" v-else>
+        This jig has no fields.
+      </p>
     </div>
   </div>
 </template>
@@ -42,7 +44,6 @@ import ArrayLike from '../../components/fields/ArrayLike.vue'
 import KeyValue from '../../components/fields/KeyValue.vue'
 import Nested from '../../components/fields/Nested.vue'
 import PointerType from '../../components/fields/PointerType.vue'
-import EmptyContent from '../../components/EmptyContent.vue'
 import { jigFields } from '../../helpers'
 
 const jig = inject(KEYS.jig)

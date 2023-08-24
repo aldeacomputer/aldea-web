@@ -31,8 +31,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, provide, ref } from 'vue'
-import { onBeforeRouteUpdate, useRoute } from 'vue-router'
+import { computed, provide, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import { useHead } from '@unhead/vue'
 import * as dayjs from 'dayjs'
 import { OpCode, Output, Pointer, Tx, base16, instructions } from '@aldea/sdk'
@@ -103,9 +103,9 @@ async function loadOutputs() {
   }
 }
 
-onBeforeRouteUpdate(async (to, from) => {
-  if (to.name && /^tx/.test(to.name as string) && to.params.id !== from.params.id) {
-    txd.value = await loadTx(to.params.id as string)
+watch(() => route.params.id, async id => {
+  if (typeof route.name === 'string' && /^tx/.test(route.name)) {
+    txd.value = await loadTx(id as string)
     loadInputs()
     loadOutputs()
     window.scrollTo({ top: 0 })

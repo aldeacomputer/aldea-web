@@ -73,8 +73,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, onBeforeUnmount, ref } from 'vue'
-import { onBeforeRouteUpdate } from 'vue-router'
+import { computed, inject, onBeforeUnmount, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import { abi } from '@aldea/sdk'
 import { useAppStore } from '../../stores/app'
 import { KEYS } from '../../constants'
@@ -85,6 +85,7 @@ import MenuLink from '../../components/docs/MenuLink.vue'
 import ClassLike from '../../components/docs/ClassLike.vue'
 import FunctionLike from '../../components/docs/FunctionLike.vue'
 
+const route = useRoute()
 const store = useAppStore()
 
 const pkg = inject(KEYS.pkg)
@@ -118,9 +119,10 @@ function scrollToSection(i: number) {
   window.scrollTo({ top, behavior: 'smooth' })
 }
 
-onBeforeRouteUpdate(async (to, from) => {
-  if (to.name && /^pkg/.test(to.name as string) && to.params.id !== from.params.id) {
-    docs.value = await loadDocs(to.params.id as string)
+watch(() => route.params.id, async id => {
+  if (typeof route.name === 'string' && /^pkg/.test(route.name)) {
+    docs.value = await loadDocs(id as string)
+    window.scrollTo({ top: 0 })
   }
 })
 

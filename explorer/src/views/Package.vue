@@ -15,8 +15,8 @@
 </template>
 
 <script setup lang="ts">
-import { provide, ref } from 'vue'
-import { onBeforeRouteUpdate, useRoute } from 'vue-router'
+import { provide, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import { useHead } from '@unhead/vue'
 import { CaCode, CaDocumentMultiple01, CaRepoSourceCode } from '@kalimahapps/vue-icons'
 import { KEYS } from '../constants'
@@ -41,9 +41,9 @@ async function loadPkg(id: string): Promise<PkgData> {
   return store.adapter.getPkg(id)
 }
 
-onBeforeRouteUpdate(async (to, from) => {
-  if (to.name && /^pkg/.test(to.name as string) && to.params.id !== from.params.id) {
-    pkg.value = await loadPkg(to.params.id as string)
+watch(() => route.params.id, async id => {
+  if (typeof route.name === 'string' && /^pkg/.test(route.name)) {
+    pkg.value = await loadPkg(id as string)
     window.scrollTo({ top: 0 })
   }
 })

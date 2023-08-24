@@ -52,8 +52,8 @@
 </template>
 
 <script setup lang="ts">
-import { provide, ref } from 'vue'
-import { onBeforeRouteUpdate, useRoute } from 'vue-router'
+import { provide, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import { useHead } from '@unhead/vue'
 import { CaExpandAll, CaChangeCatalog } from '@kalimahapps/vue-icons'
 import { KEYS } from '../constants'
@@ -81,9 +81,9 @@ async function loadJig(id: string): Promise<JigData> {
   return store.adapter.getJig(id)
 }
 
-onBeforeRouteUpdate(async (to, from) => {
-  if (to.name && /^jig/.test(to.name as string) && to.params.id !== from.params.id) {
-    jig.value = await loadJig(to.params.id as string)
+watch(() => route.params.id, async id => {
+  if (typeof route.name === 'string' && /^jig/.test(route.name)) {
+    jig.value = await loadJig(id as string)
     window.scrollTo({ top: 0 })
   }
 })
