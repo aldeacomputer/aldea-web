@@ -20,7 +20,12 @@ const props = withDefaults(defineProps<{
   size: 'md'
 })
 
+const emit = defineEmits<{
+  'copied': [value: string];
+}>()
+
 async function handleClick() {
-  return window.navigator.clipboard.writeText(props.value)
+  await window.navigator.clipboard.writeText(props.value)
+  emit('copied', props.value)
 }
 </script>

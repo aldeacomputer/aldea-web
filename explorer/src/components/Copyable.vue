@@ -1,35 +1,45 @@
 <template>
-  <div class="flex items-center gap-1" :class="{'@container': responsive && !short}">
-    <component
-      :is="component"
-      :to="to"
-      class="font-mono"
-      :class="{
-        'link underline': isLink,
-        'text-14': size === 'sm',
-        'text-16': size === 'md',
-        'text-18 lg:text-20': size === 'lg',
-      }">
-      <span
-        class="@[582px]:hidden whitespace-nowrap"
-        v-if="responsive || short">
-        {{ shortValue }}
-      </span>
-      <span
-        class="break-all"
-        :class="{'hidden @[582px]:inline': responsive}"
-        v-if="!short">
-        {{ value }}
-      </span>
-    </component>
-    <CopyButton :size="size" :value="value" class="shrink-0" />
-  </div>
+  <ToolTip :show="showMessage">
+    <div class="flex items-center gap-1" :class="{'@container': responsive && !short}">
+      <component
+        :is="component"
+        :to="to"
+        class="font-mono"
+        :class="{
+          'link underline': isLink,
+          'text-14': size === 'sm',
+          'text-16': size === 'md',
+          'text-18 lg:text-20': size === 'lg',
+        }">
+        <span
+          class="@[582px]:hidden whitespace-nowrap"
+          v-if="responsive || short">
+          {{ shortValue }}
+        </span>
+        <span
+          class="break-all"
+          :class="{'hidden @[582px]:inline': responsive}"
+          v-if="!short">
+          {{ value }}
+        </span>
+      </component>
+      <CopyButton :size="size" :value="value" class="shrink-0" @copied="showToolTip" />
+    </div>
+    <template #content>
+      <div class="flex items-center gap-2">
+        <CaCheckmarkOutline class="text-16 text-success" />
+        <span>Copied!</span>
+      </div>
+    </template>
+  </ToolTip>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { RouterLink, RouteLocationRaw } from 'vue-router'
+import { CaCheckmarkOutline } from '@kalimahapps/vue-icons'
 import CopyButton from './CopyButton.vue'
+import ToolTip from './ToolTip.vue'
 
 const props = withDefaults(defineProps<{
   to?: RouteLocationRaw;
@@ -42,6 +52,8 @@ const props = withDefaults(defineProps<{
   short: false,
   size: 'md'
 })
+
+const showMessage = ref(false)
 
 const component = computed(() => {
   return isLink.value ? RouterLink : 'span'
@@ -63,4 +75,9 @@ const shortValue = computed(() => {
     return props.value
   }
 })
+
+function showToolTip() {
+  showMessage.value = true
+  setTimeout(() => showMessage.value = false, 5000)
+}
 </script>

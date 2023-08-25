@@ -23,6 +23,6 @@ import Popper from 'vue3-popper'
 }
 
 .popper {
-  @apply max-w-[220px] text-14 text-center;
+  @apply max-w-[220px] font-sans text-14 text-center;
 }
 </style>

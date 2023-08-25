@@ -32,13 +32,13 @@
       <LoadingIcon class="animate-spin" />
     </div>
     
-    <ToolTip :content="search.errorTerm" show v-if="search.isError">
-      <div class="flex items-center justify-center w-12 h-12 text-error bg-disabled">
-        <CaWarning />
+    <ToolTip show v-if="search.isError">
+      <div class="flex items-center justify-center w-12 h-12 text-secondary bg-disabled">
+        <CaArrowRight />
       </div>
       <template #content>
-        <div class="flex items-center gap-2 text-error" v-if="search.isError">
-          <CaWarning />
+        <div class="flex items-center gap-2">
+          <CaWarning class="text-16 text-error" />
           <span>Not found.</span>
         </div>
       </template>
@@ -49,13 +49,12 @@
       v-else>
       <div
         class="flex items-center justify-center w-12 h-12 "
-        :class="{
-          'text-error bg-disabled': search.isError,
-          'text-primary bg-blue-60 hover:bg-blue-50 transition-colors cursor-pointer': !search.isError && (search.isBlank || search.isValid),
-          'text-secondary bg-disabled': !search.isError && !(search.isBlank || search.isValid),
-        }"
+        :class="search.isBlank || search.isValid ?
+          'text-primary bg-blue-60 hover:bg-blue-50 transition-colors cursor-pointer' :
+          'text-secondary bg-disabled'
+        "
         @click="search.lookup">
-        <component :is="search.isError ? CaWarning : CaArrowRight" />
+        <CaArrowRight />
       </div>
     </ToolTip>
   </div>
