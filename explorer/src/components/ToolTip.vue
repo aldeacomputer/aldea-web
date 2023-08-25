@@ -25,14 +25,4 @@ import Popper from 'vue3-popper'
 .popper {
   @apply max-w-[220px] text-14 text-center;
 }
-
-/*
-:deep(.popper) {
-  @apply px-4 py-2 text-primary text-14 bg-layer-02 rounded-sm shadow;
-}
-
-:deep(.popper #arrow::before) {
-  @apply bg-layer-02;
-}
-*/
 </style>

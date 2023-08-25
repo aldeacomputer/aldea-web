@@ -30,7 +30,7 @@ export const useSearchStore = defineStore('search', () => {
   const isValid = computed(() => VALID_ID_REGEX.test(term.value) || VALID_ADDR_REGEX.test(term.value))
 
   async function lookup() {
-    if (isValid.value) {
+    if (isValid.value && !isError.value) {
       errorTerm.value = ''
       isLoading.value = true
       if (/^addr/.test(term.value))       { await lookupAddress() }
