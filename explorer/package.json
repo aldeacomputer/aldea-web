@@ -22,7 +22,8 @@
     "pinia": "^2.1.4",
     "shiki": "^0.14.3",
     "vue": "^3.3.4",
-    "vue-router": "^4.2.4"
+    "vue-router": "^4.2.4",
+    "vue3-popper": "^1.5.0"
   },
   "devDependencies": {
     "@aldea/mocknet": "^0.4.0",

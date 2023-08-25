@@ -54,6 +54,7 @@ export default {
       secondary: colors.gray['30'],
       helper: colors.gray['50'],
       placeholder: colors.gray['60'],
+      disabled: colors.gray['70'],
       info: colors.blue['50'],
       success: colors.green['40'],
       warning: colors.yellow['30'],

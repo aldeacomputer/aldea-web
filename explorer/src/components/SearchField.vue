@@ -1,12 +1,9 @@
 <template>
-  <div class="flex items-center border-b border-gray-70">
+  <div
+    class="flex items-center border-b"
+    :class="search.isError ? 'border-error' : 'border-gray-70'">
     <div class="flex items-center justify-center w-12 h-12">
-      <component
-        :is="search.isError ? CaWarning : CaSearch"
-        :class="{
-          'text-secondary group-hover:text-primary transition-colors': !search.isError,
-          'text-error': search.isError,
-        }" />
+      <CaSearch class="text-secondary group-hover:text-primary transition-colors" />
     </div>
     <div class="flex-auto">
       <input
@@ -30,16 +27,30 @@
       </div>
     </div>
     <div
-      class="flex items-center justify-center w-12 h-12 text-primary "
+      class="flex items-center justify-center w-12 h-12 text-primary"
       v-show="search.isLoading">
-      <LoadingIcon class=" animate-spin" />
+      <LoadingIcon class="animate-spin" />
     </div>
     <div
-      class="flex items-center justify-center w-12 h-12 text-primary bg-blue-60 hover:bg-blue-50 transition-colors"
-      v-show="search.isValid && !search.isError && !search.isLoading"
-      @click="search.lookup">
-      <CaArrowRight />
+      class="flex items-center justify-center w-12 h-12 text-error bg-disabled"
+      v-if="search.isError">
+      <CaWarning />
     </div>
+    <ToolTip
+      content="Enter a 64 character ID, Pointer, or an Address."
+      :show="search.isBlank || search.isValid ? false : undefined"
+      hover
+      v-else>
+      <div
+        class="flex items-center justify-center w-12 h-12 "
+        :class="search.isBlank || search.isValid ?
+         'text-primary bg-blue-60 hover:bg-blue-50 transition-colors cursor-pointer' :
+         'text-secondary bg-disabled'
+        "
+        @click="search.lookup">
+        <CaArrowRight />
+      </div>
+    </ToolTip>
   </div>
 </template>
 
@@ -48,6 +59,7 @@ import { ref } from 'vue'
 import { CaArrowRight, CaClose, CaSearch, CaWarning } from '@kalimahapps/vue-icons'
 import { useSearchStore } from '../stores/search'
 import LoadingIcon from './LoadingIcon.vue'
+import ToolTip from './ToolTip.vue'
 
 const search = useSearchStore()
 
