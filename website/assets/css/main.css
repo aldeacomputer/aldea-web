@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.hover\:pause-animation:hover {
-  animation-play-state: paused;
-}
-
 #scale {
   @apply relative pb-56;
 }
@@ -38,4 +34,20 @@
 
 .progress-bar-slim.is-active::after {
   @apply animate-progress;
+}
+
+/**
+ * TYPOGRAPHY
+ * scope typographic styles with .md
+ */
+
+.md p { @apply my-4; }
+
+/**
+ * UTILITIES
+ * Custom utility styles
+ */
+
+.hover\:pause-animation:hover {
+  animation-play-state: paused;
 }

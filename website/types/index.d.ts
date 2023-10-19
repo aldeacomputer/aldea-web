@@ -6,6 +6,18 @@ declare global {
     lang: string;
   }
 
+  interface NavLink {
+    text: string;
+    link: string;
+  }
+
+  interface NavParent {
+    text: string;
+    children: NavTree
+  }
+
+  type NavTree = Array<NavLink | NavParent>
+
   interface PageSection {
     id: string;
     name: string;

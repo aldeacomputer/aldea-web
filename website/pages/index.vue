@@ -1,127 +1,165 @@
 <template>
-  <page-header />
-
-  <page-section
-    id="usability"
-    :icon="CaEdgeCluster"
-    label="Usability & programmability"
-    title="An unrivalled developer experience"
-    :full-height="true">
-    <template #description>
-      <p>We're making Web3 possible for all developers. Our simple yet powerful programming model will have you building the decentralized future quicker than you can say "zero knowledge rollups".</p>
-    </template>
-    <div class="px-5 md:px-10 pt-20">
-      <div class="w-full max-w-7xl mx-auto">
-        <dev-carousel :items="devExamples" />
+  <NuxtLayout>
+    <div id="top" style="height: calc(100vh-80px)">
+      <div class="px-5 md:px-10 py-10 flex flex-col items-center justify-between flex-auto">
+        <div></div>
+        <div class="w-full max-w-7xl md:grid grid-cols-10 items-center gap-4">
+          <div class="py-12 col-span-7 lg:col-span-6 animate-fade-up">
+            <h1 class="mb-8 text-4xl lg:text-6xl font-light leading-extratight">
+              Building on Web3 has never been so straightforward
+            </h1>
+            <p class="text-xl lg:text-xl font-light leading-snug">
+              We are creating the best blockchain for app developers. Turbocharge
+              your on-chain development with Aldea, a new Layer 1 with a novel and
+              highly intuitive programming model.
+            </p>
+            <a
+              href="#usability"
+              class="
+                mt-12 pl-4 pr-5 py-2 inline-flex items-center gap-2 bg-gray-90 text-gray-10
+                hover:bg-gray-80 hover:text-white transition-colors cursor-pointer group"
+              data-scroll="true">
+              <CaArrowDown class="h-5 w-5 group-hover:translate-y-2 transition-transform" />
+              <span class="block font-medium text-base leading-loose">Find out more</span>
+            </a>
+          </div>
+          <div class="col-span-3 lg:col-span-4 overflow-visible">
+            <lottie-player
+              src="https://lottie.host/e49615e7-36b7-41ed-8cce-b5040738803c/MTlA6PSwaj.json"
+              class="block w-full max-w-sm mx-auto md:mx-0 animate-fade-in"
+              loop="true"
+              autoplay="true"></lottie-player>
+          </div>
+        </div>
+        <div class="w-full max-w-7xl">
+          <img
+            src="/images/city.png"
+            srcset="/images/city.png, /images/city@2x.png 2x"
+            class="hidden md:block w-full h-auto animate-fade-up-slow" />
+        </div>
       </div>
     </div>
-  </page-section>
 
-  <page-section
-    id="objects"
-    :icon="CaBlockStorage"
-    label="Interactive objects"
-    title="Making the most exciting ideas in Web3 possible"
-    :full-height="true">
-    <template #description>
-      <p>Aldea's simple yet powerful object model combines the best of Account and UTXO model blockchains. Think beyond tokens and smart contracts, and build a world of feature-rich, interactive and interoperable objects.</p>
-    </template>
-    <div class="w-full overflow-x-hidden">
-      <usecase-marquee :items="usecases" />
-    </div>
-  </page-section>
-
-  <page-section
-    id="scale"
-    :icon="CaIntentRequestScaleOut"
-    label="Scale & performance"
-    title="Built for global scale"
-    :full-height="true">
-    <template #description>
-      <p>From day one, Aldea will offer a network capable of achieving significantly higher throughput compared to other mainstream chains. No sharding, no rollups and no boondoggle.</p>
-    </template>
-    <div class="px-5 md:px-10 pt-20">
-      <div class="w-full max-w-7xl mx-auto space-y-16">
-        <performance-table :data="performanceData" />
+    <page-section
+      id="usability"
+      :icon="CaEdgeCluster"
+      label="Usability & programmability"
+      title="An unrivalled developer experience"
+      :full-height="true">
+      <template #description>
+        <p>We're making Web3 possible for all developers. Our simple yet powerful programming model will have you building the decentralized future quicker than you can say "zero knowledge rollups".</p>
+      </template>
+      <div class="px-5 md:px-10 pt-20">
+        <div class="w-full max-w-7xl mx-auto">
+          <dev-carousel :items="devExamples" />
+        </div>
       </div>
-    </div>
-  </page-section>
+    </page-section>
 
-  <page-section
-    id="contact"
-    :icon="CaMoney"
-    label="Get involved"
-    title="Help build the decentralized future"
-    :dark-bg="true">
-    <template #description>
-      <p>We are on track to launch our testnet in early 2024. Want to see what we are building?</p>
-    </template>
-    <div class="space-y-8">
-      <action-button
-        form-id="w8zRlr"
-        label="Request developer access"
-        detail="Register your interest in our testnet launch." />
-      <action-button
-        form-id="npdkjB"
-        label="Investment opportunities"
-        detail="Enquire about our seed funding round." />
-    </div>
-  </page-section>
-
-  <page-section
-    id="about"
-    :icon="CaGroup"
-    label="About us"
-    title="Who are Aldea?"
-    :dark-bg="true"
-    :full-height="true">
-    <template #description>
-      <p>As a team of blockchain veterans, we found the layer 1 we wanted didn't exist. So we are building it. We're driven to make the most exciting ideas in Web3 possible for anyone.</p>
-    </template>
-    <div class="px-5 md:px-10 pt-20">
-      <div class="w-full max-w-6xl mx-auto space-y-32">
-        <timeline :items="timelineYears" />
-        <team :items="teamMembers" />
+    <page-section
+      id="objects"
+      :icon="CaBlockStorage"
+      label="Interactive objects"
+      title="Making the most exciting ideas in Web3 possible"
+      :full-height="true">
+      <template #description>
+        <p>Aldea's simple yet powerful object model combines the best of Account and UTXO model blockchains. Think beyond tokens and smart contracts, and build a world of feature-rich, interactive and interoperable objects.</p>
+      </template>
+      <div class="w-full overflow-x-hidden">
+        <usecase-marquee :items="usecases" />
       </div>
-    </div>
-  </page-section>
+    </page-section>
 
-  <page-footer :sections="sections" :social-links="socialLinks" />
+    <page-section
+      id="scale"
+      :icon="CaIntentRequestScaleOut"
+      label="Scale & performance"
+      title="Built for global scale"
+      :full-height="true">
+      <template #description>
+        <p>From day one, Aldea will offer a network capable of achieving significantly higher throughput compared to other mainstream chains. No sharding, no rollups and no boondoggle.</p>
+      </template>
+      <div class="px-5 md:px-10 pt-20">
+        <div class="w-full max-w-7xl mx-auto space-y-16">
+          <performance-table :data="performanceData" />
+        </div>
+      </div>
+    </page-section>
+
+    <page-section
+      id="contact"
+      :icon="CaMoney"
+      label="Get involved"
+      title="Help build the decentralized future"
+      :dark-bg="true">
+      <template #description>
+        <p>We are on track to launch our testnet in early 2024. Want to see what we are building?</p>
+      </template>
+      <div class="space-y-8">
+        <action-button
+          form-id="w8zRlr"
+          label="Request developer access"
+          detail="Register your interest in our testnet launch." />
+        <action-button
+          form-id="npdkjB"
+          label="Investment opportunities"
+          detail="Enquire about our seed funding round." />
+      </div>
+    </page-section>
+
+    <page-section
+      id="about"
+      :icon="CaGroup"
+      label="About us"
+      title="Who are Aldea?"
+      :dark-bg="true"
+      :full-height="true">
+      <template #description>
+        <p>As a team of blockchain veterans, we found the layer 1 we wanted didn't exist. So we are building it. We're driven to make the most exciting ideas in Web3 possible for anyone.</p>
+      </template>
+      <div class="px-5 md:px-10 pt-20">
+        <div class="w-full max-w-6xl mx-auto space-y-32">
+          <timeline :items="timelineYears" />
+          <team :items="teamMembers" />
+        </div>
+      </div>
+    </page-section>
+  </NuxtLayout>
 </template>
 
 <script setup lang="ts">
 import {
+  CaArrowDown,
   CaBlockStorage,
   CaCheckmarkOutline,
   CaEdgeCluster,
   CaExplore,
   CaGroup,
   CaIntentRequestScaleOut,
-  CaLogoTwitter,
-  CaLogoLinkedin,
-  CaLogoGithub,
   CaMoney,
   CaRocket,
   CaTask,
 } from '~/icons'
 
-import * as rawCode from './code-examples'
+import * as rawCode from '~/codes'
 
-useSeoMeta({
-  title: 'Aldea — Building on Web3 has never been so straightforward',
-  description: 'We are creating the best blockchain for app developers. Turbocharge your on-chain development with Aldea, a new Layer 1 with a novel and highly intuitive programming model.',
-
-  ogTitle: 'Aldea — Building on Web3 has never been so straightforward',
-  ogDescription: 'We are creating the best blockchain for app developers. Turbocharge your on-chain development with Aldea, a new Layer 1 with a novel and highly intuitive programming model.',
-  ogType: 'website',
-  ogUrl: 'https://aldea.computer',
-  ogImage: 'https://aldea.computer/images/meta-image.png',
-
-  twitterTitle: 'Aldea — Building on Web3 has never been so straightforward',
-  twitterDescription: 'We are creating the best blockchain for app developers. Turbocharge your on-chain development with Aldea, a new Layer 1 with a novel and highly intuitive programming model.',
-  twitterCard: 'summary_large_image',
-  twitterImage: 'https://aldea.computer/images/meta-image.png',
-})
+// Commenting out this block as getting some weirdo errors with this set in dev mode
+//
+//useSeoMeta({
+//  title: 'Aldea — Building on Web3 has never been so straightforward',
+//  description: 'We are creating the best blockchain for app developers. Turbocharge your on-chain development with Aldea, a new Layer 1 with a novel and highly intuitive programming model.',
+//
+//  ogTitle: 'Aldea — Building on Web3 has never been so straightforward',
+//  ogDescription: 'We are creating the best blockchain for app developers. Turbocharge your on-chain development with Aldea, a new Layer 1 with a novel and highly intuitive programming model.',
+//  ogType: 'website',
+//  ogUrl: 'https://aldea.computer',
+//  ogImage: 'https://aldea.computer/images/meta-image.png',
+//
+//  twitterTitle: 'Aldea — Building on Web3 has never been so straightforward',
+//  twitterDescription: 'We are creating the best blockchain for app developers. Turbocharge your on-chain development with Aldea, a new Layer 1 with a novel and highly intuitive programming model.',
+//  twitterCard: 'summary_large_image',
+//  twitterImage: 'https://aldea.computer/images/meta-image.png',
+//})
 
 const devExamples: DevExample[] = [
   {
@@ -157,14 +195,6 @@ const devExamples: DevExample[] = [
   },
 ]
 
-const sections: PageSection[] = [
-  { name: 'Usability & programmability', id: 'usability' },
-  { name: 'Interactive objects', id: 'objects' },
-  { name: 'Scale & performance', id: 'scale' },
-  { name: 'Get involved', id: 'contact' },
-  { name: 'About us', id: 'about' },
-]
-
 const usecases: Usecase[] = [
   {
     image: '/images/use-gaming.png',
@@ -194,12 +224,6 @@ const performanceData: PerformanceRow[] = [
   { name: 'Solana', tps: '65,000', vs: '0.065' },
   { name: 'Aptos', tps: '160,000', vs: '0.16' },
   { name: 'Sui', tps: '160,000', vs: '0.16' },
-]
-
-const socialLinks: SocialLink[] = [
-  { icon: CaLogoTwitter, url: 'https://twitter.com/aldeacomputer' },
-  { icon: CaLogoLinkedin, url: 'https://www.linkedin.com/company/aldea-computer/' },
-  { icon: CaLogoGithub, url: 'https://github.com/orgs/aldeacomputer' },
 ]
 
 const teamMembers: TeamMember[] = [

@@ -18,9 +18,19 @@ export default defineNuxtConfig({
     },
   },
 
-  css: ['~/assets/css/main.css'],
+  content: {
+    documentDriven: true,
+  },
+
+  css: [
+    '~/assets/css/main.css'
+  ],
 
   devtools: { enabled: true },
+
+  modules: [
+    '@nuxt/content'
+  ],
 
   postcss: {
     plugins: {

@@ -20,6 +20,7 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
+    "@nuxt/content": "^2.8.5",
     "shiki": "^0.14.5"
   }
 }
