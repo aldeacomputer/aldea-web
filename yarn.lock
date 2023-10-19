@@ -167,8 +167,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@aldea/website@workspace:website"
   dependencies:
+    "@kalimahapps/vue-icons": ^1.4.0
     "@nuxt/devtools": latest
+    autoprefixer: ^10.4.16
     nuxt: ^3.7.4
+    postcss: ^8.4.31
+    shiki: ^0.14.5
+    tailwindcss: ^3.3.3
     vue: ^3.3.4
     vue-router: ^4.2.5
   languageName: unknown
@@ -13508,7 +13513,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.4.30":
+"postcss@npm:^8.4.30, postcss@npm:^8.4.31":
   version: 8.4.31
   resolution: "postcss@npm:8.4.31"
   dependencies:
@@ -14678,6 +14683,18 @@ __metadata:
     vscode-oniguruma: ^1.7.0
     vscode-textmate: ^8.0.0
   checksum: a4dd98e3b2a5dd8be207448f111ffb9ad2ed6c530f215714d8b61cbf91ec3edbabb09109b8ec58a26678aacd24e8161d5a9bc0c1fa1b4f64b27ceb180cbd0c89
+  languageName: node
+  linkType: hard
+
+"shiki@npm:^0.14.5":
+  version: 0.14.5
+  resolution: "shiki@npm:0.14.5"
+  dependencies:
+    ansi-sequence-parser: ^1.1.0
+    jsonc-parser: ^3.2.0
+    vscode-oniguruma: ^1.7.0
+    vscode-textmate: ^8.0.0
+  checksum: 41d847817cfc9bb6d8bf190316896698d250303656546446659cc02caed8dcc171b10cd113bb5da82425b51d0032e87aafcdc36c3dd61dadc123170b438da736
   languageName: node
   linkType: hard
 
