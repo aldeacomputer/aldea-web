@@ -2,40 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-#scale {
-  @apply relative pb-56;
-}
-
-#scale::before {
-  @apply absolute left-0 right-0 bottom-0 h-44 rotate-180;
-  content: ' ';
-  background-image: url('/images/city.png');
-  background-position: 50% 100%;
-  background-repeat: no-repeat;
-  background-size: 1280px auto;
-}
-
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { 
-  #scale::before {
-    background-image: url('/images/city@2x.png');
-  }
-}
-
-.progress-bar-slim {
-  @apply relative bg-gray-20;
-  height: 1px;
-}
-
-.progress-bar-slim::after {
-  @apply absolute top-0 left-0 w-0 bg-blue-lighter;
-  content: ' ';
-  height: 1px;
-}
-
-.progress-bar-slim.is-active::after {
-  @apply animate-progress;
-}
-
 /**
  * TYPOGRAPHY
  * scope typographic styles with .md

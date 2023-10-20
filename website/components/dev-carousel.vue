@@ -125,3 +125,20 @@ onMounted(() => startLoop())
 
 const isActive = (i: number): boolean => i == index.value
 </script>
+
+<style scoped>
+.progress-bar-slim {
+  @apply relative bg-gray-20;
+  height: 1px;
+}
+
+.progress-bar-slim::after {
+  @apply absolute top-0 left-0 w-0 bg-blue-lighter;
+  content: ' ';
+  height: 1px;
+}
+
+.progress-bar-slim.is-active::after {
+  @apply animate-progress;
+}
+</style>

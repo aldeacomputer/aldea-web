@@ -14,6 +14,9 @@
 
 <script setup lang="ts">
 const { data: posts } = await useAsyncData('blog', () => {
-  return queryContent('/blog').limit(10).find()
+  return queryContent('blog')
+    .limit(10)
+    .sort({ pubdate: -1 })
+    .find()
 })
 </script>
