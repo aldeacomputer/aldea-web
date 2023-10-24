@@ -2,7 +2,6 @@
   <NuxtLayout>
     <div id="top" style="height: calc(100vh-80px)">
       <div class="px-5 md:px-10 py-10 flex flex-col items-center justify-between flex-auto">
-        <div></div>
         <div class="w-full max-w-7xl md:grid grid-cols-10 items-center gap-4">
           <div class="py-12 col-span-7 lg:col-span-6 animate-fade-up">
             <h1 class="mb-8 text-4xl lg:text-6xl font-light leading-extratight">
@@ -270,24 +269,3 @@ const timelineYears: TimelineItem[] = [
   },
 ]
 </script>
-
-<style scoped>
-#scale {
-  @apply relative pb-56;
-}
-
-#scale::before {
-  @apply absolute left-0 right-0 bottom-0 h-44 rotate-180;
-  content: ' ';
-  background-image: url('/images/city.png');
-  background-position: 50% 100%;
-  background-repeat: no-repeat;
-  background-size: 1280px auto;
-}
-
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { 
-  #scale::before {
-    background-image: url('/images/city@2x.png');
-  }
-}
-</style>

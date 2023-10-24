@@ -1,18 +1,32 @@
 <template>
   <NuxtLayout name="default">
-    <div class="p-12">
-      <p class="mb-4">GENERIC LAYOUT</p>
-      <div class="md">
-        <slot />
+    <div class="lg:hidden">
+      <div class="inline-flex items-center w-full gap-x-1.5 bg-white px-3 py-2 text-sm ring-1 ring-inset ring-gray-300">
+        <NuxtLink class="inline-flex items-center gap-2 font-mono text-sm w-full p-2">{{ page.title }}</NuxtLink>
+        <CaArrowDown class="-mr-1 h-5 w-5" aria-hidden="true"></CaArrowDown>
       </div>
 
-      <!-- siblings: for side column -->
-      <ul>
-        <li v-for="page of siblings">
-          <NuxtLink :to="page._path" class="text-blue-500 underline">{{ page.title }}</NuxtLink>
-        </li>
-      </ul>
+      
     </div>
+    <div class="py-12 grid grid-cols-2 gap-4 md:grid-cols-8 xl:grid-cols-10">
+      <div class="hidden lg:block lg:col-start-2 lg:col-span-2">
+          <ul>
+            <li v-for="page of siblings">
+            <NuxtLink :to="page._path" class="inline-flex items-center gap-2 p-2 font-mono text-sm w-full hover:bg-slate-50 active:bg-slate-100">{{ page.title }}</NuxtLink>
+            </li>
+          </ul>     
+      </div>
+
+      <div class="m-4 md:m-0 col-span-6 md:col-start-2 lg:col-span-4">
+        <div class="md">
+        <slot />
+        </div>
+      </div>
+    </div>
+
+
+
+
   </NuxtLayout>
 </template>
 
@@ -22,7 +36,9 @@ const { page } = useContent()
 
 const { data: siblings } = await useAsyncData(`siblings:${route.path}`, () => {
   return queryContent(page.value._dir)
-    .where({ $not: { _id: page.value._id } })
     .find()
 })
+
+import { CaArrowDown } from '~/icons'
+
 </script>
