@@ -6,13 +6,25 @@
       </NuxtLink>
       <div class="hidden md:block">
         <nav>
-          <ul class="flex gap-4 font-mono text-sm">
+          <ul class="flex gap-8 text-base">
+            <li v-for="node of navTree" class="hover:text-blue-interactive  transition-colors">
+              <NuxtLink :to="node.link">{{ node.text }}</NuxtLink>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="block md:hidden">
+        <nav>
+          ...
+          <ul class="gap-4 font-mono text-sm hidden">
             <li v-for="node of navTree">
               <NuxtLink :to="node.link">{{ node.text }}</NuxtLink>
             </li>
           </ul>
         </nav>
       </div>
+
     </header>
 
     <main class="flex-auto w-full">
@@ -22,18 +34,18 @@
     <footer class="w-full px-5 md:px-10 py-12 md:py-20 bg-gray-100 text-cream-20">
       <div class="w-full max-w-7xl mx-auto md:flex flex-row-reverse justify-between gap-4">
         <div class="mb-20 md:mb-0">
-          <ul class="mb-10 font-mono text-sm text-right space-y-5">
+          <ul class="mb-10 text-md text-right space-y-5">
             <li v-for="node of navTree">
               <NuxtLink
                 :to="node.link"
-                class="underline decoration-transparent hover:text-white hover:decoration-inherit transition-colors">
+                class="hover:text-blue-interactive transition-colors">
                 {{  node.text }}
               </NuxtLink>
             </li>
           </ul>
 
           <ul class="space-x-4 text-right">
-            <li class="inline-block" v-for="link of socialLinks">
+            <li class="inline-block hover:text-blue-interactive transition-colors" v-for="link of socialLinks">
               <a :href="link.url"
                 target="_blank"
                 rel="noopener noreferrer">

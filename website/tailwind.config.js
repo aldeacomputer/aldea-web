@@ -51,6 +51,7 @@ export default {
         blue: {
           primary: '#2C799B',
           lighter: '#64A7BF',
+          interactive: '#8FC2D7',
         },
         red: {
           primary: '#C4462D',

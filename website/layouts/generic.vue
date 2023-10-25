@@ -26,6 +26,9 @@
 
 
 
+    <div class=" bg-gray-90 py-32 px-4">
+        <RelatedContent :items="relatedItems" />
+    </div>
 
   </NuxtLayout>
 </template>
@@ -39,6 +42,27 @@ const { data: siblings } = await useAsyncData(`siblings:${route.path}`, () => {
     .find()
 })
 
-import { CaArrowDown } from '~/icons'
+import { CaArrowDown, CaArrowRight, } from '~/icons'
+
+const relatedItems: RelatedItem[] = [
+  {
+    icon: CaArrowRight,
+    title: "Docs",
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla non sodales odio.',
+    link: "",
+  },
+  {
+    icon: CaArrowRight,
+    title: "About",
+    description: "What Aldea is and how it works",
+    link: "",
+  },
+  {
+    icon: CaArrowRight,
+    title: "Tutorial",
+    description: "Learn how to code with Aldea",
+    link: "",
+  }
+]
 
 </script>
