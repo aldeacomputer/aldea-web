@@ -8,7 +8,7 @@
 
       
     </div>
-    <div class="py-12 grid grid-cols-2 gap-4 md:grid-cols-8 xl:grid-cols-10">
+    <div class="py-4 md:py-12 grid grid-cols-2 gap-4 md:grid-cols-8 xl:grid-cols-10">
       <div class="hidden lg:block lg:col-start-2 lg:col-span-2">
           <ul>
             <li v-for="page of siblings">
@@ -24,11 +24,7 @@
       </div>
     </div>
 
-
-
-    <div class=" bg-gray-90 py-32 px-4">
-        <RelatedContent :items="relatedItems" />
-    </div>
+    <RelatedContent :items="relatedItems" />
 
   </NuxtLayout>
 </template>

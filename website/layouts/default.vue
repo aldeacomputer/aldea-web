@@ -1,11 +1,12 @@
 <template>
   <div class="flex flex-col min-h-screen">
-    <header class="w-full h-20 px-5 md:px-10 py-5 text-light bg-gray-100 flex items-center justify-between">
+    <header class="w-full h-16 md:h-20 px-5 md:px-10 py-5 text-light bg-gray-100 flex items-center justify-between">
       <NuxtLink to="/">
-        <img src="/images/logo.png" width="120" alt="Aldea Computer" />
+        <img src="/images/logo.png" class="h-7 md:h-8" alt="Aldea Computer" />
       </NuxtLink>
-      <div class="hidden md:block">
-        <nav>
+      <div>
+        <CaLogoGithub class="block md:hidden"/>
+        <nav class="hidden md:block">
           <ul class="flex gap-8 text-base">
             <li v-for="node of navTree" class="hover:text-blue-interactive  transition-colors">
               <NuxtLink :to="node.link">{{ node.text }}</NuxtLink>
@@ -13,19 +14,10 @@
           </ul>
         </nav>
       </div>
-
-      <div class="block md:hidden">
-        <nav>
-          ...
-          <ul class="gap-4 font-mono text-sm hidden">
-            <li v-for="node of navTree">
-              <NuxtLink :to="node.link">{{ node.text }}</NuxtLink>
-            </li>
-          </ul>
-        </nav>
-      </div>
-
     </header>
+
+
+    
 
     <main class="flex-auto w-full">
       <slot />
@@ -90,3 +82,6 @@ const socialLinks: SocialLink[] = [
   { icon: CaLogoGithub, url: 'https://github.com/orgs/aldeacomputer' },
 ]
 </script>
+
+
+
