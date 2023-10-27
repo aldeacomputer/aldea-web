@@ -26,6 +26,11 @@
 
 .md a { @apply font-medium text-blue-primary hover:text-blue-lighter}
 
+.md pre { @apply my-8 p-4; }
+
+/* Code highlighting */
+.shiki { @apply bg-gray-900; }
+
 
 /**
  * UTILITIES
