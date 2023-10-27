@@ -9,7 +9,7 @@
             <img src="https://unsplash.it/44/44" class="rounded-full h-11">
               <div>
                 <span class="text-md block">Posted by: <strong>{{ page.author }}</strong></span>
-                <span class="text-sm mb-0">{{ page.pubdate }}</span>
+                <span class="text-sm mb-0">{{ $formatDate(page.pubdate) }}</span>
               </div>
           </div>      
         </div>
@@ -21,7 +21,7 @@
               <NuxtLink :to="page._path">
                 <img src= "https://unsplash.it/400/200" class="mb-2 w-full md:min-win-400"/>
                 <h2 class="text-xl">{{ page.title }}</h2>
-                <span class="text-xs">{{ page.pubdate }}</span>
+                <span class="text-xs">{{ $formatDate(page.pubdate) }}</span>
               </NuxtLink>
             </li>
           </ul>
@@ -39,6 +39,7 @@
 <script setup lang="ts">
 const route = useRoute()
 const { page } = useContent()
+const { $formatDate } = useNuxtApp()
 
 const { data: posts } = await useAsyncData(`recent:${route.path}`, () => {
   return queryContent('blog')

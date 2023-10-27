@@ -171,6 +171,7 @@ __metadata:
     "@nuxt/content": ^2.8.5
     "@nuxt/devtools": latest
     autoprefixer: ^10.4.16
+    dayjs: ^1.11.10
     nuxt: ^3.7.4
     postcss: ^8.4.31
     shiki: ^0.14.5
@@ -7756,6 +7757,13 @@ __metadata:
   version: 4.6.3
   resolution: "dateformat@npm:4.6.3"
   checksum: c3aa0617c0a5b30595122bc8d1bee6276a9221e4d392087b41cbbdf175d9662ae0e50d0d6dcdf45caeac5153c4b5b0844265f8cd2b2245451e3da19e39e3b65d
+  languageName: node
+  linkType: hard
+
+"dayjs@npm:^1.11.10":
+  version: 1.11.10
+  resolution: "dayjs@npm:1.11.10"
+  checksum: a6b5a3813b8884f5cd557e2e6b7fa569f4c5d0c97aca9558e38534af4f2d60daafd3ff8c2000fed3435cfcec9e805bcebd99f90130c6d1c5ef524084ced588c4
   languageName: node
   linkType: hard
 
