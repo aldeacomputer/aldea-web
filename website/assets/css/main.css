@@ -25,12 +25,15 @@
 
 .md h6 { @apply font-medium mb-2}
 
-.md ul, ol {@apply mb-8}
+.md ul,
+.md ol {@apply mb-8}
 .md ul li { @apply list-inside pl-4; list-style-type: square;}
 .md ol li { @apply list-inside pl-4; list-style-type: number;}
 
 .md blockquote {@apply bg-cream-10 pl-6 pr-4 py-4 mb-8 border-l-4 border-l-blue-lighter}
+
 .md blockquote p { @apply italic mb-4}
+.md blockquote > *:last-child { @apply mb-0; }
 .md blockquote li { @apply font-medium not-italic pl-0 list-none}
 
 .md pre { @apply my-8 p-4; }
@@ -38,11 +41,11 @@
 .md table {@apply w-full mb-8 border border-gray-20}
 .md tr {@apply h-10 text-left}
 .md th { @apply border-b border-b-gray-20 font-mono text-sm}
-.md td, th {@apply px-4}
+.md td, .md th {@apply px-4}
 
 
 /* Code highlighting */
-.shiki { @apply bg-gray-900; }
+.shiki { background-color: #282c34; }
 
 
 /**

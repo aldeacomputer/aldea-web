@@ -1,17 +1,19 @@
 <template>
   <NuxtLayout name="default">
     <div class="w-full grid grid-cols-4 md:grid-cols-8 lg:grid-cols-10 gap-4 animate-fade-up">
-      <div class="py-12 mx-4 lg:mx-0 col-span-4 md:col-start-3 md:col-span-4 lg:col-start-4">
-        <img src="https://unsplash.it/1000/240" class="w-full mb-4">  
-        <div>
-          <slot />
+      <div class="py-12 mx-4 lg:mx-0 col-span-4 md:col-start-2 md:col-span-6 lg:col-start-3">
+        <img src="https://unsplash.it/1000/240" class="w-full mb-12">
+        <div class="max-w-2xl mx-auto">
+          <div class="md">
+            <slot />
+          </div>
           <div class="flex items-center gap-4 mt-8 mb-24">
             <img src="https://unsplash.it/44/44" class="rounded-full h-11">
               <div>
                 <span class="text-md block">Posted by: <strong>{{ page.author }}</strong></span>
                 <span class="text-sm mb-0">{{ $formatDate(page.pubdate) }}</span>
               </div>
-          </div>      
+          </div> 
         </div>
       </div>
     </div>
