@@ -269,3 +269,22 @@ const timelineYears: TimelineItem[] = [
   },
 ]
 </script>
+
+<style scoped>
+#scale {
+  @apply relative pb-56;
+}
+#scale::before {
+  @apply absolute left-0 right-0 bottom-0 h-44 rotate-180;
+  content: ' ';
+  background-image: url('/images/city.png');
+  background-position: 50% 100%;
+  background-repeat: no-repeat;
+  background-size: 1280px auto;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { 
+  #scale::before {
+    background-image: url('/images/city@2x.png');
+  }
+}
+</style>
