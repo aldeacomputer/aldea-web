@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@nuxt/content": "^2.8.5",
+    "dayjs": "^1.11.10",
     "shiki": "^0.14.5"
   }
 }

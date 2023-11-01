@@ -5,7 +5,7 @@ export default defineNuxtConfig({
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400&family=IBM+Plex+Sans:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300&display=swap' },
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400&family=IBM+Plex+Sans:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300;1,400&display=swap' },
       ],
       script: [
         { src: 'https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js' },
@@ -20,6 +20,10 @@ export default defineNuxtConfig({
 
   content: {
     documentDriven: true,
+    highlight: {
+      theme: 'nord',
+      preload: ['python', 'javascript', 'typescript'],
+    }
   },
 
   css: [

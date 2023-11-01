@@ -2,7 +2,7 @@
 layout: generic
 ---
 
-# How Aldea Works
+# Tokenomics
 
 Eu cupidatat veniam labore. Lorem sit veniam enim culpa reprehenderit velit. Proident anim adipisicing incididunt elit veniam laboris aliquip cupidatat. Est cupidatat veniam consequat ad ipsum ullamco qui labore duis officia laboris.
 

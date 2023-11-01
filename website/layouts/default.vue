@@ -1,19 +1,23 @@
 <template>
   <div class="flex flex-col min-h-screen">
-    <header class="w-full h-20 px-5 md:px-10 py-5 text-light bg-gray-100 flex items-center justify-between">
+    <header class="w-full h-16 md:h-20 px-5 md:px-10 py-5 text-light bg-gray-100 flex items-center justify-between">
       <NuxtLink to="/">
-        <img src="/images/logo.png" width="120" alt="Aldea Computer" />
+        <img src="/images/logo.png" class="h-7 md:h-8" alt="Aldea Computer" />
       </NuxtLink>
-      <div class="hidden md:block">
-        <nav>
-          <ul class="flex gap-4 font-mono text-sm">
-            <li v-for="node of navTree">
+      <div>
+        <CaLogoGithub class="block md:hidden"/>
+        <nav class="hidden md:block">
+          <ul class="flex gap-8 text-base">
+            <li v-for="node of navTree" class="hover:text-blue-interactive  transition-colors">
               <NuxtLink :to="node.link">{{ node.text }}</NuxtLink>
             </li>
           </ul>
         </nav>
       </div>
     </header>
+
+
+    
 
     <main class="flex-auto w-full">
       <slot />
@@ -22,18 +26,18 @@
     <footer class="w-full px-5 md:px-10 py-12 md:py-20 bg-gray-100 text-cream-20">
       <div class="w-full max-w-7xl mx-auto md:flex flex-row-reverse justify-between gap-4">
         <div class="mb-20 md:mb-0">
-          <ul class="mb-10 font-mono text-sm text-right space-y-5">
+          <ul class="mb-10 text-md text-right space-y-5">
             <li v-for="node of navTree">
               <NuxtLink
                 :to="node.link"
-                class="underline decoration-transparent hover:text-white hover:decoration-inherit transition-colors">
+                class="hover:text-blue-interactive transition-colors">
                 {{  node.text }}
               </NuxtLink>
             </li>
           </ul>
 
           <ul class="space-x-4 text-right">
-            <li class="inline-block" v-for="link of socialLinks">
+            <li class="inline-block hover:text-blue-interactive transition-colors" v-for="link of socialLinks">
               <a :href="link.url"
                 target="_blank"
                 rel="noopener noreferrer">
@@ -65,7 +69,7 @@ const navTree: NavLink[] = [
     link: '/blog',
   }, {
     text: 'About',
-    link: '/about/how-aldea-works',
+    link: '/about/faqs',
   }, {
     text: 'Docs',
     link: 'https://docs.aldea.computer',
@@ -78,3 +82,6 @@ const socialLinks: SocialLink[] = [
   { icon: CaLogoGithub, url: 'https://github.com/orgs/aldeacomputer' },
 ]
 </script>
+
+
+

@@ -55,6 +55,12 @@ declare global {
   interface Window {
     Tally: any;
   }
+
+  interface RelatedItem {
+    title: string;
+    description: string;
+    link: string;
+  }
 }
 
 

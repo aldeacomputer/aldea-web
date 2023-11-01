@@ -7,7 +7,46 @@
  * scope typographic styles with .md
  */
 
-.md p { @apply my-4; }
+.md p { @apply mb-8 }
+.md p a { @apply underline  text-blue-primary hover:text-blue-lighter}
+
+.md h1 { @apply text-4xl mb-4}
+
+.md h2 { @apply text-3xl mb-3}
+.md h2 a { @apply text-gray-100 hover:text-gray-80}
+
+.md h3 { @apply text-2xl mb-2}
+.md h3 a { @apply text-gray-100 hover:text-gray-80}
+
+.md h4 { @apply text-xl font-medium mb-2}
+.md h4 a { @apply text-gray-100 hover:text-gray-80}
+
+.md h5 { @apply text-lg font-medium mb-2}
+
+.md h6 { @apply font-medium mb-2}
+
+.md ul,
+.md ol {@apply mb-8}
+.md ul li { @apply list-inside pl-4; list-style-type: square;}
+.md ol li { @apply list-inside pl-4; list-style-type: number;}
+
+.md blockquote {@apply bg-cream-10 pl-6 pr-4 py-4 mb-8 border-l-4 border-l-blue-lighter}
+
+.md blockquote p { @apply italic mb-4}
+.md blockquote > *:last-child { @apply mb-0; }
+.md blockquote li { @apply font-medium not-italic pl-0 list-none}
+
+.md pre { @apply my-8 p-4; }
+
+.md table {@apply w-full mb-8 border border-gray-20}
+.md tr {@apply h-10 text-left}
+.md th { @apply border-b border-b-gray-20 font-mono text-sm}
+.md td, .md th {@apply px-4}
+
+
+/* Code highlighting */
+.shiki { background-color: #282c34; }
+
 
 /**
  * UTILITIES

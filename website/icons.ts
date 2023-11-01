@@ -1,10 +1,10 @@
-// Little hack to silence annoying types not found error
-
 export {
   CaArrowDown,
   CaArrowRight,
+  CaArrowUpRight,
   CaBlockStorage,
   CaCheckmarkOutline,
+  CaDocument,
   CaDotMark,
   CaEdgeCluster,
   CaExplore,
