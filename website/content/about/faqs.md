@@ -1,5 +1,6 @@
 ---
 layout: generic
+icon: CaArrowRight
 ---
 
 # FAQs
