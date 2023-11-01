@@ -3,6 +3,7 @@
 export {
   CaArrowDown,
   CaArrowRight,
+  CaArrowUpRight,
   CaBlockStorage,
   CaCheckmarkOutline,
   CaDotMark,

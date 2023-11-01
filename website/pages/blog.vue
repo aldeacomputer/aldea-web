@@ -35,29 +35,21 @@ const { data: posts } = await useAsyncData('blog', () => {
     .find()
 })
 
-
-import {
-  CaArrowRight,
-} from '~/icons'
-
 const relatedItems: RelatedItem[] = [
   {
-    icon: CaArrowRight,
     title: "Docs",
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla non sodales odio.',
-    link: "",
+    link: "https://docs.aldea.computer",
   },
   {
-    icon: CaArrowRight,
     title: "About",
     description: "What Aldea is and how it works",
-    link: "",
+    link: "/about/faqs",
   },
   {
-    icon: CaArrowRight,
     title: "Tutorial",
     description: "Learn how to code with Aldea",
-    link: "",
+    link: "https://docs.aldea.computer",
   }
 ]
 </script>

@@ -19,7 +19,7 @@
 
       <div class="m-4 md:m-0 col-span-6 md:col-start-2 lg:col-span-4">
         <div class="md">
-        <slot />
+          <slot />
         </div>
       </div>
     </div>
@@ -30,6 +30,8 @@
 </template>
 
 <script setup lang="ts">
+import { CaArrowDown, } from '~/icons'
+
 const route = useRoute()
 const { page } = useContent()
 
@@ -38,27 +40,21 @@ const { data: siblings } = await useAsyncData(`siblings:${route.path}`, () => {
     .find()
 })
 
-import { CaArrowDown, CaArrowRight, } from '~/icons'
-
 const relatedItems: RelatedItem[] = [
   {
-    icon: CaArrowRight,
     title: "Docs",
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla non sodales odio.',
-    link: "",
+    link: "https://docs.aldea.computer",
   },
   {
-    icon: CaArrowRight,
     title: "About",
     description: "What Aldea is and how it works",
-    link: "",
+    link: "/about/faqs",
   },
   {
-    icon: CaArrowRight,
     title: "Tutorial",
     description: "Learn how to code with Aldea",
-    link: "",
+    link: "https://docs.aldea.computer",
   }
 ]
-
 </script>

@@ -57,7 +57,6 @@ declare global {
   }
 
   interface RelatedItem {
-    icon: any;
     title: string;
     description: string;
     link: string;
