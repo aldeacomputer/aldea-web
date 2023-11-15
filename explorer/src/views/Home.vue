@@ -19,18 +19,37 @@
       </div>
     </div>
   </div>
+
+  <div class="w-full max-w-4xl">
+    <StreamToggle v-model="isStreaming" />
+
+    <div class="flex gap-8">
+      <div class="w-1/2">
+        <StreamingBlocks :is-streaming="isStreaming" />
+      </div>
+      <div class="w-1/2">
+        <StreamingTxns :is-streaming="isStreaming" />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useHead } from '@unhead/vue'
 import { CaInformationFilled } from '@kalimahapps/vue-icons'
 import { useAppStore } from '../stores/app'
 import SearchTrigger from '../components/SearchTrigger.vue'
 import NetworkSwitch from '../components/NetworkSwitch.vue'
+import StreamToggle from '../components/StreamToggle.vue'
+import StreamingBlocks from '../components/StreamingBlocks.vue'
+import StreamingTxns from '../components/StreamingTxns.vue'
 
 const store = useAppStore()
 
 useHead({
   title: 'Explorer'
 })
+
+const isStreaming = ref(false)
 </script>
