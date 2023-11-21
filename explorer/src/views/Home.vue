@@ -23,11 +23,11 @@
   <div class="w-full max-w-4xl">
     <StreamToggle v-model="isStreaming" />
 
-    <div class="flex gap-8">
-      <div class="w-1/2">
+    <div class="flex w-full gap-8 flex-col lg:flex-row">
+      <div class="flex-1">
         <StreamingBlocks :is-streaming="isStreaming" />
       </div>
-      <div class="w-1/2">
+      <div class="flex-1">
         <StreamingTxns :is-streaming="isStreaming" />
       </div>
     </div>

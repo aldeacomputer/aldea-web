@@ -1,8 +1,9 @@
 <template>
   <div>
-    <h2>Latest Blocks</h2>
-    <div v-if="isStreaming">31 block / sec</div>
-
+    <div class="flex justify-between items-center py-2 h-16">
+      <h2 class="text-24 font-light">Latest Blocks</h2>
+      <div class="flex items-center" v-if="isStreaming"><p class="text-28 pr-2 text-blue-40">31</p><p class="font-mono text-secondary">block/sec</p></div>
+    </div>
     <ul class="space-y-2">
       <li v-for="block of blocks">
         <StreamingBlockListItem :item="block" />
@@ -18,7 +19,7 @@ defineProps<{
   isStreaming: boolean;
 }>()
 
-const blocks = new Array(10)
+const blocks = new Array(5)
 blocks.fill({
   "id":"7b3ce5a9067432ed3763ebcd1edfab3ef150f09fbc1e1d4a5160d3f0d7ce79c4",
   "sig":"5c2da258ec7af656122d270e472f115fc41a47682de6ff1465f4bb3ba78c066961b0fc6ff01a083c86b6da7028a7500f5258cd345d69430b2a6cc37eee41980f",

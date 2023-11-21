@@ -1,6 +1,6 @@
 <template>
   <div class="h-screen px-4 py-6 flex flex-col">
-    <div class="flex-auto flex flex-col items-center justify-center">
+    <div class="flex-auto flex flex-col items-center justify-center gap-10">
       <slot></slot>
     </div>
     

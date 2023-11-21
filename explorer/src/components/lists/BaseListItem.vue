@@ -11,9 +11,9 @@
       <div class="flex-auto">
         <slot></slot>
       </div>
-      <div class="flex flex-shrink-0 items-center justify-center w-12">
-          <component :is="chevronIcon" v-if="hasDropDown" />
-        </div>
+      <div class="flex flex-shrink-0 items-center justify-center w-12" v-if="hasDropDown">
+          <component :is="chevronIcon" />
+      </div>
     </div>
 
     <div
