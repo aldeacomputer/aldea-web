@@ -1,6 +1,6 @@
 import { Aldea, FileResponse, OutputResponse, Output, CommitTxResponse, abi } from '@aldea/sdk'
 import { ChainAdapter, LookupResult } from './adapter'
-import { cached } from './cache';
+import { cached } from './cache'
 
 export class Mocknet implements ChainAdapter {
   constructor(public aldea: Aldea) {}
