@@ -2,6 +2,7 @@ import { ref, watch } from 'vue'
 import { defineStore } from 'pinia'
 import { ChainAdapter } from './blockchain/adapter'
 import { createMocknetAdapter } from './blockchain/mocknet'
+import { Backend } from './blockchain/backend'
 import { useRouter } from 'vue-router';
 
 const STORAGE_KEY = '__network'
@@ -17,6 +18,11 @@ const networks: Network[] = [
     id: 'alphanet',
     label: 'Alphanet',
     init: () => createMocknetAdapter('https://node.aldea.computer')
+  },
+  {
+    id: 'devnet',
+    label: 'Devnet',
+    init: () => new Backend('http://localhost:4080')
   },
   {
     id: 'mocknet',

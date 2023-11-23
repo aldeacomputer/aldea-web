@@ -20,10 +20,10 @@
     </div>
   </div>
 
-  <div class="w-full max-w-4xl">
+  <div class="w-full max-w-md lg:max-w-4xl pb-16">
     <StreamToggle v-model="isStreaming" />
 
-    <div class="flex w-full gap-8 flex-col lg:flex-row">
+    <div class="flex w-full gap-4 lg:gap-8 flex-col lg:flex-row">
       <div class="flex-1">
         <StreamingBlocks :is-streaming="isStreaming" />
       </div>

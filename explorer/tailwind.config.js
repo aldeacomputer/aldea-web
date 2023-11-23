@@ -81,6 +81,15 @@ export default {
       },
       screens: {
         xs: '480px'
+      },
+      keyframes: {
+        'drop-in': {
+          '0%': { transform: 'translateY(-56px)' },
+          '100%': { transform: 'translateY(0)' },
+        }
+      },
+      animation: {
+        'drop-in': 'drop-in 0.2s ease-in-out forwards'
       }
     },
   },

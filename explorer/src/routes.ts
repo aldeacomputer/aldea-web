@@ -24,6 +24,16 @@ export const routes: RouteRecordRaw[] = [
     component: Home
   },
   {
+    name: 'blocks',
+    path: '/blocks',
+    component: TxView,
+  },
+  {
+    name: 'block',
+    path: '/block/:id',
+    component: TxView,
+  },
+  {
     name: 'tx',
     path: '/tx/:id',
     component: TxView,

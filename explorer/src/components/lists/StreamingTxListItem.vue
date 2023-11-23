@@ -2,14 +2,14 @@
   <BaseListItem :icon="AkArrowUpDown">
     <div class="flex items-center justify-between gap-6 last:pr-4">
       <Copyable
+        :to="{ name: 'tx', params: { id: item.id } }"
         short
         size="sm"
         :value="item.id" />
-        <div>
-          <p>80675</p>
-        </div>
-      <div class="hidden xs:block">{{ item.size }}</div>
-      
+      <div class="flex items-center gap-1">
+        <span>{{ (item.size / 1000).toFixed(2) }}</span>
+        <span class="text-secondary">kb</span>
+      </div>
     </div>
   </BaseListItem>
 </template>
@@ -20,7 +20,6 @@ import BaseListItem from './BaseListItem.vue'
 import Copyable from '../Copyable.vue'
 
 defineProps<{
-  item: any;
+  item: TxDataMin;
 }>()
-
 </script>

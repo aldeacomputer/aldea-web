@@ -27,14 +27,26 @@
 </template>
 
 <script setup lang="ts">
+import { watch } from 'vue'
+import { useAppStore } from '../stores/app'
+import { Backend } from '../stores/blockchain/backend'
 
-defineProps<{
+const store = useAppStore()
+
+const props = defineProps<{
   modelValue: boolean;
 }>()
 
 defineEmits<{
   (e: 'update:modelValue', val: boolean): void;
 }>()
+
+watch(() => props.modelValue, isStreaming => {
+  if (store.network === 'devnet') {
+    const adapter = store.adapter as Backend
+    isStreaming ? adapter.startStream() : adapter.stopStream()
+  }
+})
 </script>
 
 <style scoped>

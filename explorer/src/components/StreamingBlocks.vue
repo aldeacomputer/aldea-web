@@ -2,33 +2,69 @@
   <div>
     <div class="flex justify-between items-center py-2 h-16">
       <h2 class="text-24 font-light">Latest Blocks</h2>
-      <div class="flex items-center" v-if="isStreaming"><p class="text-28 pr-2 text-blue-40">31</p><p class="font-mono text-secondary">block/sec</p></div>
+      <div class="flex items-center" v-if="isStreaming">
+        <span class="text-28 pr-2 text-blue-40">{{ stat }}</span>
+        <span class="font-mono text-secondary">block/sec</span>
+      </div>
     </div>
-    <ul class="space-y-2">
-      <li v-for="block of blocks">
-        <StreamingBlockListItem :item="block" />
-      </li>
-    </ul>
+    <div class="overflow-hidden" ref="wrap">
+      <ul class="space-y-2" ref="list">
+        <li v-for="block of blocks">
+          <StreamingBlockListItem :item="block" />
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { nextTick, onMounted, ref } from 'vue'
+import { useAppStore } from '../stores/app'
+import { bus } from '../bus'
 import StreamingBlockListItem from './lists/StreamingBlockListItem.vue'
+
+const store = useAppStore()
 
 defineProps<{
   isStreaming: boolean;
 }>()
 
-const blocks = new Array(5)
-blocks.fill({
-  "id":"7b3ce5a9067432ed3763ebcd1edfab3ef150f09fbc1e1d4a5160d3f0d7ce79c4",
-  "sig":"5c2da258ec7af656122d270e472f115fc41a47682de6ff1465f4bb3ba78c066961b0fc6ff01a083c86b6da7028a7500f5258cd345d69430b2a6cc37eee41980f",
-  "created_at":1700055698485,
-  "height":80675,
-  "creator":"868aba083f424b92d1d6467db06d620448fc47efca85c544e08b30473bb320b4",
-  "prev_block_id":"f76e170cba450546d0d2c18209fd5072cb35c87b2d9a78f76fe7304c21c4e3f7",
-  "tx_root":"0000000000000000000000000000000000000000000000000000000000000000",
-  "state_root":"0000000000000000000000000000000000000000000000000000000000000000",
-  "state_commit":"544c297daf78f7b2dddc5cbd41830d95cdc9a0807295fb2c0b8be643b6b81b56"
+const wrap = ref<HTMLElement>()
+const list = ref<HTMLElement>()
+const isAnimating = ref<boolean>(false)
+
+const blocks = ref<Array<BlockData>>(await loadBlocks())
+const stat = ref<number>(blocks.value.length)
+
+async function loadBlocks(): Promise<BlockData[]> {
+  return store.adapter.getBlocks({ limit: 10 })
+}
+
+onMounted(() => {
+  bus.on('block', addEvent)
+  bus.on('stats', setStats)
+
+  list.value?.addEventListener('animationend', () => {
+    if (blocks.value.length >= 10) blocks.value.pop()
+    list.value!.classList.remove('animate-drop-in')
+    wrap.value!.style.removeProperty('height')
+    isAnimating.value = false
+  })
 })
+
+function addEvent(block: any): void {
+  if (!isAnimating.value) {
+    isAnimating.value = true
+    wrap.value!.style.setProperty('height', `${wrap!.value?.offsetHeight}px`)
+    blocks.value.unshift(block)
+
+    nextTick(() => {
+      list.value!.classList.add('animate-drop-in')
+    })
+  }
+}
+
+function setStats({ bps }: any): void {
+  stat.value = bps
+}
 </script>

@@ -34,6 +34,18 @@ declare global {
     url: string;
   }
 
+  interface BlockData {
+    id: string;
+    height: number;
+    prev_block_id: string;
+    creator: string;
+    created_at: number;
+    tx_root: string;
+    state_root: string;
+    state_commit: string;
+    sig: string;
+  }
+
   interface JigData extends OutputResponse {
     abi: abi.Abi;
     props: Record<string, any>;
@@ -57,6 +69,11 @@ declare global {
 
   interface TxData extends CommitTxResponse {
     timestamp: number;
+  }
+
+  interface TxDataMin {
+    id: string;
+    size: number;
   }
 
   interface SearchResult {
