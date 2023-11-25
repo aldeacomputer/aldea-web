@@ -1,37 +1,37 @@
 <template>
-  <ToolTip :show="showMessage">
-    <div class="flex items-center gap-1" :class="{'@container': responsive && !short}">
-      <component
-        :is="component"
-        :to="to"
-        class="font-mono"
-        :class="{
-          'link underline': isLink,
-          'text-14': size === 'sm',
-          'text-16': size === 'md',
-          'text-18 lg:text-20': size === 'lg',
-        }">
-        <span
-          class="@[582px]:hidden whitespace-nowrap"
-          v-if="responsive || short">
-          {{ shortValue }}
-        </span>
-        <span
-          class="break-all"
-          :class="{'hidden @[582px]:inline': responsive}"
-          v-if="!short">
-          {{ value }}
-        </span>
-      </component>
+  <div class="flex items-center gap-1" :class="{'@container': responsive && !short}">
+    <component
+      :is="component"
+      :to="to"
+      class="font-mono"
+      :class="{
+        'link underline': isLink,
+        'text-14': size === 'sm',
+        'text-16': size === 'md',
+        'text-18 lg:text-20': size === 'lg',
+      }">
+      <span
+        class="@[582px]:hidden whitespace-nowrap"
+        v-if="responsive || short">
+        {{ shortValue }}
+      </span>
+      <span
+        class="break-all"
+        :class="{'hidden @[582px]:inline': responsive}"
+        v-if="!short">
+        {{ value }}
+      </span>
+    </component>
+    <ToolTip :show="showMessage">
       <CopyButton :size="size" :value="value" class="shrink-0" @copied="showToolTip" />
-    </div>
-    <template #content>
-      <div class="flex items-center gap-2">
-        <CaCheckmarkOutline class="text-16 text-success" />
-        <span>Copied!</span>
-      </div>
-    </template>
-  </ToolTip>
+      <template #content>
+        <div class="flex items-center gap-2">
+          <CaCheckmarkOutline class="text-16 text-success" />
+          <span>Copied!</span>
+        </div>
+      </template>
+    </ToolTip>
+  </div>
 </template>
 
 <script setup lang="ts">

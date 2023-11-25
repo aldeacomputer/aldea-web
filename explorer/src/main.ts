@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { createPinia } from 'pinia'
 import { createHead } from '@unhead/vue'
-import { CommitTxResponse, OutputResponse, PackageResponse, abi } from '@aldea/sdk'
+import { OutputResponse, PackageResponse, abi } from '@aldea/sdk'
 import { routes } from './routes'
 import * as helpers from './helpers'
 import './style.css'
@@ -32,6 +32,17 @@ declare global {
     title: string;
     value: string;
     url: string;
+  }
+
+  interface MetaData {
+    after?: string;
+    before?: string;
+    total_count: number;
+  }
+
+  interface DataOf<T> {
+    data: Array<T>;
+    meta?: MetaData;
   }
 
   interface BlockData {
@@ -67,11 +78,24 @@ declare global {
     docs: Record<string, string>;
   }
 
-  interface TxData extends CommitTxResponse {
+  interface TxData {
+    id: string;
+    rawtx: string;
+    spends: string[];
+    outputs: OutputResponse[];
+    packages: PackageResponse[];
     timestamp: number;
+    block_id?: string;
+    block_height?: number;
   }
 
   interface TxDataMin {
+    id: string;
+    rawtx: string;
+    block_id?: string;
+  }
+
+  interface TxSize {
     id: string;
     size: number;
   }

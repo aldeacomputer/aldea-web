@@ -37,7 +37,8 @@ const blocks = ref<Array<BlockData>>(await loadBlocks())
 const stat = ref<number>(blocks.value.length)
 
 async function loadBlocks(): Promise<BlockData[]> {
-  return store.adapter.getBlocks({ limit: 10 })
+  const { data } = await store.adapter.getBlocks({ limit: 10 })
+  return data
 }
 
 onMounted(() => {

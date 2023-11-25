@@ -33,11 +33,12 @@ const wrap = ref<HTMLElement>()
 const list = ref<HTMLElement>()
 const isAnimating = ref<boolean>(false)
 
-const txs = ref<Array<TxDataMin>>(await loadTxs())
+const txs = ref<Array<TxSize>>(await loadTxs())
 const stat = ref<number>(txs.value.length)
 
-async function loadTxs(): Promise<TxDataMin[]> {
-  return store.adapter.getTxs({ limit: 10 })
+async function loadTxs(): Promise<TxSize[]> {
+  const { data } = await store.adapter.getTxs({ limit: 10 })
+  return data.map(tx => ({ id: tx.id, size: tx.rawtx.length / 2 }))
 }
 
 onMounted(() => {

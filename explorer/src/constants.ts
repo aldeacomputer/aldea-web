@@ -9,6 +9,7 @@ export const KEYS = {
   jigs: Symbol() as InjectionKey<Ref<JigData[]>>,
   pkg: Symbol() as InjectionKey<Ref<PkgData>>,
   txd: Symbol() as InjectionKey<Ref<TxData>>,
+  txds: Symbol() as InjectionKey<Ref<DataOf<TxDataMin>>>,
 
   tx: Symbol() as InjectionKey<Ref<Tx>>,
   txInputs: Symbol() as InjectionKey<Ref<JigData[]>>,

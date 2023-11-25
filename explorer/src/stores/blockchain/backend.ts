@@ -19,76 +19,68 @@ export class Backend implements ChainAdapter {
     this.ky = ky.create({ prefixUrl: this.baseUrl })
   }
 
-  async getBlocks(opts: Partial<PaginationParams> = {}): Promise<BlockData[]> {
-    const res = await this.ky.get('blocks', { searchParams: opts }).json<DataOf<BlockJson[]>>()
-    return res.data
+  async getBlocks(opts: Partial<PaginationParams> = {}): Promise<DataOf<BlockData>> {
+    return this.ky.get('blocks', { searchParams: opts }).json<DataOf<BlockJson>>()
   }
 
   async getBlock(id: string | number): Promise<BlockData> {
-    const path = typeof id === 'number' ? `/blocks/h/${id}` : `/blocks/${id}`
-    const res = await this.ky.get(path).json<DataOf<BlockJson>>()
-    return res.data
+    const path = typeof id === 'number' ? `blocks/h/${id}` : `blocks/${id}`
+    return this.ky.get(path).json<BlockJson>()
   }
 
-  async getAddrJigs(addr: string): Promise<JigData[]> {
+  async getBlockTxs(id: string | number, _opts: Partial<PaginationParams> = {}): Promise<DataOf<TxDataMin>> {
+    const path = typeof id === 'number' ? `blocks/h/${id}/transactions` : `blocks/${id}/transactions`
+    return this.ky.get(path).json<DataOf<TxDataMin>>()
+  }
+
+  async getAddrJigs(addr: string, _opts: Partial<PaginationParams> = {}): Promise<DataOf<JigData>> {
     const lock = new Lock(LockType.ADDRESS, Address.fromString(addr).hash)
     const lockHex = base16.encode(lock.toBytes())
-    const res = await this.ky.get(`locks/${lockHex}/outputs`).json<DataOf<OutputJson[]>>()
-    return Promise.all(res.data.map(o => this.outputToJig(o)))
+    const res = await this.ky.get(`locks/${lockHex}/outputs`).json<DataOf<OutputJson>>()
+    const data = await Promise.all(res.data.map(o => this.outputToJig(o)))
+    return { data, meta: res.meta }
   }
 
   async getJig(jigId: string): Promise<JigData> {
-    let res: DataOf<OutputJson>
+    let res: OutputJson
     if (/_\d+$/.test(jigId)) {
-      res = await this.ky.get(`outputs/o/${jigId}`).json<DataOf<OutputJson>>()
+      res = await this.ky.get(`outputs/o/${jigId}`).json<OutputJson>()
     } else {
-      res = await cached<DataOf<OutputJson>>(jigId, () => this.ky.get(`outputs/${jigId}`).json<DataOf<OutputJson>>())
+      res = await cached<OutputJson>(jigId, () => this.ky.get(`outputs/${jigId}`).json<OutputJson>())
     }
-    return this.outputToJig(res.data)
+    return this.outputToJig(res)
   }
 
   async getAbi(pkgId: string): Promise<Abi> {
-    const res = await cached<DataOf<Abi>>([pkgId, 'abi'], () => this.ky.get(`packages/${pkgId}/abi`).json<DataOf<Abi>>())
-    return res.data
+    return cached<Abi>([pkgId, 'abi'], () => this.ky.get(`packages/${pkgId}/abi`).json<Abi>())
   }
 
   async getDocs(pkgId: string): Promise<PkgDocs> {
-    const res = await cached<DataOf<PkgDocs>>([pkgId, 'docs'], () => this.ky.get(`packages/${pkgId}/docs`).json<DataOf<PkgDocs>>())
-    return res.data
+    return cached<PkgDocs>([pkgId, 'docs'], () => this.ky.get(`packages/${pkgId}/docs`).json<PkgDocs>())
   }
 
-  getPkg(pkgId: string): Promise<PkgData> {
+  async getPkg(pkgId: string): Promise<PkgData> {
     return cached<PkgData>(pkgId, async () => {
       const [abi, pkg] = await Promise.all([
         this.getAbi(pkgId),
-        this.ky.get(`packages/${pkgId}/src`).json<DataOf<PackageResponse>>(),
+        this.ky.get(`packages/${pkgId}/src`).json<PackageResponse>(),
       ])
-      return { ...pkg.data, abi }
+      return { ...pkg, abi }
     })
   }
 
-  async getTxs(opts: Partial<PaginationParams> = {}): Promise<TxDataMin[]> {
-    const res = await this.ky.get('transactions', { searchParams: opts }).json<DataOf<TxJsonMin[]>>()
-    return res.data.map(tx => ({ id: tx.id, size: tx.raw.length / 2 }))
+  async getTxs(opts: Partial<PaginationParams> = {}): Promise<DataOf<TxDataMin>> {
+    return this.ky.get('transactions', { searchParams: opts }).json<DataOf<TxDataMin>>()
   }
 
-  getTx(txid: string): Promise<TxData> {
+  async getTx(txid: string): Promise<TxData> {
     return cached<TxData>(txid, async () => {
-      const res = await this.ky.get(`transactions/${txid}`).json<DataOf<TxJson>>()
-      
-      return {
-        id: res.data.id,
-        rawtx: res.data.raw,
-        inputs: [],
-        outputs: [],
-        packages: [],
-        timestamp: 0,
-      }
+      return this.ky.get(`transactions/${txid}`).json<TxData>()
     })
   }
 
-  lookupById(id: string): Promise<LookupResult> {
-    
+  async lookupById(_id: string): Promise<LookupResult> {
+    return {}
   }
 
   startStream(): void {
@@ -116,10 +108,6 @@ export class Backend implements ChainAdapter {
   }
 }
 
-interface DataOf<T> {
-  data: T;
-}
-
 interface BlockJson {
   id: string;
   height: number;
@@ -139,18 +127,4 @@ interface OutputJson {
   class: string;
   lock: string;
   state: string;
-}
-
-interface TxJson {
-  id: string;
-  raw: string;
-  block_id: string;
-  inputs: string[];
-  outputs: string[];
-  packages: string[];
-}
-
-interface TxJsonMin {
-  id: string;
-  raw: string;
 }

@@ -1,6 +1,9 @@
 import { RouteRecordRaw } from 'vue-router'
 
 import Home from './views/Home.vue'
+import BlocksView from './views/Blocks.vue'
+import BlockView from './views/Block.vue'
+import BlockTxsTab from './views/block/Txs.vue'
 import TxView from './views/Tx.vue'
 import TxInstructionsTab from './views/tx/Instructions.vue'
 import TxOutputsTab from './views/tx/Outputs.vue'
@@ -26,12 +29,16 @@ export const routes: RouteRecordRaw[] = [
   {
     name: 'blocks',
     path: '/blocks',
-    component: TxView,
+    component: BlocksView,
   },
   {
     name: 'block',
     path: '/block/:id',
-    component: TxView,
+    component: BlockView,
+    children: [
+      { name: 'block_transactions', path: '', component: BlockTxsTab },
+    ],
+    redirect: { name: 'block_transactions' },
   },
   {
     name: 'tx',

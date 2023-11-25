@@ -22,5 +22,4 @@ import Copyable from '../Copyable.vue'
 defineProps<{
   item: BlockData;
 }>()
-
 </script>

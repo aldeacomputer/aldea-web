@@ -20,7 +20,7 @@
     </div>
   </div>
 
-  <div class="w-full max-w-md lg:max-w-4xl pb-16">
+  <div class="w-full max-w-md lg:max-w-4xl pb-16" v-if="showStreams">
     <StreamToggle v-model="isStreaming" />
 
     <div class="flex w-full gap-4 lg:gap-8 flex-col lg:flex-row">
@@ -44,6 +44,7 @@ import NetworkSwitch from '../components/NetworkSwitch.vue'
 import StreamToggle from '../components/StreamToggle.vue'
 import StreamingBlocks from '../components/StreamingBlocks.vue'
 import StreamingTxns from '../components/StreamingTxns.vue'
+import { computed } from 'vue'
 
 const store = useAppStore()
 
@@ -52,4 +53,8 @@ useHead({
 })
 
 const isStreaming = ref(false)
+
+const showStreams = computed<boolean>(() => {
+  return ['devnet'].includes(store.network)
+})
 </script>

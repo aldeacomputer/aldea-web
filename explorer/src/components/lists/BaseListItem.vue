@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-layer-01 overflow-hidden"
+    class="bg-layer-01"
     :class="{'group hover:bg-layer-02 transition-colors cursor-pointer': hasDropDown}"
     @click="toggleOpen">
 
