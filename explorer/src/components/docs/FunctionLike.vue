@@ -3,9 +3,10 @@
     <div
       class="flex items-center justify-between gap-4 px-4 py-2 bg-layer-01 border-l-4 border-gray-70"
       :class="{
-        'border-error': isStatic(code),
-        'border-success': isFunction(code) || isConstructor(code),
-        'border-info': isInstance(code),
+        
+        'border-success': isPublic(code),
+        'border-error': isProtected(code),
+        'border-info': isFunction(code),
       }">
       <div class="flex-auto font-mono text-14 md:text-16 text-secondary">
         <span>{{ code.name }}</span>
@@ -24,9 +25,9 @@
       <div
         class="text-12 px-2 py-0.5 text-secondary border rounded"
         :class="{
-          'border-warning': isStatic(code),
-          'border-success': isFunction(code) || isConstructor(code),
-          'border-info': isInstance(code),
+          'border-success': isPublic(code),
+          'border-warning': isProtected(code),
+          'border-info': isFunction(code),
         }">
         {{ kind }}
       </div>
@@ -51,15 +52,13 @@ const props = defineProps<{
 
 const kind = computed(() => {
   return isMethod(props.code) ?
-    (props.code.kind ? abi.MethodKind[props.code.kind].toLowerCase() : 'instance') :
+    (isProtected(props.code) ? 'protected' : 'public') :
     'function'
 })
 
 const docKey = computed(() => {
   if (isMethod(props.code)) {
-    const sep = props.code.kind ?
-      (props.code.kind === abi.MethodKind.INSTANCE ? '$' : '_') : '$'
-      return `${props.className}${sep}${props.code.name}`
+      return `${props.className}_${props.code.name}`
   } else {
     return props.code.name
   }
@@ -73,15 +72,23 @@ function isMethod(m: any): m is abi.MethodNode {
   return !isFunction(m)
 }
 
-function isStatic(m: any): boolean {
-  return isMethod(m) && m.kind === abi.MethodKind.STATIC
+function isPublic(m: any): boolean {
+  return isMethod(m) && m.kind === abi.MethodKind.PUBLIC
 }
 
-function isConstructor(m: any): boolean {
-  return isMethod(m) && m.kind === abi.MethodKind.CONSTRUCTOR
+function isProtected(m: any): boolean {
+  return isMethod(m) && m.kind === abi.MethodKind.PROTECTED
 }
 
-function isInstance(m: any): boolean {
-  return isMethod(m) && (!m.kind || m.kind === abi.MethodKind.INSTANCE)
-}
+//function isStatic(m: any): boolean {
+//  return isMethod(m) && m.kind === abi.MethodKind.STATIC
+//}
+//
+//function isConstructor(m: any): boolean {
+//  return isMethod(m) && m.kind === abi.MethodKind.CONSTRUCTOR
+//}
+//
+//function isInstance(m: any): boolean {
+//  return isMethod(m) && (!m.kind || m.kind === abi.MethodKind.INSTANCE)
+//}
 </script>

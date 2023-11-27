@@ -5,21 +5,21 @@
         <MenuLink
           v-for="ex, i of classes"
           @click="scrollToSection(i)">
-          {{ ex.code.name }}
+          {{ ex.name }}
         </MenuLink>
       </MenuSection>
       <MenuSection title="Interfaces" v-if="interfaces.length">
         <MenuLink
           v-for="ex, i of interfaces"
           @click="scrollToSection(i + classes.length)">
-          {{ ex.code.name }}
+          {{ ex.name }}
         </MenuLink>
       </MenuSection>
       <MenuSection title="Functions" v-if="functions.length">
         <MenuLink
           v-for="ex, i of functions"
           @click="scrollToSection(i + classes.length + interfaces.length)">
-          {{ ex.code.name }}
+          {{ ex.name }}
         </MenuLink>
       </MenuSection>
       <MenuSection title="Objects" v-if="objects.length">
@@ -39,7 +39,7 @@
           v-for="ex of classes"
           ref="sections"
           :kind="ex.kind"
-          :code="ex.code as abi.ClassNode"
+          :code="ex as abi.ClassNode"
           :docs="docs.docs" />
       </DocSection>
 
@@ -48,7 +48,7 @@
           v-for="ex of interfaces"
           ref="sections"
           :kind="ex.kind"
-          :code="ex.code as abi.InterfaceNode"
+          :code="ex as abi.InterfaceNode"
           :docs="docs.docs" />
       </DocSection>
 
@@ -57,7 +57,7 @@
           v-for="ex of functions"
           ref="sections"
           :kind="ex.kind"
-          :code="ex.code as abi.FunctionNode"
+          :code="ex as abi.FunctionNode"
           :docs="docs.docs" />
       </DocSection>
 
@@ -65,7 +65,7 @@
         <ClassLike
           v-for="obj of objects"
           ref="sections"
-          :code="obj"
+          :code="(obj as abi.ObjectNode)"
           :docs="docs.docs" />
       </DocSection>
     </div>
@@ -89,24 +89,28 @@ const route = useRoute()
 const store = useAppStore()
 
 const pkg = inject(KEYS.pkg)
-const docs = ref(await loadDocs(pkg?.value.id!))
+const docs = ref(await loadDocs(route.params.id as string))
 
 const sections = ref<Array<{root: HTMLElement}>>([])
 
+const query = computed(() => {
+  return new abi.AbiQuery(pkg!.value.abi).fromExports()
+})
+
 const classes = computed(() => {
-  return pkg!.value.abi.exports.filter(ex => ex.kind === abi.CodeKind.CLASS)
+  return new abi.AbiQuery(pkg!.value.abi).fromExports().byKind(abi.CodeKind.CLASS).allCode()
 })
 
 const interfaces = computed(() => {
-  return pkg!.value.abi.exports.filter(ex => ex.kind === abi.CodeKind.INTERFACE)
+  return query.value.byKind(abi.CodeKind.INTERFACE).allCode()
 })
 
 const functions = computed(() => {
-  return pkg!.value.abi.exports.filter(ex => ex.kind === abi.CodeKind.FUNCTION)
+  return query.value.byKind(abi.CodeKind.FUNCTION).allCode()
 })
 
 const objects = computed(() => {
-  return pkg!.value.abi.objects
+  return query.value.byKind(abi.CodeKind.OBJECT).allCode()
 })
 
 async function loadDocs(id: string): Promise<PkgDocs> {

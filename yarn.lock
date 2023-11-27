@@ -43,14 +43,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aldea/compiler@npm:^0.3.0":
-  version: 0.3.0
-  resolution: "@aldea/compiler@npm:0.3.0"
+"@aldea/compiler@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "@aldea/compiler@npm:0.5.0"
   dependencies:
-    "@aldea/core": ^0.4.0
-    assemblyscript: "npm:@aldea/assemblyscript@^0.1.0"
+    "@aldea/core": ^0.7.0
+    assemblyscript: "npm:@aldea/assemblyscript@0.27.14-X"
     comment-parser: ^1.3.1
-  checksum: 9c9a42d926793cdda02ae1074b63e25b73ced3a3f21ab7853bf0b13abfe39f34e2a4f169031e936e2779e7dc14f3d23643dd05f5e46cf60fae79be0402a9dd13
+  checksum: 2c84da6e9390320fabc0d6230a2dda5bb3afdcfedd686b88363e18005c20d47442593e0f9bebd9940a6c2434fb76f875c6fee8d3ea8e332a87e9d06949812ffa
   languageName: node
   linkType: hard
 
@@ -85,12 +85,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@aldea/core@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "@aldea/core@npm:0.7.0"
+  dependencies:
+    "@noble/ed25519": ^2.0.0
+    "@noble/hashes": ^1.3.0
+    "@scure/base": ^1.1.1
+  checksum: bc8a6c012fce74b428cc03d60c370062dc7e56755b0999686c8e77a33a81e30437b581c7c09d4ad77b92ef79b02e0fae75b320f31aed7081aeb6225ccecbfcd2
+  languageName: node
+  linkType: hard
+
 "@aldea/explorer@workspace:explorer":
   version: 0.0.0-use.local
   resolution: "@aldea/explorer@workspace:explorer"
   dependencies:
-    "@aldea/mocknet": ^0.4.0
-    "@aldea/sdk": ^0.4.0
+    "@aldea/mocknet": ^0.7.0
+    "@aldea/sdk": ^0.7.1
     "@cocalc/local-storage-lru": ^2.3.0
     "@kalimahapps/vue-icons": ^1.4.0
     "@tailwindcss/container-queries": ^0.1.1
@@ -116,12 +127,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@aldea/mocknet@npm:^0.4.0":
-  version: 0.4.0
-  resolution: "@aldea/mocknet@npm:0.4.0"
+"@aldea/mocknet@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "@aldea/mocknet@npm:0.7.0"
   dependencies:
-    "@aldea/core": ^0.4.0
-    "@aldea/vm": ^0.4.0
+    "@aldea/core": ^0.7.0
+    "@aldea/vm": ^0.7.0
     "@chainsafe/libp2p-gossipsub": ^6.2.0
     "@chainsafe/libp2p-noise": ^11.0.1
     "@chainsafe/libp2p-yamux": ^3.0.7
@@ -139,29 +150,28 @@ __metadata:
     pino-pretty: ^10.0.0
   bin:
     mocknet: bin/mocknet.js
-  checksum: 8e8183b98d2b9303b75b2d37a4090ee300b361b7d0a048628bde8e1c2d068319c0564c40efc9f9bd7ea49a231327117209213529db57d82ae6919a6751cdd804
+  checksum: e0fe8be5c9e4e46aa773955c8ca43e10849bbd114bdac405ad887f059159b8fe2a887f56850bdbc49ebf466a638389cb48f2826c3f1a7bc52d3a180950dda76d
   languageName: node
   linkType: hard
 
-"@aldea/sdk@npm:^0.4.0":
-  version: 0.4.0
-  resolution: "@aldea/sdk@npm:0.4.0"
+"@aldea/sdk@npm:^0.7.1":
+  version: 0.7.1
+  resolution: "@aldea/sdk@npm:0.7.1"
   dependencies:
-    "@aldea/core": ^0.4.0
-    ky: ^0.33.3
-    ky-universal: ^0.11.0
-  checksum: 1a1a748615e79728dd80d87de43fbc828082082961488be75bf406456c41a9b260e47045ce2c6712b87caa679a7d5371e146d5edec1538c9a97ae44bcb9a6217
+    "@aldea/core": ^0.7.0
+    ky: ^1.0.1
+  checksum: f2ba01c2048f460a2d07f38c697f7ae2d8c1dea6f08cdcc86a08844d5c110816c939e4b8bac26c0f66703293148c3b56626526bbe71aef19d2d028372e024e1d
   languageName: node
   linkType: hard
 
-"@aldea/vm@npm:^0.4.0":
-  version: 0.4.0
-  resolution: "@aldea/vm@npm:0.4.0"
+"@aldea/vm@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "@aldea/vm@npm:0.7.0"
   dependencies:
-    "@aldea/compiler": ^0.3.0
-    "@aldea/core": ^0.4.0
+    "@aldea/compiler": ^0.5.0
+    "@aldea/core": ^0.7.0
     moment: ^2.29.4
-  checksum: 8c04e9548f1e5e7db15f579fe9afdd24131fa6c6a2f4ae4b23f571ba3c60865ce086e44d180ac2acdc0564de947ae9851fdaeebd1c68f6260f77e66205555ee4
+  checksum: e5e01bae32147e789e762fb4e0599f6fd1583458cbdcc33fe4e301482aae1ad236510d375adc8d5164cc78b3c6ffc83b755fe780eb1942604d487decd4d70fb7
   languageName: node
   linkType: hard
 
@@ -6408,16 +6418,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"assemblyscript@npm:@aldea/assemblyscript@^0.1.0":
-  version: 0.1.0
-  resolution: "@aldea/assemblyscript@npm:0.1.0"
+"assemblyscript@npm:@aldea/assemblyscript@0.27.14-X":
+  version: 0.27.14-X
+  resolution: "@aldea/assemblyscript@npm:0.27.14-X"
   dependencies:
     binaryen: 112.0.0-nightly.20230411
     long: ^5.2.1
   bin:
     asc: bin/asc.js
     asinit: bin/asinit.js
-  checksum: b648758982271f8b5a282683a9ccef3f865dc6928a615922e6302a4027832f53cc4d876f2591b1d540684b1b76a02c507c16b91f10d07ab1e1c50d3b7286640c
+  checksum: c7c08f73543eb84eed0fb64abb0f8ffdaf4a823eff97f4d3c2612337806bdc99c1135449ddd9973851170444b09fe7b2990b681d8def7b59533377c6d1b4f65d
   languageName: node
   linkType: hard
 
@@ -7727,13 +7737,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"data-uri-to-buffer@npm:^4.0.0":
-  version: 4.0.1
-  resolution: "data-uri-to-buffer@npm:4.0.1"
-  checksum: 0d0790b67ffec5302f204c2ccca4494f70b4e2d940fea3d36b09f0bb2b8539c2e86690429eb1f1dc4bcc9e4df0644193073e63d9ee48ac9fce79ec1506e4aa4c
-  languageName: node
-  linkType: hard
-
 "datastore-core@npm:^8.0.1":
   version: 8.0.4
   resolution: "datastore-core@npm:8.0.4"
@@ -8965,16 +8968,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fetch-blob@npm:^3.1.2, fetch-blob@npm:^3.1.4":
-  version: 3.2.0
-  resolution: "fetch-blob@npm:3.2.0"
-  dependencies:
-    node-domexception: ^1.0.0
-    web-streams-polyfill: ^3.0.3
-  checksum: f19bc28a2a0b9626e69fd7cf3a05798706db7f6c7548da657cbf5026a570945f5eeaedff52007ea35c8bcd3d237c58a20bf1543bc568ab2422411d762dd3d5bf
-  languageName: node
-  linkType: hard
-
 "fetch-retry@npm:^5.0.2":
   version: 5.0.6
   resolution: "fetch-retry@npm:5.0.6"
@@ -9133,15 +9126,6 @@ __metadata:
     combined-stream: ^1.0.8
     mime-types: ^2.1.12
   checksum: b019e8d35c8afc14a2bd8a7a92fa4f525a4726b6d5a9740e8d2623c30e308fbb58dc8469f90415a856698933c8479b01646a9dff33c87cc4e76d72aedbbf860d
-  languageName: node
-  linkType: hard
-
-"formdata-polyfill@npm:^4.0.10":
-  version: 4.0.10
-  resolution: "formdata-polyfill@npm:4.0.10"
-  dependencies:
-    fetch-blob: ^3.1.2
-  checksum: 82a34df292afadd82b43d4a740ce387bc08541e0a534358425193017bf9fb3567875dc5f69564984b1da979979b70703aa73dee715a17b6c229752ae736dd9db
   languageName: node
   linkType: hard
 
@@ -11378,30 +11362,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ky-universal@npm:^0.11.0":
-  version: 0.11.0
-  resolution: "ky-universal@npm:0.11.0"
-  dependencies:
-    abort-controller: ^3.0.0
-    node-fetch: ^3.2.10
-  peerDependencies:
-    ky: ">=0.31.4"
-    web-streams-polyfill: ">=3.2.1"
-  peerDependenciesMeta:
-    web-streams-polyfill:
-      optional: true
-  checksum: 42e4c91551a0d17465d6a117de2d1fa4efdf38c4e29dbd70af0c5b7ac0ee13994bceca9af2a0ac21a943d1cd22557ea664abe79f25e096d30a6baca0a0265a12
-  languageName: node
-  linkType: hard
-
-"ky@npm:^0.33.3":
-  version: 0.33.3
-  resolution: "ky@npm:0.33.3"
-  checksum: d1869e1f33c0165355f621b6726fcc1a9de20a31f4a826ca0cfd5753d83b9cba8723402d554a00194e0ee3959e0dda0638f4b99d54a3a7de928b55ff870b0bcc
-  languageName: node
-  linkType: hard
-
-"ky@npm:^1.1.3":
+"ky@npm:^1.0.1, ky@npm:^1.1.3":
   version: 1.1.3
   resolution: "ky@npm:1.1.3"
   checksum: 5fe71516f175fab4ee0284f1d7c1392cae15a04d7ea132db78ea69919b070b5b8efaa09f34585182a64607c48a9060751be63381225310f4a64a3a07bea0a05e
@@ -13389,13 +13350,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-domexception@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "node-domexception@npm:1.0.0"
-  checksum: ee1d37dd2a4eb26a8a92cd6b64dfc29caec72bff5e1ed9aba80c294f57a31ba4895a60fd48347cf17dd6e766da0ae87d75657dfd1f384ebfa60462c2283f5c7f
-  languageName: node
-  linkType: hard
-
 "node-emoji@npm:^2.1.0":
   version: 2.1.0
   resolution: "node-emoji@npm:2.1.0"
@@ -13447,17 +13401,6 @@ __metadata:
     encoding:
       optional: true
   checksum: d76d2f5edb451a3f05b15115ec89fc6be39de37c6089f1b6368df03b91e1633fd379a7e01b7ab05089a25034b2023d959b47e59759cb38d88341b2459e89d6e5
-  languageName: node
-  linkType: hard
-
-"node-fetch@npm:^3.2.10":
-  version: 3.3.1
-  resolution: "node-fetch@npm:3.3.1"
-  dependencies:
-    data-uri-to-buffer: ^4.0.0
-    fetch-blob: ^3.1.4
-    formdata-polyfill: ^4.0.10
-  checksum: 62145fd3ba4770a76110bc31fdc0054ab2f5442b5ce96e9c4b39fc9e94a3d305560eec76e1165d9259eab866e02a8eecf9301062bb5dfc9f08a4d08b69d223dd
   languageName: node
   linkType: hard
 
@@ -18595,13 +18538,6 @@ __metadata:
   version: 2.0.1
   resolution: "web-namespaces@npm:2.0.1"
   checksum: b6d9f02f1a43d0ef0848a812d89c83801d5bbad57d8bb61f02eb6d7eb794c3736f6cc2e1191664bb26136594c8218ac609f4069722c6f56d9fc2d808fa9271c6
-  languageName: node
-  linkType: hard
-
-"web-streams-polyfill@npm:^3.0.3":
-  version: 3.2.1
-  resolution: "web-streams-polyfill@npm:3.2.1"
-  checksum: b119c78574b6d65935e35098c2afdcd752b84268e18746606af149e3c424e15621b6f1ff0b42b2676dc012fc4f0d313f964b41a4b5031e525faa03997457da02
   languageName: node
   linkType: hard
 
