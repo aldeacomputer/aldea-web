@@ -51,7 +51,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, provide, ref } from 'vue'
+import { computed, provide, ref, watch } from 'vue'
 import { useAppStore } from '../stores/app'
 import { useRoute } from 'vue-router'
 import { useHead } from '@unhead/vue'
@@ -89,4 +89,12 @@ async function loadBlock(id: string): Promise<BlockData> {
 async function loadTxs(id: string): Promise<DataOf<TxDataMin>> {
   return store.adapter.getBlockTxs(id)
 }
+
+watch(() => route.params.id, async id => {
+  if (typeof route.name === 'string' && /^block/.test(route.name)) {
+    block.value = await loadBlock(id as string)
+    txds.value = await loadTxs(id as string)
+    window.scrollTo({ top: 0 })
+  }
+})
 </script>

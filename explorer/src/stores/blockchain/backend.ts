@@ -28,15 +28,15 @@ export class Backend implements ChainAdapter {
     return this.ky.get(path).json<BlockJson>()
   }
 
-  async getBlockTxs(id: string | number, _opts: Partial<PaginationParams> = {}): Promise<DataOf<TxDataMin>> {
+  async getBlockTxs(id: string | number, opts: Partial<PaginationParams> = {}): Promise<DataOf<TxDataMin>> {
     const path = typeof id === 'number' ? `blocks/h/${id}/transactions` : `blocks/${id}/transactions`
-    return this.ky.get(path).json<DataOf<TxDataMin>>()
+    return this.ky.get(path, { searchParams: opts }).json<DataOf<TxDataMin>>()
   }
 
-  async getAddrJigs(addr: string, _opts: Partial<PaginationParams> = {}): Promise<DataOf<JigData>> {
+  async getAddrJigs(addr: string, opts: Partial<PaginationParams> = {}): Promise<DataOf<JigData>> {
     const lock = new Lock(LockType.ADDRESS, Address.fromString(addr).hash)
     const lockHex = base16.encode(lock.toBytes())
-    const res = await this.ky.get(`locks/${lockHex}/outputs`).json<DataOf<OutputJson>>()
+    const res = await this.ky.get(`locks/${lockHex}/outputs`, { searchParams: opts }).json<DataOf<OutputJson>>()
     const data = await Promise.all(res.data.map(o => this.outputToJig(o)))
     return { data, meta: res.meta }
   }

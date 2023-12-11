@@ -56,7 +56,7 @@ const className = computed(() => {
 
 const balance = computed(() => {
   if (props.item.class === COIN_CLASS) {
-    return (Number(jigProps.value?.motos) / 100000000).toFixed(8)
+    return (Number(jigProps.value?.amount) / 100000000).toFixed(8)
   }
 })
 
