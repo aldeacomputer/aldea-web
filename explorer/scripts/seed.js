@@ -15,6 +15,9 @@ const user = KeyPair.fromRandom()
 setTimeout(async () => {
   try {
     const tx1 = await deployPkgs()
+    console.log('🌱', 'package', tx1.packages[0].id)
+    console.log('🌱', 'package', tx1.packages[1].id)
+    console.log('🌱', 'transaction', tx1.id, tx1.txid)
     const tx2 = await seedUser(tx1.packages[0].id)
     const tx3 = await kitchenSink(tx1.packages[1].id)
 

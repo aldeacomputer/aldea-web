@@ -10,6 +10,14 @@ export class Mocknet implements ChainAdapter {
     return Promise.all(outputs.map(o => this.outputToJig(o)))
   }
 
+  async getBlock(_id: string): Promise<BlockData> {
+    
+  }
+
+  async getBlocks(): Promise<BlockData[]> {
+    return Promise.resolve([])
+  }
+
   async getJig(jigId: string): Promise<JigData> {
     let output: OutputResponse
     if (/_\d+$/.test(jigId)) {
@@ -49,9 +57,8 @@ export class Mocknet implements ChainAdapter {
 
   async getTx(txid: string): Promise<TxData> {
     return cached<TxData>(txid, async () => {
-      const data = await this.aldea.getTx(txid) as CommitTxResponse & { executed_at: number }
-      const timestamp = data.executed_at
-      return { ...data, timestamp, executed_at: undefined }
+      const data = await this.aldea.getTx(txid) as CommitTxResponse
+      return { ...data } as TxData
     })
   }
 

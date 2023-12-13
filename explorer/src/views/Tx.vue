@@ -9,15 +9,19 @@
       </template>
       <template #after-title>
         <div class="flex flex-col sm:flex-row gap-2">
+          <!--
           <Label :icon="CaCalendar">
             <time class="font-mono text-14">{{ timestamp }}</time>
           </Label>
+          -->
+          <!--
           <Label :icon="CaMoney">
             <div class="font-mono space-x-1.5">
               <span class="text-14">{{ fee }}</span>
               <span class="text-12">motos</span>
             </div>
           </Label>
+          -->
         </div>
       </template>
     </PageHeader>
@@ -34,7 +38,7 @@
 import { computed, provide, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useHead } from '@unhead/vue'
-import * as dayjs from 'dayjs'
+//import * as dayjs from 'dayjs'
 import { OpCode, Output, Pointer, Tx, base16, instructions } from '@aldea/sdk'
 import { CaArrowsHorizontal, CaBox, CaCalendar, CaCheckmarkOutline, CaListDropdown, CaMoney } from '@kalimahapps/vue-icons'
 import { useAppStore } from '../stores/app'
@@ -67,15 +71,15 @@ provide(KEYS.tx, tx)
 provide(KEYS.txInputs, inputs)
 provide(KEYS.txOutputs, outputs)
 
-const timestamp = computed(() => {
-  return dayjs
-    .unix(txd.value.timestamp)
-    .format('YYYY-MM-DD HH:mm')
-})
+//const timestamp = computed(() => {
+//  return dayjs
+//    .unix(txd.value.timestamp)
+//    .format('YYYY-MM-DD HH:mm')
+//})
 
-const fee = computed(() => {
-  return Number(999)
-})
+//const fee = computed(() => {
+//  return Number(999)
+//})
 
 async function loadTx(id: string): Promise<TxData> {
   return store.adapter.getTx(id)

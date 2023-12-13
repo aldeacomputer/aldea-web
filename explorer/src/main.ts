@@ -81,12 +81,13 @@ declare global {
   interface TxData {
     id: string;
     rawtx: string;
+    reads: string[];
     spends: string[];
     outputs: OutputResponse[];
     packages: PackageResponse[];
-    timestamp: number;
-    block_id?: string;
-    block_height?: number;
+    //timestamp: number;
+    //block_id?: string;
+    //block_height?: number;
   }
 
   interface TxDataMin {

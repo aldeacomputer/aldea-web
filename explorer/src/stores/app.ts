@@ -2,7 +2,7 @@ import { ref, watch } from 'vue'
 import { defineStore } from 'pinia'
 import { ChainAdapter } from './blockchain/adapter'
 import { createMocknetAdapter } from './blockchain/mocknet'
-import { Backend } from './blockchain/backend'
+//import { Backend } from './blockchain/backend'
 import { useRouter } from 'vue-router';
 
 const STORAGE_KEY = '__network'
@@ -15,15 +15,15 @@ interface Network {
 
 const networks: Network[] = [
   {
-    id: 'alphanet',
-    label: 'Alphanet',
-    init: () => createMocknetAdapter('https://node.aldea.computer')
-  },
-  {
     id: 'devnet',
     label: 'Devnet',
-    init: () => new Backend('http://localhost:4080')
+    init: () => createMocknetAdapter('https://node.aldea.computer')
   },
+  //{
+  //  id: 'devnet',
+  //  label: 'Devnet',
+  //  init: () => new Backend('http://localhost:4080')
+  //},
   {
     id: 'mocknet',
     label: 'Mocknet',
@@ -31,7 +31,7 @@ const networks: Network[] = [
   }
 ]
 
-const networkId = sessionStorage.getItem(STORAGE_KEY) || 'alphanet'
+const networkId = sessionStorage.getItem(STORAGE_KEY) || 'devnet'
 const defaultNetwork = networks.find(n => n.id === networkId)!
 
 export const useAppStore = defineStore('app', () => {

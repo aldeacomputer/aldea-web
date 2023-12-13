@@ -190,9 +190,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aldea/website@workspace:website":
+"@aldea/website@workspace:website_nuxt":
   version: 0.0.0-use.local
-  resolution: "@aldea/website@workspace:website"
+  resolution: "@aldea/website@workspace:website_nuxt"
   dependencies:
     "@kalimahapps/vue-icons": ^1.4.0
     "@nuxt/content": ^2.8.5

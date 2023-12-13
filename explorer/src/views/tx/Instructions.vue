@@ -33,7 +33,6 @@ function componentFor(instruction: Instruction) {
     case OpCode.NEW:
     case OpCode.CALL:
     case OpCode.EXEC:
-    case OpCode.EXECFUNC:
       return CallInstruction
     case OpCode.LOCK:
       return LockInstruction

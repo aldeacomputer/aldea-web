@@ -17,7 +17,7 @@ import { KEYS } from '../../constants'
 import BaseInstruction from './BaseInstruction.vue'
 import Enclosed from '../Enclosed.vue'
 
-type StaticCallInstruction = instructions.NewInstruction | instructions.ExecInstruction | instructions.ExecFuncInstruction
+type StaticCallInstruction = instructions.NewInstruction | instructions.ExecInstruction
 
 const props = defineProps<{
   idx: number;
@@ -37,12 +37,11 @@ const callName = computed(() => {
       case OpCode.NEW:
         return `new ${ctxCode.value.name}()`
       case OpCode.CALL:
-        const iMethod = (<abi.ClassNode>ctxCode.value).methods[(<instructions.CallInstruction>props.instruction).methodIdx]
-        return `${ctxCode.value.name}$${iMethod.name}()`
+        const iMethod = (<abi.ClassNode>ctxCode.value).methods
+            .filter(m => m.kind === abi.MethodKind.PUBLIC && m.name !== 'constructor')
+            [(<instructions.CallInstruction>props.instruction).methodIdx]
+        return `${ctxCode.value.name}_${iMethod.name}()`
       case OpCode.EXEC:
-        const sMethod = (<abi.ClassNode>ctxCode.value).methods[(<instructions.ExecInstruction>props.instruction).methodIdx]
-        return `${ctxCode.value.name}.${sMethod.name}()`
-      case OpCode.EXECFUNC:
         return `${ctxCode.value.name}()`
     }
   } else {
@@ -57,7 +56,7 @@ async function traverseParents(idx: number, exportIdx?: number): Promise<void> {
     case OpCode.IMPORT:
       const pkgId = base16.encode((<instructions.ImportInstruction>parent).pkgId)
       ctxAbi.value = await store.adapter.getAbi(pkgId)
-      ctxCode.value = ctxAbi.value.exports[exportIdx!].code as abi.ClassNode | abi.FunctionNode
+      ctxCode.value = ctxAbi.value.defs[ctxAbi.value.exports[exportIdx!]] as abi.ClassNode | abi.FunctionNode
       break
 
     case OpCode.LOAD:
@@ -68,12 +67,11 @@ async function traverseParents(idx: number, exportIdx?: number): Promise<void> {
       ctxJig.value = await store.adapter.getJig(id)
       ctxAbi.value = ctxJig.value.abi
       const codeIdx = Number(ctxJig.value.class.split('_')[1])
-      ctxCode.value = ctxAbi.value.exports[codeIdx].code as abi.ClassNode
+      ctxCode.value = ctxAbi.value.defs[ctxAbi.value.exports[codeIdx!]] as abi.ClassNode | abi.FunctionNode
       break
 
     case OpCode.NEW:
     case OpCode.EXEC:
-    case OpCode.EXECFUNC:
       return traverseParents((<StaticCallInstruction>parent).idx, (<StaticCallInstruction>parent).exportIdx)
 
     case OpCode.CALL:
