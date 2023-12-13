@@ -5,7 +5,7 @@
   "workspaces": [
     "components",
     "explorer",
-    "website"
+    "website_nuxt"
   ],
   "packageManager": "yarn@3.6.1"
 }
