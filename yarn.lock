@@ -43,14 +43,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aldea/compiler@npm:^0.5.0":
-  version: 0.5.0
-  resolution: "@aldea/compiler@npm:0.5.0"
+"@aldea/compiler@npm:^0.6.1":
+  version: 0.6.1
+  resolution: "@aldea/compiler@npm:0.6.1"
   dependencies:
-    "@aldea/core": ^0.7.0
+    "@aldea/core": ^0.7.2
+    "@aldea/wasm-metering": ^0.1.0
     assemblyscript: "npm:@aldea/assemblyscript@0.27.14-X"
     comment-parser: ^1.3.1
-  checksum: 2c84da6e9390320fabc0d6230a2dda5bb3afdcfedd686b88363e18005c20d47442593e0f9bebd9940a6c2434fb76f875c6fee8d3ea8e332a87e9d06949812ffa
+    wasm-metering: ^0.2.1
+  checksum: ab646df89e6f96b83ea8ead4b95f4aaf711426657899cc3b85e142662e9281ac005cb66a398781eaff23a59269ba42b1a1715e2f0917abe2dadaea1257de73c8
   languageName: node
   linkType: hard
 
@@ -85,14 +87,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aldea/core@npm:^0.7.0":
-  version: 0.7.0
-  resolution: "@aldea/core@npm:0.7.0"
+"@aldea/core@npm:^0.7.2":
+  version: 0.7.2
+  resolution: "@aldea/core@npm:0.7.2"
   dependencies:
     "@noble/ed25519": ^2.0.0
     "@noble/hashes": ^1.3.0
     "@scure/base": ^1.1.1
-  checksum: bc8a6c012fce74b428cc03d60c370062dc7e56755b0999686c8e77a33a81e30437b581c7c09d4ad77b92ef79b02e0fae75b320f31aed7081aeb6225ccecbfcd2
+  checksum: 60c86683f4bb6fd2ac36d1fbce34a640fb1f04418c489459760aa44dd5b7b3a6dc5a1a3a677d8cc929d7931d33b63a8ca25e2f147a9ef9b2d42af363880c9992
   languageName: node
   linkType: hard
 
@@ -100,8 +102,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@aldea/explorer@workspace:explorer"
   dependencies:
-    "@aldea/mocknet": ^0.7.0
-    "@aldea/sdk": ^0.7.1
+    "@aldea/mocknet": ^0.7.3
+    "@aldea/sdk": ^0.7.2
     "@cocalc/local-storage-lru": ^2.3.0
     "@kalimahapps/vue-icons": ^1.4.0
     "@tailwindcss/container-queries": ^0.1.1
@@ -127,12 +129,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@aldea/mocknet@npm:^0.7.0":
-  version: 0.7.0
-  resolution: "@aldea/mocknet@npm:0.7.0"
+"@aldea/mocknet@npm:^0.7.3":
+  version: 0.7.3
+  resolution: "@aldea/mocknet@npm:0.7.3"
   dependencies:
-    "@aldea/core": ^0.7.0
-    "@aldea/vm": ^0.7.0
+    "@aldea/core": ^0.7.2
+    "@aldea/vm": ^0.7.3
     "@chainsafe/libp2p-gossipsub": ^6.2.0
     "@chainsafe/libp2p-noise": ^11.0.1
     "@chainsafe/libp2p-yamux": ^3.0.7
@@ -150,28 +152,41 @@ __metadata:
     pino-pretty: ^10.0.0
   bin:
     mocknet: bin/mocknet.js
-  checksum: e0fe8be5c9e4e46aa773955c8ca43e10849bbd114bdac405ad887f059159b8fe2a887f56850bdbc49ebf466a638389cb48f2826c3f1a7bc52d3a180950dda76d
+  checksum: 72d8acb517491b84e162bc75a0476af697377b6e9bebc34b5fd8a2442a98d30b05c510733e4378390e154b1519d3b751252626d5fa7514d39779e52591b671f2
   languageName: node
   linkType: hard
 
-"@aldea/sdk@npm:^0.7.1":
-  version: 0.7.1
-  resolution: "@aldea/sdk@npm:0.7.1"
+"@aldea/sdk@npm:^0.7.2":
+  version: 0.7.2
+  resolution: "@aldea/sdk@npm:0.7.2"
   dependencies:
-    "@aldea/core": ^0.7.0
+    "@aldea/core": ^0.7.2
     ky: ^1.0.1
-  checksum: f2ba01c2048f460a2d07f38c697f7ae2d8c1dea6f08cdcc86a08844d5c110816c939e4b8bac26c0f66703293148c3b56626526bbe71aef19d2d028372e024e1d
+  checksum: ac8719dd7fc363104d11a00976f458c78323063d3d038a47ae71a0ea05c3f0b9c0d80ca4f471aba180aeb28b2d376eedc2f013122113c40f97629393cfe85527
   languageName: node
   linkType: hard
 
-"@aldea/vm@npm:^0.7.0":
-  version: 0.7.0
-  resolution: "@aldea/vm@npm:0.7.0"
+"@aldea/vm@npm:^0.7.3":
+  version: 0.7.3
+  resolution: "@aldea/vm@npm:0.7.3"
   dependencies:
-    "@aldea/compiler": ^0.5.0
-    "@aldea/core": ^0.7.0
+    "@aldea/compiler": ^0.6.1
+    "@aldea/core": ^0.7.2
     moment: ^2.29.4
-  checksum: e5e01bae32147e789e762fb4e0599f6fd1583458cbdcc33fe4e301482aae1ad236510d375adc8d5164cc78b3c6ffc83b755fe780eb1942604d487decd4d70fb7
+  checksum: 0faae95c489a50417cdb1129ec7bace3d27c3473499bf9675154db3da09209d8bf96d9888941d984c3400c988967434511505f1485cb42781b05183c8b08df72
+  languageName: node
+  linkType: hard
+
+"@aldea/wasm-metering@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@aldea/wasm-metering@npm:0.1.0"
+  dependencies:
+    buffer-pipe: ^0.0.5
+    leb128: ^0.0.5
+    safe-buffer: ^5.2.1
+    warp-isomorphic: ^1.0.7
+    warp-wasm-metering: ^1.0.1
+  checksum: eabaf9fb837eb730720fe823aba5b9c74560b565c1b5a75441ff79764735ab7e46babd74b7ca3cd786f61c7232c6516f0153651730b7140673b89feca05b9d93
   languageName: node
   linkType: hard
 
@@ -6726,6 +6741,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"bn.js@npm:^4.11.6, bn.js@npm:^4.11.8":
+  version: 4.12.0
+  resolution: "bn.js@npm:4.12.0"
+  checksum: 39afb4f15f4ea537b55eaf1446c896af28ac948fdcf47171961475724d1bb65118cca49fa6e3d67706e4790955ec0e74de584e45c8f1ef89f46c812bee5b5a12
+  languageName: node
+  linkType: hard
+
+"bn.js@npm:^5.0.0":
+  version: 5.2.1
+  resolution: "bn.js@npm:5.2.1"
+  checksum: 3dd8c8d38055fedfa95c1d5fc3c99f8dd547b36287b37768db0abab3c239711f88ff58d18d155dd8ad902b0b0cee973747b7ae20ea12a09473272b0201c9edd3
+  languageName: node
+  linkType: hard
+
 "body-parser@npm:1.20.1":
   version: 1.20.1
   resolution: "body-parser@npm:1.20.1"
@@ -6854,6 +6883,42 @@ __metadata:
   version: 1.1.2
   resolution: "buffer-from@npm:1.1.2"
   checksum: 0448524a562b37d4d7ed9efd91685a5b77a50672c556ea254ac9a6d30e3403a517d8981f10e565db24e8339413b43c97ca2951f10e399c6125a0d8911f5679bb
+  languageName: node
+  linkType: hard
+
+"buffer-pipe@npm:0.0.0":
+  version: 0.0.0
+  resolution: "buffer-pipe@npm:0.0.0"
+  dependencies:
+    safe-buffer: ^5.1.1
+  checksum: dd86ae2d7318829ce90a0ef3163493d12b9e595cd27af5fe10e451af95db25e0a0ec43221a346a1b2efda8f8bb98045105eb470ebfc70bf7f8721467af1803a0
+  languageName: node
+  linkType: hard
+
+"buffer-pipe@npm:0.0.2":
+  version: 0.0.2
+  resolution: "buffer-pipe@npm:0.0.2"
+  dependencies:
+    safe-buffer: ^5.1.1
+  checksum: 67d3c48f37a655c1286d9069cdadcb56e4be7c56030daf02c2506f0a286f69e74736382ab29912109fc28d46609c986e0643423e9c126a97477701fc89a3752f
+  languageName: node
+  linkType: hard
+
+"buffer-pipe@npm:0.0.3":
+  version: 0.0.3
+  resolution: "buffer-pipe@npm:0.0.3"
+  dependencies:
+    safe-buffer: ^5.1.2
+  checksum: 04daf09291f88952078578cc1e6e06ce044c1c0c57b0f5fef6a4d9332d7bd016f4f54331421fae1a322de45df5cfd79ff443aa04dfc51c244809e18b7a404746
+  languageName: node
+  linkType: hard
+
+"buffer-pipe@npm:^0.0.5":
+  version: 0.0.5
+  resolution: "buffer-pipe@npm:0.0.5"
+  dependencies:
+    safe-buffer: ^5.2.0
+  checksum: f6c6ed157c5c3ef7b0e637644adfa2bd0a2b1e3392dc70d1e8da02f17452cb138c00913847730baa8a37e794eeee54745d21b075cbcfbba86a3529184ee7a75e
   languageName: node
   linkType: hard
 
@@ -11396,6 +11461,26 @@ __metadata:
   dependencies:
     readable-stream: ^2.0.5
   checksum: 822c54c6b87701a6491c70d4fabc4cafcf0f87d6b656af168ee7bb3c45de9128a801cb612e6eeeefc64d298a7524a698dd49b13b0121ae50c2ae305f0dcc5310
+  languageName: node
+  linkType: hard
+
+"leb128@npm:0.0.4, leb128@npm:^0.0.4":
+  version: 0.0.4
+  resolution: "leb128@npm:0.0.4"
+  dependencies:
+    bn.js: ^4.11.6
+    buffer-pipe: 0.0.0
+  checksum: f3107a05b2ed7a7ccdfd1e16e3603179d967811d15ce77d7c4bfb061c271799ce8991dc18340219d59b59cfc2d4d8aae7366e8a8b8c9ed4afdea0f195d11832d
+  languageName: node
+  linkType: hard
+
+"leb128@npm:^0.0.5":
+  version: 0.0.5
+  resolution: "leb128@npm:0.0.5"
+  dependencies:
+    bn.js: ^5.0.0
+    buffer-pipe: 0.0.3
+  checksum: d477f9f5c423401f279a7a9e2afa96d42baf1701a4e2a3d62a08696efa8c536d93a122ece14b9b54037e847108f67426abe6bbb6b4e1327a9bbbc9058ebafe60
   languageName: node
   linkType: hard
 
@@ -15992,7 +16077,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"safe-buffer@npm:5.2.1, safe-buffer@npm:^5.1.0, safe-buffer@npm:~5.2.0":
+"safe-buffer@npm:5.2.1, safe-buffer@npm:^5.1.0, safe-buffer@npm:^5.1.1, safe-buffer@npm:^5.1.2, safe-buffer@npm:^5.2.0, safe-buffer@npm:^5.2.1, safe-buffer@npm:~5.2.0":
   version: 5.2.1
   resolution: "safe-buffer@npm:5.2.1"
   checksum: b99c4b41fdd67a6aaf280fcd05e9ffb0813654894223afb78a31f14a19ad220bba8aba1cb14eddce1fcfb037155fe6de4e861784eb434f7d11ed58d1e70dd491
@@ -17478,6 +17563,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"undici@npm:^5.19.1, undici@npm:^5.8.0":
+  version: 5.28.2
+  resolution: "undici@npm:5.28.2"
+  dependencies:
+    "@fastify/busboy": ^2.0.0
+  checksum: f9e9335803f962fff07c3c11c6d50bbc76248bacf97035047155adb29c3622a65bd6bff23a22218189740133149d22e63b68131d8c40e78ac6cb4b6d686a6dfa
+  languageName: node
+  linkType: hard
+
 "undici@npm:^5.23.0":
   version: 5.26.3
   resolution: "undici@npm:5.26.3"
@@ -18512,6 +18606,79 @@ __metadata:
   dependencies:
     makeerror: 1.0.12
   checksum: ad7a257ea1e662e57ef2e018f97b3c02a7240ad5093c392186ce0bcf1f1a60bbadd520d073b9beb921ed99f64f065efb63dfc8eec689a80e569f93c1c5d5e16c
+  languageName: node
+  linkType: hard
+
+"warp-isomorphic@npm:1.0.0":
+  version: 1.0.0
+  resolution: "warp-isomorphic@npm:1.0.0"
+  dependencies:
+    buffer: ^6.0.3
+    undici: ^5.8.0
+  checksum: e593eea4eba28b5e87157aca8e2ff35576f41df0953cd7adb06064b087abb52b2c4778dee6f8100e3a1deaf416270f5d212e34231d2b013340cc1f8af5f0590c
+  languageName: node
+  linkType: hard
+
+"warp-isomorphic@npm:^1.0.7":
+  version: 1.0.7
+  resolution: "warp-isomorphic@npm:1.0.7"
+  dependencies:
+    buffer: ^6.0.3
+    undici: ^5.19.1
+  checksum: 7e089dff97ebf98d910e638cae17630858ab3a67beb5b595b7dcc7d1456a7249a55317b261a2e5624dca4ba249f316953233bfabff2ee3100d3e7e388308a8ec
+  languageName: node
+  linkType: hard
+
+"warp-wasm-json-toolkit@npm:1.0.2":
+  version: 1.0.2
+  resolution: "warp-wasm-json-toolkit@npm:1.0.2"
+  dependencies:
+    buffer-pipe: 0.0.3
+    leb128: 0.0.4
+    warp-isomorphic: 1.0.0
+  bin:
+    json2wasm: bin/json2wasm
+    wasm2json: bin/wasm2json
+  checksum: 87dee2af1e66221651487fcfa6f8df822b51789eaba7eec90af7e01d2ecbf77b46600630b2eb6db624aa3ec0a24718c5c609b28f34f5a2540c506fca3fd6b1b3
+  languageName: node
+  linkType: hard
+
+"warp-wasm-metering@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "warp-wasm-metering@npm:1.0.1"
+  dependencies:
+    leb128: ^0.0.4
+    warp-wasm-json-toolkit: 1.0.2
+  bin:
+    wasm-meter: bin/wasm-meter
+  checksum: 446fa90476ca9c619773c30eba4e306b7b4f4140471775f1cb169f10d67d12497d2a55dcac5dfe3e7221138a6b85c720c9b16475a7479b1e0162ba7972eca921
+  languageName: node
+  linkType: hard
+
+"wasm-json-toolkit@npm:0.2.3":
+  version: 0.2.3
+  resolution: "wasm-json-toolkit@npm:0.2.3"
+  dependencies:
+    bn.js: ^4.11.8
+    buffer-pipe: 0.0.2
+    leb128: 0.0.4
+    safe-buffer: ^5.1.1
+  bin:
+    json2wasm: ./bin/json2wasm
+    wasm2json: ./bin/wasm2json
+  checksum: 03c79b2aee23622a13c58d4c4406dd3880f45e089dbf8beced2217afa21b15b11bb78d3346b073c1a4af77d8e64701c325acffe62816c4ac2617eed7659d4da4
+  languageName: node
+  linkType: hard
+
+"wasm-metering@npm:^0.2.1":
+  version: 0.2.1
+  resolution: "wasm-metering@npm:0.2.1"
+  dependencies:
+    leb128: ^0.0.4
+    wasm-json-toolkit: 0.2.3
+  bin:
+    wasm-meter: ./bin/wasm-meter
+  checksum: b326f98bcfea1f459b7d8e392c182a74bdcb361fcc778f796e404b53e9fa1c75dd3dac28667267c73be53979c933c8e91d63ef4eb2713254ddee745b71e234a9
   languageName: node
   linkType: hard
 

@@ -169,7 +169,7 @@ export class KitchenSink extends Jig {
 /**
  * `SomeObj` is a plain object.
  */
-declare class SomeObj {
+export class SomeObj {
   foo: string;
   bar: string;
   baz: bool;

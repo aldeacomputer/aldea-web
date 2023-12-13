@@ -49,7 +49,7 @@ export class House extends Jig {
    * (representing the maximum possible winnings) to the Game as it's own stake.
    */
   createGame(guess: i8, bet: Coin): Game {
-    const stake = this.balance.send(bet.motos * 4)
+    const stake = this.balance.send(bet.amount * 4)
     stake.$lock.unlock()
     return new Game(this, guess, bet, stake)
   }
@@ -160,7 +160,7 @@ export class Game extends Jig {
       (score < 7 && this.guess === Guess.UNDER) ||
       (score > 7 && this.guess === Guess.OVER)
     ) {
-      const winnings = this.stake.send(this.bet.motos)
+      const winnings = this.stake.send(this.bet.amount)
       this.bet = this.bet.combine([winnings])
       this.bet.$lock.changeToAddressLock(userPKH)
       this.stake.$lock.unlock()

@@ -13,23 +13,28 @@ const keys = KeyPair.fromRandom()
 const user = KeyPair.fromRandom()
 
 setTimeout(async () => {
-  const tx1 = await deployPkgs()
-  const tx2 = await seedUser(tx1.packages[0].id)
-  const tx3 = await kitchenSink(tx1.packages[1].id)
+  try {
+    const tx1 = await deployPkgs()
+    const tx2 = await seedUser(tx1.packages[0].id)
+    const tx3 = await kitchenSink(tx1.packages[1].id)
 
-  console.log('🌱', 'address', keys.pubKey.toAddress().toString())
-  console.log('🌱', 'address', user.pubKey.toAddress().toString())
-  for (let jig of tx2.outputs) {
-    console.log('🌱', 'jig', jig.id)  
+    console.log('🌱', 'address', keys.pubKey.toAddress().toString())
+    console.log('🌱', 'address', user.pubKey.toAddress().toString())
+    for (let jig of tx2.outputs) {
+      console.log('🌱', 'jig', jig.id)  
+    }
+    for (let jig of tx3.outputs) {
+      console.log('🌱', 'jig', jig.id)  
+    }
+    console.log('🌱', 'package', tx1.packages[0].id)
+    console.log('🌱', 'package', tx1.packages[1].id)
+    console.log('🌱', 'transaction', tx1.id)
+    console.log('🌱', 'transaction', tx2.id)
+    console.log('🌱', 'transaction', tx3.id)
+  } catch(e) {
+    console.log(await e.response.text())
+    process.exit()
   }
-  for (let jig of tx3.outputs) {
-    console.log('🌱', 'jig', jig.id)  
-  }
-  console.log('🌱', 'package', tx1.packages[0].id)
-  console.log('🌱', 'package', tx1.packages[1].id)
-  console.log('🌱', 'transaction', tx1.id)
-  console.log('🌱', 'transaction', tx2.id)
-  console.log('🌱', 'transaction', tx3.id)
 }, WAIT_TIME)
 
 async function deployPkgs() {

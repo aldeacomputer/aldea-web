@@ -8,7 +8,7 @@ export class SellOffer extends Jig {
 
   constructor(
     public asset: Jig,
-    public motos: u64,
+    public amount: u64,
     sellerPKH: ArrayBuffer,
   ) {
     super()
@@ -24,7 +24,7 @@ export class SellOffer extends Jig {
    * of this method.
    */
   redeem(payment: Coin): void {
-    if (payment.motos < this.motos) {
+    if (payment.amount < this.amount) {
       throw new Error('payment does not match offer')
     }
 
