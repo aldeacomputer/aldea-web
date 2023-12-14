@@ -1,0 +1,52 @@
+<div
+  class="lg:grid grid-cols-10 gap-4"
+  x-data="UsecaseCarousel"
+  x-init="items = {{len items}}">
+  <div class="col-span-5">
+    <ul class="flex gap-8 xl:gap-16 mb-4 lg:mb-8 text-2xl lg:text-3xl">
+      {{#each items}}
+        <li>
+          <a
+            class="underline underline-offset-4 decoration-transparent hover:decoration-inherit transition-colors cursor-pointer"
+            :class="isActive({{@index}}) ? 'font-medium' : 'font-light'"
+            @click="selectItem({{@index}})">
+            {{this.title}}
+          </a>
+        </li>
+      {{/each}}
+    </ul>
+
+    <div class="relative h-7 mb-12">
+      {{#each items}}
+        <p
+          class="absolute text-xl text-gray-70 font-light transition-opacity duration-200"
+          :class="isActive({{@index}}) ? 'opacity-1' : 'opacity-0'">
+          {{this.text}}
+        </p>
+      {{/each}}
+    </div>
+  </div>
+
+  <div class="col-span-5">
+    <div class="relative" :style="{height: fHeight+'px'}">
+      {{#each items}}
+        <ul
+          class="absolute space-y-6 transition-opacity duration-300 | uc-features"
+          :class="isActive({{@index}}) ? 'opacity-1' : 'opacity-0'">
+          {{#each this.list}}
+            <li class="grid grid-cols-5 gap-4">
+              <span>
+                <img src="{{this.icon}}" width="88" class="block" />
+              </span>
+              <div class="col-span-4">
+                <h3 class="mb-2 text-xl font-medium">{{this.title}}</h3>
+                <p class="text-lg font-light">{{this.description}}</p>
+              </div>
+            </li>
+          {{/each}}
+        </ul>
+      {{/each}}
+    </div>
+  </div>
+  
+</div>

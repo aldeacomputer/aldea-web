@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    {{!-- Primary Meta Tags --}}
+    <title>Aldea — Building on Web3 has never been so straightforward</title>
+    <meta name="title" content="Aldea — Building on Web3 has never been so straightforward" />
+    <meta name="description" content="We are creating the best blockchain for app developers. Turbocharge your on-chain development with Aldea, a new Layer 1 with a novel and highly intuitive programming model." />
+
+    {{!-- Open Graph / Facebook --}}
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://aldea.computer" />
+    <meta property="og:title" content="Aldea — Building on Web3 has never been so straightforward" />
+    <meta property="og:description" content="We are creating the best blockchain for app developers. Turbocharge your on-chain development with Aldea, a new Layer 1 with a novel and highly intuitive programming model." />
+    <meta property="og:image" content="/images/meta-image.png" />
+
+    {{!-- Twitter --}}
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://aldea.computer" />
+    <meta property="twitter:title" content="Aldea — Building on Web3 has never been so straightforward" />
+    <meta property="twitter:description" content="We are creating the best blockchain for app developers. Turbocharge your on-chain development with Aldea, a new Layer 1 with a novel and highly intuitive programming model." />
+    <meta property="twitter:image" content="/images/meta-image.png" />
+
+    <link rel="icon" href="/images/favicon-32.png" sizes="32x32" />
+    <link rel="icon" href="/images/favicon-128.png" sizes="128x128" />
+    <link rel="icon" href="/images/favicon-180.png" sizes="180x180" />
+    <link rel="icon" href="/images/favicon-192.png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/images/favicon-180.png" />
+
+    {{!-- Linked stylesheets and scripts --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400&family=IBM+Plex+Sans:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300&display=swap">
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script async src="https://tally.so/widgets/embed.js"></script>
+    <script defer src="https://plausible.io/js/script.js" data-domain="aldea.computer"></script>
+  </head>
+  <body class="bg-light text-gray-90">
+    {{>page-header}}
+
+    {{#>page-section
+      id="usability"
+      icon="edge-cluster"
+      label="Usability & programmability"
+      title="An unrivalled developer experience"
+      description="We're making Web3 possible for all developers. Our simple yet powerful programming model will have you building the decentralized future quicker than you can say \"zero knowledge rollups\"."
+      fullHeight=true
+    }}
+      <div class="px-5 md:px-10 pt-20">
+        <div class="w-full max-w-7xl mx-auto">
+          {{>dev-carousel items=devExamples}}
+        </div>
+      </div>
+    {{/page-section}}
+
+    {{#>page-section
+      id="scale"
+      icon="scale-out"
+      label="Scale & performance"
+      title="Built for global scale"
+      description="From day one, Aldea will offer a network capable of achieving significantly higher throughput compared to other mainstream chains. No sharding, no rollups and no boondoggle."
+      fullHeight=true
+    }}
+      <div class="px-5 md:px-10 pt-20">
+        <div class="w-full max-w-7xl mx-auto space-y-16">
+          {{>performance-stats data=performanceData}}
+          {{!--{{>performance-image}}--}}
+        </div>
+      </div>
+    {{/page-section}}
+
+    {{#>page-section
+      id="objects"
+      icon="block-storage"
+      label="Interactive objects"
+      title="Making the most exciting ideas in Web3 possible"
+      description="Aldea's simple yet powerful object model combines the best of Account and UTXO model blockchains. Think beyond tokens and smart contracts, and build a world of feature-rich, interactive and interoperable objects."
+      fullHeight=true
+    }}
+      <div class="px-5 md:px-10 pt-20">
+        <div class="w-full max-w-7xl mx-auto">
+          {{>usecase-tabs items=betterUsecases ids=usecaseIds}}
+        </div>
+      </div>
+    {{/page-section}}
+
+    {{#>page-section
+      id="contact"
+      icon="rocket"
+      label="Learn more"
+      title="Try Aldea instantly, right in your browser!"
+      description="Dive into our interactive, step-by-step tutorials and you'll be deploying code on-chain and crafting transactions in no time. Discover the power and simplicity of Aldea - all without leaving your browser."
+      darkBg=true
+      showTutButton=true
+    }}
+      {{>action-buttons}}
+    {{/page-section}}
+
+    {{#>page-section
+      id="about"
+      icon="group"
+      label="About us"
+      title="Who are Aldea?"
+      description="As a team of blockchain veterans, we found the layer 1 we wanted didn't exist. So we are building it. We're driven to make the most exciting ideas in Web3 possible for anyone."
+      darkBg=true
+      fullHeight=true
+    }}
+      <div class="px-5 md:px-10 pt-20">
+        <div class="w-full max-w-6xl mx-auto space-y-32">
+          {{>timeline items=timelineYears}}
+          {{>team items=teamMembers}}
+        </div>
+      </div>
+    {{/page-section}}
+
+    {{>page-footer}}
+
+    <script type="module" src="/main.ts"></script>
+  </body>
+</html>

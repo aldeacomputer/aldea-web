@@ -1,0 +1,31 @@
+{
+  "name": "website",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "packageManager": "yarn@3.2.3",
+  "dependencies": {
+    "alpinejs": "3.12.3",
+    "shiki": "^0.14.2"
+  },
+  "devDependencies": {
+    "@carbon/icon-helpers": "^10.41.0",
+    "@carbon/icons": "^11.21.0",
+    "@types/alpinejs": "3.7.2",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.24",
+    "tailwindcss": "^3.3.2",
+    "typescript": "^5.2.2",
+    "vite": "^4.3.9",
+    "vite-plugin-generate-file": "^0.0.4",
+    "vite-plugin-handlebars": "^1.6.0",
+    "vite-plugin-html": "^3.2.0",
+    "vite-plugin-minify": "^1.5.2",
+    "vite-plugin-mp": "^2.2.3"
+  }
+}

@@ -1,0 +1,62 @@
+<section
+  id="{{id}}"
+  class="
+    flex flex-col items-center py-12 md:py-16 lg:py-24
+    {{#if darkBg}}bg-gray-90 text-cream-20{{/if}}
+    {{#if fullHeight}}min-h-screen{{/if}}">
+
+  <div class="mx-5 md:mx-10">
+    <div class="flex flex-col w-full max-w-7xl">
+      <div
+        class="
+          mb-8 flex items-center gap-2 font-mono text-sm
+          {{#unless darkBg}}text-gray-70{{/unless}}">
+        {{{ icon icon 'icon w-4 h-4 text-blue-lighter' }}}
+        {{ label }}
+      </div>
+
+      <div class="lg:grid grid-cols-10 gap-4">
+        <div class="col-span-4">
+          <h1 class="mb-8 text-3xl lg:text-4xl font-light">{{ title }}</h1>
+          {{#unless fullHeight }}
+            <div class="mb-8">
+              <p class="{{#unless darkBg}}text-gray-70{{/unless}}">
+                {{ description }}
+              </p>
+              {{#if showTutButton}}
+                <div class="mt-8">
+                  <a href="https://docs.aldea.computer/tutorial/basics/introduction"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="
+                      mb-4 pl-4 pr-5 py-2 inline-flex items-center gap-2 bg-white text-gray-80 
+                      hover:bg-gray-20 hover:text-gray-90 transition-colors cursor-pointer group">
+                    <span class="block font-medium text-base leading-loose">Interactive tutorial</span>
+                    {{{ icon 'arrow-right' 'h-5 w-5 group-hover:translate-x-2 transition-transform' }}}
+                  </a>
+                </div>
+              {{/if}}
+            </div>
+          {{/unless}}
+        </div>
+        <div class="col-span-4 col-start-7">
+          {{#if fullHeight}}
+            <div>
+              <p class="{{#unless darkBg}}text-gray-70{{/unless}}">
+                {{ description }}
+              </p>
+            </div>
+          {{else}}
+            {{> @partial-block}}
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{#if fullHeight}}
+    <div class="flex flex-col justify-center flex-auto w-full">
+      {{> @partial-block}}
+    </div>
+  {{/if}}
+</section>

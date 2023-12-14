@@ -1,0 +1,29 @@
+<div class="h-0 opacity-0 overflow-hidden">
+  {{! Handlebars renders each item hidden so search engines will get it }}
+  {{#each items}}
+    <div>
+      <img src="{{this.image}}" alt="{{this.title}}" width="240" height="240" class="block mb-3">
+      <div class="px-2">
+        <h4 class="mb-2 text-xl text-gray-90">{{this.title}}</h4>
+        <p class="text-sm text-gray-50">{{this.description}}</p>
+      </div>
+    </div>
+  {{/each}}
+</div>
+
+<div
+  class="mt-20 flex justify-center gap-8 animate-slip-left hover:pause-animation"
+  x-data="Marquee"
+  x-init="items={{json items}}">
+
+  {{! Alpine renders dynamically generated items for the animation }}
+  <template x-for="item in genItems()">
+    <div class="w-60 shrink-0">
+      <img :src="item.image" :alt="item.title" width="240" height="240" class="block mb-3">
+      <div class="px-2">
+        <h4 class="mb-2 text-xl text-gray-90" x-text="item.title"></h4>
+        <p class="text-sm text-gray-50" x-text="item.description"></p>
+      </div>
+    </div>
+  </template>
+</div>

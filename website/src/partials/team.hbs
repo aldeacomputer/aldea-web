@@ -1,0 +1,12 @@
+<div>
+  <h3 class="mb-16 font-mono text-sm text-gray-50 text-center">Meet the team</h3>
+  <div class="flex flex-wrap justify-around gap-4">
+    {{#each items}}
+      <div class="mb-8 shrink-0">
+        <img src="{{this.image}}" alt="{{this.name}}" width="150" height="150" class="block mb-3">
+        <h4 class="mb-2 text-xl">{{ this.name }}</h4>
+        <div class="font-mono text-sm text-gray-50">{{ this.role }}</div>
+      </div>
+    {{/each}}
+  </div>
+</div>

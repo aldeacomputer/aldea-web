@@ -1,0 +1,35 @@
+<div class="space-y-8">
+  <h1 class="text-xl lg:text-2xl">Resources</h1>
+
+  <ul class="font-mono text-sm text-light space-y-5">
+    {{#each resourceLinks}}
+      <li class="flex items-start gap-3">
+        {{{ icon 'arrow-right' 'h-4 w-4 mt-0.5 text-gray-20' }}}
+        <div class="flex flex-col gap-1">
+          <a href="{{this.url}}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline decoration-transparent hover:text-white hover:decoration-inherit transition-colors">
+            {{this.label}}
+          </a>
+          <span class="text-gray-40">{{this.text}}</span>
+          
+        </div>
+        
+      </li>
+    {{/each}}
+  </ul>
+
+  <!--{{#each resourceLinks}}
+    <div>
+      <a href="{{this.url}}"
+        class="
+          mb-3 pl-4 pr-5 py-1.5 inline-flex items-center gap-2 bg-transparent text-gray-20 border border-gray-30
+          hover:bg-white/10 hover:text-white transition-colors cursor-pointer group">
+        <span class="block text-base leading-loose">{{this.label}}</span>
+        {{{ icon 'arrow-right' 'h-5 w-5 group-hover:translate-x-2 transition-transform' }}}
+      </a>
+      <p class="font-mono text-sm text-light">{{this.text}}</p>
+    </div>
+  {{/each}}-->
+</div>

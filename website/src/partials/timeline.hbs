@@ -1,0 +1,18 @@
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-8">
+  {{#each items}}
+    <div
+      class="p-4 flex flex-col border border-gray-50 rounded">
+      <span class="self-end {{#unless (isFuture this.year)}}text-blue-lighter{{/unless}}">
+        {{{ icon this.icon 'icon w-5 h-5' }}}
+      </span>
+      
+      <h3
+        class="
+          mt-2 mb-3 font-mono text-4xl font-light
+          {{#if (isFuture this.year)}}text-gray-30{{else}}text-blue-lighter{{/if}}">
+        {{ this.year }}
+      </h3>
+      <p class="font-mono text-sm">{{ this.description }}</p>
+    </div>
+  {{/each}}
+</div>
