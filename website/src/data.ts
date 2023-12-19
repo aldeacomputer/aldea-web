@@ -183,6 +183,30 @@ export const performanceData = [
   { name: 'Sui', tps: '160,000', vs: '0.16' },
 ]
 
+export const performanceFeatures = [
+  {
+    image: '/images/performance-parallelization.png',
+    title: 'Object-level parallelization',
+    description: 'Aldea’s object model unlocks a greater level of parallelization. If two transactions operate over different objects they can be executed in parallel.',
+  }, {
+    image: '/images/performance-speed.png',
+    title: 'Near-native execution speeds',
+    description: 'Smart contract logic gets compiled to Web Assembly, a battle-tested execution environment that runs at near-native speeds.',
+  }, {
+    image: '/images/performance-caching.png',
+    title: 'State caching',
+    description: 'All state within Aldea is localized and stored as objects and packages. This enables excellent cache locality and minimal database lookups.',
+  }, {
+    image: '/images/performance-validation.png',
+    title: 'Specialized signature validation',
+    description: 'Validating signatures is the most demanding part of running a node. Aldea’s architecture enables this piece to be optimized and run separately from execution.',
+  }, {
+    image: '/images/performance-storage.png',
+    title: 'Low storage usage',
+    description: 'A node does not need the entire blockchain state to begin validating. Aldea’s database also performs batch updates to supporting objects to be used at very high frequencies.',
+  }
+]
+
 export const usecases = [
   {
     image: '/images/use-gaming.png',
