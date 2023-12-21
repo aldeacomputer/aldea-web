@@ -306,21 +306,21 @@ export const resourceLinks = [
     label: 'Developer docs',
     text: 'Read our developer documentation.',
   },
-  {
-    url: '#todo',
-    label: 'Download Litepaper',
-    text: 'Dive deeper into the tech behind Aldea.',
-  },
+  //{
+  //  url: '#todo',
+  //  label: 'Download Litepaper',
+  //  text: 'Dive deeper into the tech behind Aldea.',
+  //},
   {
     url: 'https://www.youtube.com/watch?v=h6actzI2cz0',
     label: 'Coding with Aldea',
     text: 'Watch what it\'s like to code with Aldea.',
   },
-  {
-    url: '#todo',
-    label: 'The pitch deck',
-    text: 'Download our investor pitch deck.',
-  },
+  //{
+  //  url: '#todo',
+  //  label: 'The pitch deck',
+  //  text: 'Download our investor pitch deck.',
+  //},
 ]
 
 export const timelineYears = [
