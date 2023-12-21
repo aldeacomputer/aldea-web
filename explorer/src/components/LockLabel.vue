@@ -46,7 +46,7 @@ const linkIcon = computed(() => {
 const linkParams = computed(() => {
   if (props.lock.type === LockType.ADDRESS) {
     const addr = new Address(base16.decode(props.lock.data))
-    return { name: 'addr', params: { addr: addr.toString() } }
+    return { name: 'addr', params: { id: addr.toString() } }
   } else {
     return { name: 'jig', params: { id: props.lock.data } }
   }

@@ -6,10 +6,10 @@ export const COIN_CLASS  = `${COIN_PKG_ID}_0`
 
 export const KEYS = {
   jig: Symbol() as InjectionKey<Ref<JigData>>,
-  jigs: Symbol() as InjectionKey<Ref<DataOf<JigData>>>,
+  jigs: Symbol() as InjectionKey<Ref<JigData[]>>,
   pkg: Symbol() as InjectionKey<Ref<PkgData>>,
   txd: Symbol() as InjectionKey<Ref<TxData>>,
-  txds: Symbol() as InjectionKey<Ref<DataOf<TxDataMin>>>,
+  txds: Symbol() as InjectionKey<Ref<TxData[]>>,
 
   tx: Symbol() as InjectionKey<Ref<Tx>>,
   txInputs: Symbol() as InjectionKey<Ref<JigData[]>>,

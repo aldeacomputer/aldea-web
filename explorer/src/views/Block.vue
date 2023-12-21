@@ -26,7 +26,7 @@
         <table class="w-full text-14">
           <tr>
             <th class="pr-4 pb-1 font-normal text-secondary text-left">Transactions</th>
-            <td class="pb-1">{{ txds.meta?.total_count }}</td>
+            <td class="pb-1">{{ txds.length }}</td>
           </tr>
           <tr>
             <th class="pr-4 pb-1 font-normal text-secondary text-left">TX root</th>
@@ -51,7 +51,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, provide, ref, watch } from 'vue'
+import { computed, provide, shallowRef, watch } from 'vue'
 import { useAppStore } from '../stores/app'
 import { useRoute } from 'vue-router'
 import { useHead } from '@unhead/vue'
@@ -72,8 +72,9 @@ useHead({
   title: () => `Block ${route.params.id}`
 })
 
-const block = ref<BlockData>(await loadBlock(route.params.id as string))
-const txds = ref<DataOf<TxDataMin>>(await loadTxs(route.params.id as string))
+const fullBlock = shallowRef<[BlockData, TxData[]]>(await loadBlock(route.params.id as string))
+const block = computed<BlockData>(() => fullBlock.value[0])
+const txds = computed<TxData[]>(() => fullBlock.value[1])
 
 provide(KEYS.txds, txds)
 
@@ -82,18 +83,13 @@ const timestamp = computed(() => {
     .format('YYYY-MM-DD HH:mm')
 })
 
-async function loadBlock(id: string): Promise<BlockData> {
+async function loadBlock(id: string): Promise<[BlockData, TxData[]]> {
   return store.adapter.getBlock(id)
-}
-
-async function loadTxs(id: string): Promise<DataOf<TxDataMin>> {
-  return store.adapter.getBlockTxs(id)
 }
 
 watch(() => route.params.id, async id => {
   if (typeof route.name === 'string' && /^block/.test(route.name)) {
-    block.value = await loadBlock(id as string)
-    txds.value = await loadTxs(id as string)
+    fullBlock.value = await loadBlock(id as string)
     window.scrollTo({ top: 0 })
   }
 })

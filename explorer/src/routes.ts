@@ -74,7 +74,7 @@ export const routes: RouteRecordRaw[] = [
   },
   {
     name: 'addr',
-    path: '/address/:addr',
+    path: '/address/:id',
     component: AddrView,
     children: [
       { name: 'addr_jigs', path: '', component: AddrJigsTab },

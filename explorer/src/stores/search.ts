@@ -65,7 +65,7 @@ export const useSearchStore = defineStore('search', () => {
   function goto(res: SearchResult) {
     push(res)
     if (res.type === 'addr') {
-      router.push({ name: 'addr', params: { addr: res.value }})
+      router.push({ name: 'addr', params: { id: res.value }})
     } else {
       router.push({ name: res.type, params: { id: res.value }})
     }

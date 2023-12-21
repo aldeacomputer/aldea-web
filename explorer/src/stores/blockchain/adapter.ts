@@ -3,12 +3,13 @@ import { abi } from '@aldea/sdk'
 export type LookupResult =
   { type: 'jig', data: JigData } |
   { type: 'pkg', data: PkgData } |
-  { type: 'tx', data: TxData }
+  { type: 'tx', data: TxData } |
+  { type: 'block', data: BlockData }
 
 export interface ChainAdapter {
-  getBlocks(): Promise<BlockData[]>;
+  getBlocks(opts?: any): Promise<BlockData[]>;
   //getBlocks(opts: any): Promise<DataOf<BlockData>>;
-  getBlock(id: string): Promise<BlockData>;
+  getBlock(id: string): Promise<[BlockData, TxData[]]>;
   //getBlockTxs(id: string): Promise<DataOf<TxDataMin>>;
   //getBlockTxs(id: string, opts: any): Promise<DataOf<TxDataMin>>;
   //getTxs(): Promise<DataOf<TxDataMin>>;

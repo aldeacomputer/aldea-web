@@ -80,7 +80,8 @@ function isArrayLike(name: string): boolean {
 }
 
 function isKeyValue(name: string): boolean {
-  return name === 'Map' || jig!.value.abi.objects.some(o => o.name === name)
+  const objects = jig!.value.abi.exports.map(i => jig!.value.abi.defs[i]).filter(o => o.kind === abi.CodeKind.OBJECT)
+  return name === 'Map' || objects.some(o => o.name === name)
 }
 
 function isPointer(val: any): boolean {

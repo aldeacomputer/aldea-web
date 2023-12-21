@@ -39,7 +39,8 @@ function valType(key: string) {
   if (props.type.name === 'Map') {
     return props.type.args[1]
   } else {
-    const obj = jig?.value.abi.objects.find(o => o.name === props.type.name)
+    const objects = jig?.value.abi.exports.map(i => jig!.value.abi.defs[i]).filter(o => o.kind === abi.CodeKind.OBJECT)
+    const obj = objects?.find(o => o.name === props.type.name) as abi.ObjectNode
     const field = obj?.fields.find(f => f.name === key)
     return field!.type
   }

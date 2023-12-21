@@ -34,16 +34,16 @@ declare global {
     url: string;
   }
 
-  interface MetaData {
-    after?: string;
-    before?: string;
-    total_count: number;
-  }
+  //interface MetaData {
+  //  after?: string;
+  //  before?: string;
+  //  total_count: number;
+  //}
 
-  interface DataOf<T> {
-    data: Array<T>;
-    meta?: MetaData;
-  }
+  //interface DataOf<T> {
+  //  data: Array<T>;
+  //  meta?: MetaData;
+  //}
 
   interface BlockData {
     id: string;
@@ -102,7 +102,7 @@ declare global {
   }
 
   interface SearchResult {
-    type: 'addr' | 'jig' | 'pkg' | 'tx';
+    type: 'addr' | 'jig' | 'pkg' | 'tx' | 'block';
     value: string;
   }
 }

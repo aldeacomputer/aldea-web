@@ -2,7 +2,7 @@
   <BaseInstruction :idx="idx" :instruction="instruction">
     <Enclosed :icon="CaPassword" :value="address">
       <Copyable
-        :to="{ name: 'addr', params: { addr: address } }"
+        :to="{ name: 'addr', params: { id: address } }"
         :value="address"
         size="sm"
         short />

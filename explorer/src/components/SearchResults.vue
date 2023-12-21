@@ -48,6 +48,7 @@ function resultType(result: SearchResult) {
     case 'jig': return 'Jig'
     case 'pkg': return 'Package'
     case 'tx': return 'Transaction'
+    case 'block': return 'Block'
   }
 }
 

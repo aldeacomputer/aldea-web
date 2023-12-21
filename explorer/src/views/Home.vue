@@ -8,6 +8,10 @@
     <NetworkSwitch on-home />
 
     <div class="pt-12" v-if="store.network === 'mocknet'">
+      <MiniBlocks />
+    </div>
+
+    <div class="pt-12" v-if="store.network === 'mocknet'">
       <div class="flex gap-4 p-4 bg-layer-01 border border-l-4 border-info rounded-sm">
         <div class="pt-0.5">
           <CaInformationFilled class="text-info" />
@@ -19,32 +23,18 @@
       </div>
     </div>
   </div>
-
-  <div class="w-full max-w-md lg:max-w-4xl pb-16" v-if="showStreams">
-    <StreamToggle v-model="isStreaming" />
-
-    <div class="flex w-full gap-4 lg:gap-8 flex-col lg:flex-row">
-      <div class="flex-1">
-        <StreamingBlocks :is-streaming="isStreaming" />
-      </div>
-      <div class="flex-1">
-        <StreamingTxns :is-streaming="isStreaming" />
-      </div>
-    </div>
-  </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import { useHead } from '@unhead/vue'
 import { CaInformationFilled } from '@kalimahapps/vue-icons'
 import { useAppStore } from '../stores/app'
 import SearchTrigger from '../components/SearchTrigger.vue'
 import NetworkSwitch from '../components/NetworkSwitch.vue'
-import StreamToggle from '../components/StreamToggle.vue'
-import StreamingBlocks from '../components/StreamingBlocks.vue'
-import StreamingTxns from '../components/StreamingTxns.vue'
-import { computed } from 'vue'
+import MiniBlocks from '../components/MiniBlocks.vue'
+//import StreamToggle from '../components/StreamToggle.vue'
+//import StreamingBlocks from '../components/StreamingBlocks.vue'
+//import StreamingTxns from '../components/StreamingTxns.vue'
 
 const store = useAppStore()
 
@@ -52,9 +42,10 @@ useHead({
   title: 'Explorer'
 })
 
-const isStreaming = ref(false)
-
-const showStreams = computed<boolean>(() => {
-  return ['devnet'].includes(store.network)
-})
+//const isStreaming = ref(false)
+//
+//const showStreams = computed<boolean>(() => {
+//  return false
+//  return ['devnet'].includes(store.network)
+//})
 </script>
