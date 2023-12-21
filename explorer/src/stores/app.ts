@@ -14,16 +14,16 @@ interface Network {
 }
 
 const networks: Network[] = [
-  {
-    id: 'devnet',
-    label: 'Devnet',
-    init: () => createMocknetAdapter('https://node.aldea.computer')
-  },
   //{
   //  id: 'devnet',
   //  label: 'Devnet',
-  //  init: () => new Backend('http://localhost:4080')
+  //  init: () => createMocknetAdapter('https://devnet.aldea.computer')
   //},
+  {
+    id: 'alphanet',
+    label: 'Devnet (JS)',
+    init: () => createMocknetAdapter('https://node.aldea.computer')
+  },
   {
     id: 'mocknet',
     label: 'Mocknet',
@@ -31,7 +31,7 @@ const networks: Network[] = [
   }
 ]
 
-const networkId = sessionStorage.getItem(STORAGE_KEY) || 'devnet'
+const networkId = sessionStorage.getItem(STORAGE_KEY) || 'alphanet'
 const defaultNetwork = networks.find(n => n.id === networkId)!
 
 export const useAppStore = defineStore('app', () => {

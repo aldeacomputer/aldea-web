@@ -8,19 +8,15 @@ const WAIT_TIME = 2000
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
-const aldea = new Aldea('http://localhost:4000', { cache: false })
+const aldea = new Aldea('https://node.aldea.computer', { cache: false })
 const keys = KeyPair.fromRandom()
 const user = KeyPair.fromRandom()
 
 setTimeout(async () => {
   try {
-    console.log('start', new Date())
     const tx1 = await deployPkgs()
-    console.log('tx1', new Date())
     const tx2 = await seedUser(tx1.packages[0].id)
-    console.log('tx2', new Date())
     const tx3 = await kitchenSink(tx1.packages[1].id)
-    console.log('tx3', new Date())
 
     console.log('🌱', 'address', keys.pubKey.toAddress().toString())
     console.log('🌱', 'address', user.pubKey.toAddress().toString())
@@ -93,7 +89,6 @@ async function seedUser(pkgId) {
 }
 
 async function kitchenSink(pkgId) {
-  console.log({ pkgId })
   const params = { address: keys.pubKey.toAddress().toString(), amount: 100 }
   const coin = await aldea.api.post('mint', { json: params }).json()
 

@@ -7,7 +7,7 @@
     <SearchTrigger on-home />
     <NetworkSwitch on-home />
 
-    <div class="pt-12" v-if="store.network === 'mocknet'">
+    <div class="pt-12" v-if="store.network === 'devnet'">
       <MiniBlocks />
     </div>
 
