@@ -1,10 +1,10 @@
 #!/bin/bash
 
-GIT_REMOTES=`git remote | grep dokku-splash`
+GIT_REMOTES=`git remote | grep dokku-website`
 
 if [[ -z "$GIT_REMOTES" ]]
 then
-  git remote add dokku-splash dokku@aldea.computer:splash
+  git remote add dokku-website dokku@aldea.computer:website
 fi
 
 REPO_CHANGES=`git status -s`
@@ -23,4 +23,4 @@ then
   exit 1
 fi
 
-git push dokku-splash main
+git push dokku-website main

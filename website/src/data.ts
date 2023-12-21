@@ -2,7 +2,7 @@ import { codeToTokens } from '../lib/shiki'
 
 export const navLinks = [
   { text: 'Developer docs', icon: 'book', url: 'https://docs.aldea.computer' },
-  { text: 'Tutorial', icon: 'rocket', url: 'https://docs.aldea.computer/tutorial/basics/introduction' },
+  { text: 'Tutorial', icon: 'rocket', url: 'https://docs.aldea.computer/tutorial/basics/introduction.html' },
   { text: 'Explorer', icon: 'compass', url: 'https://explorer.aldea.computer' },
 ]
 
