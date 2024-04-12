@@ -68,7 +68,7 @@ const navTree: NavLink[] = [
     link: '/about/how-aldea-works',
   }, {
     text: 'Docs',
-    link: 'https://docs.aldea.computer',
+    link: 'https://docs.aldea.network',
   }
 ]
 

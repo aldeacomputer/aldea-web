@@ -55,7 +55,7 @@ export class Player extends Jig {
 `.trim()
 
 export const source = `
-> curl https://node.aldea.computer/package/9994f116c8d76d893e3d13b045c118cea1871c56ae45d1811a1ce064104ee8fc/source
+> curl https://node.aldea.network/package/9994f116c8d76d893e3d13b045c118cea1871c56ae45d1811a1ce064104ee8fc/source
 
 export class PublicCounter extends Jig {
   count: u32 = 0

@@ -8,7 +8,7 @@ const WAIT_TIME = 2000
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
-const aldea = new Aldea('https://node.aldea.computer', { cache: false })
+const aldea = new Aldea('https://node.aldea.network', { cache: false })
 const keys = KeyPair.fromRandom()
 const user = KeyPair.fromRandom()
 

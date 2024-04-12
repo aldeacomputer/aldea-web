@@ -152,13 +152,13 @@ import * as rawCode from '~/codes'
 //  ogTitle: 'Aldea — Building on Web3 has never been so straightforward',
 //  ogDescription: 'We are creating the best blockchain for app developers. Turbocharge your on-chain development with Aldea, a new Layer 1 with a novel and highly intuitive programming model.',
 //  ogType: 'website',
-//  ogUrl: 'https://aldea.computer',
-//  ogImage: 'https://aldea.computer/images/meta-image.png',
+//  ogUrl: 'https://aldea.network',
+//  ogImage: 'https://aldea.network/images/meta-image.png',
 //
 //  twitterTitle: 'Aldea — Building on Web3 has never been so straightforward',
 //  twitterDescription: 'We are creating the best blockchain for app developers. Turbocharge your on-chain development with Aldea, a new Layer 1 with a novel and highly intuitive programming model.',
 //  twitterCard: 'summary_large_image',
-//  twitterImage: 'https://aldea.computer/images/meta-image.png',
+//  twitterImage: 'https://aldea.network/images/meta-image.png',
 //})
 
 const devExamples: DevExample[] = [

@@ -1,9 +1,9 @@
 import { codeToTokens } from '../lib/shiki'
 
 export const navLinks = [
-  { text: 'Developer docs', icon: 'book', url: 'https://docs.aldea.computer' },
-  { text: 'Tutorial', icon: 'rocket', url: 'https://docs.aldea.computer/tutorial/basics/introduction.html' },
-  { text: 'Explorer', icon: 'compass', url: 'https://explorer.aldea.computer' },
+  { text: 'Developer docs', icon: 'book', url: 'https://docs.aldea.network' },
+  { text: 'Tutorial', icon: 'rocket', url: 'https://docs.aldea.network/tutorial/basics/introduction.html' },
+  { text: 'Explorer', icon: 'compass', url: 'https://explorer.aldea.network' },
 ]
 
 export const sections = [
@@ -16,7 +16,7 @@ export const sections = [
 
 const code1 = `
 /**
- * Say hello to the Aldea Computer 👋
+ * Say hello to the aldea.network 👋
  */
 export function helloWorld(name: string): string {
   return ${'`Hello ${name}`'}
@@ -53,7 +53,7 @@ export class Cat extends Pet {
 `.trim()
 
 // 4acf0fadb88c9166fcc7e3b64a0e6958da121e1faec101d6d0680936fcbfe792
-// https://node.aldea.computer/packages/0000000000000000000000000000000000000000000000000000000000000000/source
+// https://node.aldea.network/packages/0000000000000000000000000000000000000000000000000000000000000000/source
 
 const code3 = `
 import { GameItem } from 'pkg://e400ce56df8d0d0b156ca4493e5243597424abdb226ff4ce4e5fcdcb8af9501c'
@@ -74,7 +74,7 @@ export class Player extends Jig {
 `.trim()
 
 const code4 = `
-> curl https://node.aldea.computer/package/9994f116c8d76d893e3d13b045c118cea1871c56ae45d1811a1ce064104ee8fc/source
+> curl https://node.aldea.network/package/9994f116c8d76d893e3d13b045c118cea1871c56ae45d1811a1ce064104ee8fc/source
 
 export class PublicCounter extends Jig {
   count: u32 = 0
@@ -302,7 +302,7 @@ export const betterUsecases = [
 
 export const resourceLinks = [
   {
-    url: 'https://docs.aldea.computer',
+    url: 'https://docs.aldea.network',
     label: 'Developer docs',
     text: 'Read our developer documentation.',
   },
@@ -372,6 +372,6 @@ export const teamMembers = [
 
 export const socialLinks = [
   { icon: 'twitter', url: 'https://twitter.com/aldeacomputer' },
-  { icon: 'linkedin', url: 'https://www.linkedin.com/company/aldea-computer/' },
+  { icon: 'linkedin', url: 'https://www.linkedin.com/company/aldea.network/' },
   { icon: 'github', url: 'https://github.com/orgs/aldeacomputer' },
 ]
