@@ -363,10 +363,10 @@ export const teamMembers = [
     image: '/images/ani.png',
     name: 'Anabella Rizzi',
     role: 'Design',
-  //}, {
-  //  image: '/images/rius.png',
-  //  name: 'Rius Chua',
-  //  role: 'Partnerships',
+  }, {
+   image: '/images/rius.png',
+   name: 'Rius Chua',
+   role: 'Partnerships',
   }
 ]
 
