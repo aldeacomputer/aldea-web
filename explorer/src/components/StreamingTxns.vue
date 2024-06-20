@@ -19,11 +19,11 @@
 
 <script setup lang="ts">
 import { nextTick, onMounted, ref } from 'vue'
-import { useAppStore } from '../stores/app'
+//import { useAppStore } from '../stores/app'
 import { bus } from '../bus'
 import StreamingTxListItem from './lists/StreamingTxListItem.vue'
 
-const store = useAppStore()
+//const store = useAppStore()
 
 defineProps<{
   isStreaming: boolean;
@@ -37,8 +37,9 @@ const txs = ref<Array<TxSize>>(await loadTxs())
 const stat = ref<number>(txs.value.length)
 
 async function loadTxs(): Promise<TxSize[]> {
-  const { data } = await store.adapter.getTxs({ limit: 10 })
-  return data.map(tx => ({ id: tx.id, size: tx.rawtx.length / 2 }))
+  //const { data } = await store.adapter.getTxs({ limit: 10 })
+  //return data.map(tx => ({ id: tx.id, size: tx.rawtx.length / 2 }))
+  return []
 }
 
 onMounted(() => {

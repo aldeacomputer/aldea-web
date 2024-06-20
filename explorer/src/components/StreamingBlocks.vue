@@ -19,11 +19,11 @@
 
 <script setup lang="ts">
 import { nextTick, onMounted, ref } from 'vue'
-import { useAppStore } from '../stores/app'
+//import { useAppStore } from '../stores/app'
 import { bus } from '../bus'
 import StreamingBlockListItem from './lists/StreamingBlockListItem.vue'
 
-const store = useAppStore()
+//const store = useAppStore()
 
 defineProps<{
   isStreaming: boolean;
@@ -37,8 +37,9 @@ const blocks = ref<Array<BlockData>>(await loadBlocks())
 const stat = ref<number>(blocks.value.length)
 
 async function loadBlocks(): Promise<BlockData[]> {
-  const { data } = await store.adapter.getBlocks({ limit: 10 })
-  return data
+  //const { data } = await store.adapter.getBlocks({ limit: 10 })
+  //return data
+  return []
 }
 
 onMounted(() => {

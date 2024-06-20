@@ -19,7 +19,8 @@
 import { CaCaretLeft, CaCaretRight } from '@kalimahapps/vue-icons'
 
 defineProps<{
-  meta: MetaData;
+  //meta: MetaData;
+  meta: any;
 }>()
 
 defineEmits<{

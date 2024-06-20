@@ -46,7 +46,7 @@ import Primitive from '..//fields/Primitive.vue'
 //import Nested from '..//fields/Nested.vue'
 //import PointerType from '..//fields/PointerType.vue'
 
-type StaticCallInstruction = instructions.NewInstruction | instructions.ExecInstruction | instructions.ExecFuncInstruction
+type StaticCallInstruction = instructions.NewInstruction | instructions.ExecInstruction //| instructions.ExecFuncInstruction
 
 const props = defineProps<{
   idx: number;
@@ -69,10 +69,10 @@ const callName = computed(() => {
         const iMethod = (<abi.ClassNode>ctxCode.value).methods[(<instructions.CallInstruction>props.instruction).methodIdx]
         return `${ctxCode.value.name}$${iMethod.name}()`
       case OpCode.EXEC:
-        const sMethod = (<abi.ClassNode>ctxCode.value).methods[(<instructions.ExecInstruction>props.instruction).methodIdx]
+        const sMethod = (<abi.ClassNode>ctxCode.value).methods[(<instructions.ExecInstruction>props.instruction).exportIdx]
         return `${ctxCode.value.name}.${sMethod.name}()`
-      case OpCode.EXECFUNC:
-        return `${ctxCode.value.name}()`
+      //case OpCode.EXECFUNC:
+      //  return `${ctxCode.value.name}()`
     }
   } else {
     return '<Unknown>'
@@ -83,12 +83,13 @@ const args = computed(() => {
   if (ctxCode.value) {
     switch (props.instruction.opcode) {
       case OpCode.NEW:
-        return (<abi.ClassNode>ctxCode.value).methods.find(m => m.kind === abi.MethodKind.CONSTRUCTOR)!.args
+        return (<abi.ClassNode>ctxCode.value).methods.find(m => m.name === 'constructor')!.args
       case OpCode.CALL:
+      return (<abi.ClassNode>ctxCode.value).methods[(<instructions.CallInstruction>props.instruction).methodIdx].args
       case OpCode.EXEC:
-        return (<abi.ClassNode>ctxCode.value).methods[(<instructions.CallInstruction | instructions.ExecInstruction>props.instruction).methodIdx].args
-      case OpCode.EXECFUNC:
-        return (<abi.FunctionNode>ctxCode.value).args
+        return (<abi.ClassNode>ctxCode.value).methods[(<instructions.ExecInstruction>props.instruction).exportIdx].args
+      //case OpCode.EXECFUNC:
+      //  return (<abi.FunctionNode>ctxCode.value).args
     }
   } else {
     return []
@@ -111,10 +112,11 @@ const returnType = computed<abi.TypeNode>(() => {
       case OpCode.NEW:
         return { name: ctxCode.value!.name, nullable: false, args: [] }
       case OpCode.CALL:
+      return (<abi.ClassNode>ctxCode.value).methods[(<instructions.CallInstruction>props.instruction).methodIdx].rtype as abi.TypeNode
       case OpCode.EXEC:
-        return (<abi.ClassNode>ctxCode.value).methods[(<instructions.CallInstruction | instructions.ExecInstruction>props.instruction).methodIdx].rtype as abi.TypeNode
-      case OpCode.EXECFUNC:
-        return (<abi.FunctionNode>ctxCode.value).rtype     
+        return (<abi.ClassNode>ctxCode.value).methods[(<instructions.ExecInstruction>props.instruction).exportIdx].rtype as abi.TypeNode
+      //case OpCode.EXECFUNC:
+      //  return (<abi.FunctionNode>ctxCode.value).rtype     
     }
   }
   return { name: 'Unknown', nullable: false, args: [] }
@@ -127,7 +129,7 @@ async function traverseParents(idx: number, exportIdx?: number): Promise<void> {
     case OpCode.IMPORT:
       const pkgId = base16.encode((<instructions.ImportInstruction>parent).pkgId)
       ctxAbi.value = await store.adapter.getAbi(pkgId)
-      ctxCode.value = ctxAbi.value.exports[exportIdx!].code as abi.ClassNode | abi.FunctionNode
+      ctxCode.value = ctxAbi.value.defs[ctxAbi.value.exports[exportIdx!]] as abi.ClassNode | abi.FunctionNode
       break
 
     case OpCode.LOAD:
@@ -138,13 +140,14 @@ async function traverseParents(idx: number, exportIdx?: number): Promise<void> {
       ctxJig.value = await store.adapter.getJig(id)
       ctxAbi.value = ctxJig.value.abi
       const codeIdx = Number(ctxJig.value.class.split('_')[1])
-      ctxCode.value = ctxAbi.value.exports[codeIdx].code as abi.ClassNode
+      ctxCode.value = ctxAbi.value.defs[ctxAbi.value.exports[codeIdx]] as abi.ClassNode
       break
 
     case OpCode.NEW:
     case OpCode.EXEC:
-    case OpCode.EXECFUNC:
       return traverseParents((<StaticCallInstruction>parent).idx, (<StaticCallInstruction>parent).exportIdx)
+    //case OpCode.EXECFUNC:
+    //  return traverseParents((<StaticCallInstruction>parent).idx, (<StaticCallInstruction>parent).exportIdx)
 
     case OpCode.CALL:
       return traverseParents((<instructions.CallInstruction>parent).idx)

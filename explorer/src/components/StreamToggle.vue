@@ -29,7 +29,7 @@
 <script setup lang="ts">
 import { watch } from 'vue'
 import { useAppStore } from '../stores/app'
-import { Backend } from '../stores/blockchain/backend'
+//import { Backend } from '../stores/blockchain/backend'
 
 const store = useAppStore()
 
@@ -41,10 +41,10 @@ defineEmits<{
   (e: 'update:modelValue', val: boolean): void;
 }>()
 
-watch(() => props.modelValue, isStreaming => {
+watch(() => props.modelValue, _isStreaming => {
   if (store.network === 'devnet') {
-    const adapter = store.adapter as Backend
-    isStreaming ? adapter.startStream() : adapter.stopStream()
+    //const adapter = store.adapter as ChainAdapter
+    //isStreaming ? adapter.startStream() : adapter.stopStream()
   }
 })
 </script>
