@@ -5,5 +5,5 @@ COPY website/ ./
 RUN yarn install
 RUN yarn build
 
-FROM pierrezemb/gostatic as server
+FROM pierrezemb/gostatic AS server
 COPY --from=build /build/dist /srv/http/
