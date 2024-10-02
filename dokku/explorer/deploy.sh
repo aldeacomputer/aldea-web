@@ -4,7 +4,7 @@ GIT_REMOTES=`git remote | grep dokku-explorer`
 
 if [[ -z "$GIT_REMOTES" ]]
 then
-  git remote add dokku-explorer dokku@explorer.aldea.computer:explorer
+  git remote add dokku-explorer dokku@explorer.aldeacomputer.com:explorer
 fi
 
 REPO_CHANGES=`git status -s`

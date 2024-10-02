@@ -17,12 +17,12 @@ const networks: Network[] = [
   //{
   //  id: 'devnet',
   //  label: 'Devnet',
-  //  init: () => createMocknetAdapter('https://devnet.aldea.computer')
+  //  init: () => createMocknetAdapter('https://devnet.aldeacomputer.com')
   //},
   {
     id: 'alphanet',
     label: 'Devnet (JS)',
-    init: () => createMocknetAdapter('https://node.aldea.computer')
+    init: () => createMocknetAdapter('https://node.aldeacomputer.com')
   },
   {
     id: 'mocknet',

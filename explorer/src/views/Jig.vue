@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <th class="pr-4 pb-1 font-normal text-secondary text-left align-top">Link</th>
-            <td class="pb-1 align-top"><a class="link underline">https://aldea.computer</a></td>
+            <td class="pb-1 align-top"><a class="link underline">https://aldeacomputer.com</a></td>
           </tr>
         </table>
       </template>

@@ -8,7 +8,7 @@
         We are creating the best blockchain for app developers.
         <a
           class="inline-flex items-center link"
-          href="https://aldea.computer"
+          href="https://aldeacomputer.com"
           target="_blank">
           <span class="underline">Find out more</span>
           <CaArrowUpRight class="text-16" />

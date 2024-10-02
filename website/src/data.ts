@@ -1,9 +1,9 @@
 import { codeToTokens } from '../lib/shiki'
 
 export const navLinks = [
-  { text: 'Developer docs', icon: 'book', url: 'https://docs.aldea.computer' },
-  { text: 'Tutorial', icon: 'rocket', url: 'https://docs.aldea.computer/tutorial/basics/introduction.html' },
-  { text: 'Explorer', icon: 'compass', url: 'https://explorer.aldea.computer' },
+  { text: 'Developer docs', icon: 'book', url: 'https://docs.aldeacomputer.com' },
+  { text: 'Tutorial', icon: 'rocket', url: 'https://docs.aldeacomputer.com/tutorial/basics/introduction.html' },
+  { text: 'Explorer', icon: 'compass', url: 'https://explorer.aldeacomputer.com' },
 ]
 
 export const sections = [
@@ -53,7 +53,7 @@ export class Cat extends Pet {
 `.trim()
 
 // 4acf0fadb88c9166fcc7e3b64a0e6958da121e1faec101d6d0680936fcbfe792
-// https://node.aldea.computer/packages/0000000000000000000000000000000000000000000000000000000000000000/source
+// https://node.aldeacomputer.com/packages/0000000000000000000000000000000000000000000000000000000000000000/source
 
 const code3 = `
 import { GameItem } from 'pkg://e400ce56df8d0d0b156ca4493e5243597424abdb226ff4ce4e5fcdcb8af9501c'
@@ -74,7 +74,7 @@ export class Player extends Jig {
 `.trim()
 
 const code4 = `
-> curl https://node.aldea.computer/package/9994f116c8d76d893e3d13b045c118cea1871c56ae45d1811a1ce064104ee8fc/source
+> curl https://node.aldeacomputer.com/package/9994f116c8d76d893e3d13b045c118cea1871c56ae45d1811a1ce064104ee8fc/source
 
 export class PublicCounter extends Jig {
   count: u32 = 0
@@ -297,12 +297,12 @@ export const betterUsecases = [
         description: 'Express and experience a fuller range of digital object relationships. Discover new network effects through objects calling, storing, and extending other objects.'
       },
     ],
-  }, 
+  },
 ]
 
 export const resourceLinks = [
   {
-    url: 'https://docs.aldea.computer',
+    url: 'https://docs.aldeacomputer.com',
     label: 'Developer docs',
     text: 'Read our developer documentation.',
   },

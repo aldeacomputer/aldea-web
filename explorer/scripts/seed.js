@@ -8,7 +8,7 @@ const WAIT_TIME = 2000
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
-const aldea = new Aldea('https://node.aldea.computer', { cache: false })
+const aldea = new Aldea('https://node.aldeacomputer.com', { cache: false })
 const keys = KeyPair.fromRandom()
 const user = KeyPair.fromRandom()
 
@@ -21,10 +21,10 @@ setTimeout(async () => {
     console.log('🌱', 'address', keys.pubKey.toAddress().toString())
     console.log('🌱', 'address', user.pubKey.toAddress().toString())
     for (let jig of tx2.outputs) {
-      console.log('🌱', 'jig', jig.id)  
+      console.log('🌱', 'jig', jig.id)
     }
     for (let jig of tx3.outputs) {
-      console.log('🌱', 'jig', jig.id)  
+      console.log('🌱', 'jig', jig.id)
     }
     console.log('🌱', 'package', tx1.packages[0].id)
     console.log('🌱', 'package', tx1.packages[1].id)
@@ -74,7 +74,7 @@ async function seedUser(pkgId) {
       const coinRef = txb.call(feeRef, 'send', [BigInt(motos)])
       txb.lock(coinRef, user.pubKey.toAddress())
     }
-    
+
     const stakeRef = txb.call(feeRef, 'send', [100000000n])
     txb.lock(stakeRef, keys.pubKey.toAddress())
     const houseRef = txb.new(pkgRef, 'House', [stakeRef, keys.pubKey.toBytes()])

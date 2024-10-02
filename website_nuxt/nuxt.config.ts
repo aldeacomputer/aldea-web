@@ -10,7 +10,7 @@ export default defineNuxtConfig({
       script: [
         { src: 'https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js' },
         { src: 'https://tally.so/widgets/embed.js', async: true },
-        { src: 'https://plausible.io/js/script.js', defer: true, 'data-domain': 'aldea.computer' },
+        { src: 'https://plausible.io/js/script.js', defer: true, 'data-domain': 'aldeacomputer.com' },
       ],
       bodyAttrs: {
         class: 'bg-light text-gray-90'
