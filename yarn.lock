@@ -43,16 +43,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aldea/compiler@npm:^0.6.1":
-  version: 0.6.1
-  resolution: "@aldea/compiler@npm:0.6.1"
+"@aldea/compiler@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "@aldea/compiler@npm:0.7.0"
   dependencies:
     "@aldea/core": ^0.7.2
     "@aldea/wasm-metering": ^0.1.0
     assemblyscript: "npm:@aldea/assemblyscript@0.27.14-X"
     comment-parser: ^1.3.1
     wasm-metering: ^0.2.1
-  checksum: ab646df89e6f96b83ea8ead4b95f4aaf711426657899cc3b85e142662e9281ac005cb66a398781eaff23a59269ba42b1a1715e2f0917abe2dadaea1257de73c8
+  checksum: affe0e350e4dc6660109b4c4bb9ab0088786fa7d7cf98f15edb9532af82bc726f037cfc7b2cd51f2f6efccfe3092ad565952fa5b2a2e023903667c3c04154904
   languageName: node
   linkType: hard
 
@@ -102,8 +102,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@aldea/explorer@workspace:explorer"
   dependencies:
-    "@aldea/mocknet": ^0.7.3
-    "@aldea/sdk": ^0.7.2
+    "@aldea/mocknet": ^0.8.0
+    "@aldea/sdk": ^0.8.0
     "@cocalc/local-storage-lru": ^2.3.0
     "@kalimahapps/vue-icons": ^1.4.0
     "@tailwindcss/container-queries": ^0.1.1
@@ -120,7 +120,7 @@ __metadata:
     postcss: ^8.4.27
     shiki: ^0.14.3
     tailwindcss: ^3.3.3
-    typescript: ^5.0.2
+    typescript: 5.2.2
     vite: ^4.4.5
     vue: ^3.3.4
     vue-router: ^4.2.4
@@ -129,12 +129,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@aldea/mocknet@npm:^0.7.3":
-  version: 0.7.3
-  resolution: "@aldea/mocknet@npm:0.7.3"
+"@aldea/mocknet@npm:^0.8.0":
+  version: 0.8.0
+  resolution: "@aldea/mocknet@npm:0.8.0"
   dependencies:
     "@aldea/core": ^0.7.2
-    "@aldea/vm": ^0.7.3
+    "@aldea/vm": ^0.8.0
     "@chainsafe/libp2p-gossipsub": ^6.2.0
     "@chainsafe/libp2p-noise": ^11.0.1
     "@chainsafe/libp2p-yamux": ^3.0.7
@@ -152,28 +152,28 @@ __metadata:
     pino-pretty: ^10.0.0
   bin:
     mocknet: bin/mocknet.js
-  checksum: 72d8acb517491b84e162bc75a0476af697377b6e9bebc34b5fd8a2442a98d30b05c510733e4378390e154b1519d3b751252626d5fa7514d39779e52591b671f2
+  checksum: 223c2a98d95b0e12fee9634c573603da12083068cd4fd92cf00841dac4f55d843c2307e15a6656b541c554ba06487b89aa52899c4f9a4e5894a99d87fb5b961b
   languageName: node
   linkType: hard
 
-"@aldea/sdk@npm:^0.7.2":
-  version: 0.7.2
-  resolution: "@aldea/sdk@npm:0.7.2"
+"@aldea/sdk@npm:^0.8.0":
+  version: 0.8.0
+  resolution: "@aldea/sdk@npm:0.8.0"
   dependencies:
     "@aldea/core": ^0.7.2
     ky: ^1.0.1
-  checksum: ac8719dd7fc363104d11a00976f458c78323063d3d038a47ae71a0ea05c3f0b9c0d80ca4f471aba180aeb28b2d376eedc2f013122113c40f97629393cfe85527
+  checksum: c2635aff9dead0eaa11c19faef2ef343f2a6293c407f89d9030f47758dab1eb793c2665c6feca5c5e90f30a1070c22783dfbff8874f99c1427deba8dad3075ad
   languageName: node
   linkType: hard
 
-"@aldea/vm@npm:^0.7.3":
-  version: 0.7.3
-  resolution: "@aldea/vm@npm:0.7.3"
+"@aldea/vm@npm:^0.8.0":
+  version: 0.8.0
+  resolution: "@aldea/vm@npm:0.8.0"
   dependencies:
-    "@aldea/compiler": ^0.6.1
+    "@aldea/compiler": ^0.7.0
     "@aldea/core": ^0.7.2
     moment: ^2.29.4
-  checksum: 0faae95c489a50417cdb1129ec7bace3d27c3473499bf9675154db3da09209d8bf96d9888941d984c3400c988967434511505f1485cb42781b05183c8b08df72
+  checksum: 9b56bcb56ce8ff1c4136942767ee69a061fd84605c8a6d65e3c60a5c0b90fecce5933fa78cfae1febf835738e42f47ae19e94b64262952b7bf4549e77f3b706e
   languageName: node
   linkType: hard
 
@@ -18051,7 +18051,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.0.2, typescript@npm:^5.1.6":
+"typescript@npm:5.2.2":
+  version: 5.2.2
+  resolution: "typescript@npm:5.2.2"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 7912821dac4d962d315c36800fe387cdc0a6298dba7ec171b350b4a6e988b51d7b8f051317786db1094bd7431d526b648aba7da8236607febb26cf5b871d2d3c
+  languageName: node
+  linkType: hard
+
+"typescript@npm:^5.1.6":
   version: 5.1.6
   resolution: "typescript@npm:5.1.6"
   bin:
@@ -18061,33 +18071,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.2.2":
-  version: 5.3.3
-  resolution: "typescript@npm:5.3.3"
+"typescript@patch:typescript@5.2.2#~builtin<compat/typescript>":
+  version: 5.2.2
+  resolution: "typescript@patch:typescript@npm%3A5.2.2#~builtin<compat/typescript>::version=5.2.2&hash=14eedb"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 2007ccb6e51bbbf6fde0a78099efe04dc1c3dfbdff04ca3b6a8bc717991862b39fd6126c0c3ebf2d2d98ac5e960bcaa873826bb2bb241f14277034148f41f6a2
+  checksum: 07106822b4305de3f22835cbba949a2b35451cad50888759b6818421290ff95d522b38ef7919e70fb381c5fe9c1c643d7dea22c8b31652a717ddbd57b7f4d554
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^5.0.2#~builtin<compat/typescript>, typescript@patch:typescript@^5.1.6#~builtin<compat/typescript>":
+"typescript@patch:typescript@^5.1.6#~builtin<compat/typescript>":
   version: 5.1.6
   resolution: "typescript@patch:typescript@npm%3A5.1.6#~builtin<compat/typescript>::version=5.1.6&hash=5da071"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: f53bfe97f7c8b2b6d23cf572750d4e7d1e0c5fff1c36d859d0ec84556a827b8785077bc27676bf7e71fae538e517c3ecc0f37e7f593be913d884805d931bc8be
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@^5.2.2#~builtin<compat/typescript>":
-  version: 5.3.3
-  resolution: "typescript@patch:typescript@npm%3A5.3.3#~builtin<compat/typescript>::version=5.3.3&hash=14eedb"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: f61375590b3162599f0f0d5b8737877ac0a7bc52761dbb585d67e7b8753a3a4c42d9a554c4cc929f591ffcf3a2b0602f65ae3ce74714fd5652623a816862b610
   languageName: node
   linkType: hard
 
@@ -19504,7 +19504,7 @@ __metadata:
     postcss: ^8.4.24
     shiki: ^0.14.2
     tailwindcss: ^3.3.2
-    typescript: ^5.2.2
+    typescript: 5.2.2
     vite: ^4.3.9
     vite-plugin-generate-file: ^0.0.4
     vite-plugin-handlebars: ^1.6.0
